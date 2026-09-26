@@ -1,12 +1,9 @@
-# RP Glass 2 — Stage 1
+# RP Glass 2 — v0.3.1
 
-Clean mobile-safe baseline for SillyTavern 1.19+.
+Mobile containment patch.
 
-- One Hanabi mascot above the composer.
-- Native activate lifecycle hook plus guarded self-init fallback.
-- No MutationObserver.
-- No message scanning.
-- No timers or particles.
-- `pointer-events:none` so the mascot cannot block typing/buttons.
-
-Repository folder name: `RP-Glass-2`.
+- Hanabi is smaller on phones.
+- Hanabi is mounted inside the composer layer instead of document.body.
+- ST drawers/settings/loading overlays can cover the mascot normally.
+- No MutationObserver, polling, timers, particles, or full-chat scans.
+- Keeps the working ST 1.19 lifecycle loader from v0.2.0.

@@ -1,12 +1,22 @@
-/* RP Glass 2 — Stage 1 v0.2.0
-   One lightweight mascot layer. No observers, polling, particles or chat scans. */
+/* RP Glass 2 — v0.3.0 Visual Novel Foundation
+   Mobile-first decorative layer only. Core SillyTavern message layout is NOT rewritten. */
 
+:root {
+    --rp2-violet: rgba(183, 85, 255, .72);
+    --rp2-pink: rgba(255, 95, 205, .48);
+    --rp2-cyan: rgba(82, 219, 255, .58);
+    --rp2-ink: rgba(10, 7, 22, .78);
+    --rp2-ink-deep: rgba(6, 5, 14, .90);
+    --rp2-paper: rgba(255,255,255,.93);
+}
+
+/* Mascot: deliberately compact on mobile so Scene Blocks remain visible. */
 #rp-glass-2-hanabi-input {
     position: fixed;
     z-index: 2147483000;
-    width: clamp(180px, 31vw, 230px);
+    width: clamp(122px, 21vw, 160px);
     height: auto;
-    transform: translate(-50%, -86%);
+    transform: translate(-50%, -78%);
     transform-origin: 50% 100%;
     pointer-events: none !important;
     user-select: none;
@@ -15,11 +25,113 @@
     object-fit: contain;
     opacity: 1;
     display: block;
-    filter: drop-shadow(0 3px 8px rgba(183, 85, 255, 0.28));
+    filter: drop-shadow(0 3px 7px rgba(183,85,255,.24));
 }
 
 @media (max-width: 520px) {
-    #rp-glass-2-hanabi-input {
-        width: min(220px, 58vw);
-    }
+    #rp-glass-2-hanabi-input { width: min(142px, 38vw); }
+}
+
+/* Message = a page/panel, without touching display/flex/position structure. */
+#chat .mes {
+    background:
+      radial-gradient(circle at 92% 7%, rgba(192,89,255,.11), transparent 25%),
+      linear-gradient(145deg, rgba(19,10,38,.88), rgba(7,8,18,.84)) !important;
+    border: 1px solid rgba(167,83,255,.48) !important;
+    border-radius: 22px !important;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.025), 0 8px 26px rgba(0,0,0,.18) !important;
+    margin: 10px 3px 16px !important;
+    overflow: visible;
+}
+
+#chat .mes::after {
+    content: "✦";
+    float: right;
+    margin: 10px 14px 0 0;
+    color: rgba(220,154,255,.58);
+    text-shadow: 0 0 10px rgba(193,91,255,.55);
+    font-size: 15px;
+    pointer-events: none;
+}
+
+#chat .mes .name_text,
+#chat .mes .ch_name,
+#chat .mes .mes_name {
+    color: #f0c9ff !important;
+    text-shadow: 0 0 9px rgba(189,87,255,.38);
+    letter-spacing: .02em;
+}
+
+/* Book body: readable and calm. */
+#chat .mes_text {
+    color: var(--rp2-paper) !important;
+    line-height: 1.62 !important;
+    text-wrap: pretty;
+}
+
+#chat .mes_text p { margin-block: .62em !important; }
+
+/* Spoken dialogue / emphasis: neon accent, not the whole page. */
+#chat .mes_text em,
+#chat .mes_text i,
+#chat .mes_text q,
+#chat .mes_text .quote {
+    color: #79ef8c !important;
+    text-shadow: 0 0 8px rgba(70,255,113,.18);
+}
+
+#chat .mes_text strong,
+#chat .mes_text b { color: #ffe5a6; }
+
+/* Date / scene heading produced by the RP prompt. */
+#chat .mes_text h1,
+#chat .mes_text h2,
+#chat .mes_text h3 {
+    border: 1px solid rgba(81,213,255,.46);
+    border-left: 5px solid rgba(78,238,255,.88);
+    border-radius: 15px;
+    background: linear-gradient(110deg, rgba(23,25,56,.88), rgba(31,11,55,.72));
+    box-shadow: 0 0 18px rgba(65,190,255,.08), inset 0 0 18px rgba(165,71,255,.05);
+    padding: 10px 13px !important;
+    margin: 9px 0 15px !important;
+    font-family: system-ui, sans-serif !important;
+    font-size: .84em !important;
+    line-height: 1.42 !important;
+    letter-spacing: .01em;
+}
+
+/* Thoughts + independent reader: same family, distinct identities. */
+#chat .mes_text details {
+    background: linear-gradient(145deg, rgba(31,11,52,.82), rgba(8,8,17,.84)) !important;
+    border: 1px solid rgba(198,84,255,.60) !important;
+    border-left: 6px solid rgba(203,80,255,.92) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 0 22px rgba(181,62,255,.10) !important;
+    padding: 11px 13px !important;
+    margin: 15px 0 !important;
+}
+
+#chat .mes_text details summary {
+    color: #efc9ff !important;
+    font-family: system-ui, sans-serif !important;
+    font-weight: 750 !important;
+    letter-spacing: .01em;
+}
+
+#chat .mes_text story_footer details,
+#chat .mes_text story-footer details {
+    background: linear-gradient(145deg, rgba(28,19,13,.88), rgba(10,8,11,.90)) !important;
+    border-color: rgba(220,158,76,.68) !important;
+    border-left-color: rgba(239,171,74,.95) !important;
+    box-shadow: 0 0 22px rgba(232,151,49,.08) !important;
+}
+
+#chat .mes_text story_footer summary,
+#chat .mes_text story-footer summary { color: #ffd28a !important; }
+
+/* Mobile breathing room without restructuring ST internals. */
+@media (max-width: 520px) {
+    #chat .mes { border-radius: 19px !important; margin-inline: 2px !important; }
+    #chat .mes_text { line-height: 1.57 !important; }
+    #chat .mes_text h1, #chat .mes_text h2, #chat .mes_text h3 { font-size: .79em !important; }
 }
