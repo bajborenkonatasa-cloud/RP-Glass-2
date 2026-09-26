@@ -3,6 +3,8 @@ let rp2Initialized = false;
 let rp2Raf = 0;
 let rp2EventsBound = false;
 let rp2ComposerObserver = null;
+let rp2MessageObserver = null;
+const RP2_SAFE_GAP = 12;
 
 function getComposer() {
     return document.querySelector('#send_form')
@@ -34,6 +36,63 @@ function queuePlacement() {
 }
 
 
+
+
+
+function getMessageToolbar(messageEl) {
+    if (!messageEl) return null;
+    const candidates = [
+        '.mes_buttons',
+        '.mes_buttons_container',
+        '.extraMesButtons',
+        '.mes_edit',
+        '[title*="Edit"]',
+        '[title*="Редакт"]',
+    ];
+    for (const selector of candidates) {
+        const el = messageEl.querySelector(selector);
+        if (el && el.getClientRects().length) return el.closest('.mes_buttons, .mes_buttons_container, .extraMesButtons') || el;
+    }
+    return null;
+}
+
+function keepPeekClearOfToolbar(messageEl) {
+    const chibi = messageEl?.querySelector(':scope > .rp2-hanabi-peek:not([hidden])');
+    if (!chibi) return;
+
+    // CSS owns the normal pose. JS adds only a tiny per-message correction when
+    // SillyTavern's real toolbar geometry would otherwise sit under Hanabi's hair.
+    chibi.style.removeProperty('--rp2-safe-lift');
+    const toolbar = getMessageToolbar(messageEl);
+    if (!toolbar) return;
+
+    const mascotRect = chibi.getBoundingClientRect();
+    const toolbarRect = toolbar.getBoundingClientRect();
+    const overlapsX = mascotRect.right > toolbarRect.left - RP2_SAFE_GAP
+        && mascotRect.left < toolbarRect.right + RP2_SAFE_GAP;
+    const overlapsY = mascotRect.bottom > toolbarRect.top - RP2_SAFE_GAP
+        && mascotRect.top < toolbarRect.bottom + RP2_SAFE_GAP;
+    if (!overlapsX || !overlapsY) return;
+
+    const lift = Math.ceil(mascotRect.bottom - toolbarRect.top + RP2_SAFE_GAP);
+    chibi.style.setProperty('--rp2-safe-lift', `${Math.max(0, Math.min(lift, 84))}px`);
+}
+
+function queuePeekSafeZone(messageEl) {
+    requestAnimationFrame(() => keepPeekClearOfToolbar(messageEl));
+}
+
+function observeMessageGeometry(messageEl) {
+    if (!messageEl || typeof ResizeObserver === 'undefined') return;
+    if (!rp2MessageObserver) {
+        rp2MessageObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) queuePeekSafeZone(entry.target);
+        });
+    }
+    if (messageEl.dataset.rp2SafeObserved === '1') return;
+    messageEl.dataset.rp2SafeObserved = '1';
+    rp2MessageObserver.observe(messageEl);
+}
 
 const RP2_NAV_RE = /\[hanabi\s*:\s*(dreamy|sad|angry|happy|playful)(?:\s*\|\s*(peek|run|sleep|input|off))?\s*\]/ig;
 const RP2_EMOTION_ASSETS = {
@@ -89,6 +148,7 @@ function applyHanabiState(messageEl, state) {
     const kind = RP2_CHIBI_ASSETS[state.chibi] ? state.chibi : 'peek';
     chibi.classList.add(`rp2-chibi-${kind}`);
     chibi.src = new URL(RP2_CHIBI_ASSETS[kind], import.meta.url).href;
+    queuePeekSafeZone(messageEl);
 }
 
 function decorateHanabiNavigator(messageEl) {
@@ -122,7 +182,10 @@ function decorateSceneHeader(messageEl) {
         peek.setAttribute('aria-hidden', 'true');
         peek.src = new URL('./assets/hanabi-chibi-peek.webp', import.meta.url).href;
         messageEl.appendChild(peek);
+        peek.addEventListener('load', () => queuePeekSafeZone(messageEl), { once: true });
     }
+    observeMessageGeometry(messageEl);
+    queuePeekSafeZone(messageEl);
 }
 
 function isThoughtsDetails(details) {
@@ -237,7 +300,7 @@ export async function init() {
     window.visualViewport?.addEventListener('resize', queuePlacement, { passive: true });
     window.visualViewport?.addEventListener('scroll', queuePlacement, { passive: true });
 
-    console.info('[RP Glass 2] Visual Novel v0.6.7 Header Reflow initialized');
+    console.info('[RP Glass 2] Visual Novel v0.7.1 Safe-Zone initialized');
 }
 
 // Compatibility fallback: current third-party extensions may self-initialize

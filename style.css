@@ -624,3 +624,16 @@
         max-width: 50% !important;
     }
 }
+
+
+/* ============================================================
+   RP-Glass 2 v0.7.1 — ADAPTIVE PEEK SAFE ZONE
+   Per-message correction keeps Hanabi's hair clear of SillyTavern's
+   real message toolbar. Font-size/layout changes are handled by one
+   ResizeObserver; no MutationObserver, polling or global rescans.
+   ============================================================ */
+#chat .mes.rp2-has-scene-header > .rp2-hanabi-peek {
+    margin-top: calc(-1 * var(--rp2-safe-lift, 0px)) !important;
+    transition: margin-top .16s ease-out !important;
+    pointer-events: none !important;
+}
