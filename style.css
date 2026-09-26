@@ -207,3 +207,45 @@
 @media (max-width: 520px) {
     #chat .mes.rp2-has-scene-header .rp2-scene-header { min-height: 64px; }
 }
+
+/* v0.4.2 — Header balance polish.
+   Visual sizing only: no display/flex rewrites and no Scene Header mechanics changes. */
+#chat .mes.rp2-has-scene-header .avatar {
+    width: 78px !important;
+    height: 78px !important;
+    min-width: 78px !important;
+    min-height: 78px !important;
+}
+#chat .mes.rp2-has-scene-header .avatar img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+@media (max-width: 520px) {
+    #chat .mes.rp2-has-scene-header .avatar {
+        width: 76px !important;
+        height: 76px !important;
+        min-width: 76px !important;
+        min-height: 76px !important;
+    }
+
+    /* Give the larger portrait a little more room while keeping the scene card aligned. */
+    #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+    #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+        left: 126px;
+    }
+}
+
+@media (max-width: 390px) {
+    #chat .mes.rp2-has-scene-header .avatar {
+        width: 72px !important;
+        height: 72px !important;
+        min-width: 72px !important;
+        min-height: 72px !important;
+    }
+    #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+    #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+        left: 118px;
+    }
+}

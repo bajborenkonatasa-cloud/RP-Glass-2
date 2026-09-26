@@ -1,10 +1,9 @@
-# RP Glass 2 — v0.4.1 Scene Header Polish
+# RP Glass 2 — v0.4.2 Header Balance
 
-Micro-fix over v0.4.0.
+Micro-polish of the already working Scene Header.
 
-- Larger scene plaque and readable mobile typography.
-- More useful width in the free header area.
-- Slightly taller glass card for 2–3 lines.
-- No change to Hanabi size/position or chat-only layering.
-- No change to scene-header mechanics.
-- No MutationObserver, polling, particles, or core SillyTavern flex/display rewrites.
+- Enlarges the portrait/avatar in messages that contain the RP scene header.
+- Keeps the scene card readable and aligned beside it on mobile.
+- Does not rewrite SillyTavern flex/display structure.
+- Does not change Hanabi mascot placement or chat-only behavior.
+- Does not add observers, timers, or particles.
