@@ -467,3 +467,44 @@
         padding: 12px 12px !important;
     }
 }
+
+/* ============================================================
+   RP-Glass 2 v0.6.6 — PEEK HANABI / HEADER CORNER TEST
+   One static transparent chibi in the free space at the right side of the
+   message header. No core ST layout changes, no timers, no observers.
+   ============================================================ */
+#chat .mes.rp2-has-scene-header > .rp2-hanabi-peek {
+    position: absolute !important;
+    z-index: 3 !important;
+    top: 186px !important;
+    right: -8px !important;
+    width: 158px !important;
+    height: auto !important;
+    max-width: 35% !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    object-fit: contain !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    -webkit-user-drag: none !important;
+    filter: drop-shadow(0 0 9px rgba(202, 78, 255, .22));
+}
+
+@media (max-width: 520px) {
+    #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek {
+        top: 190px !important;
+        right: -9px !important;
+        width: 164px !important;
+        max-width: 37% !important;
+    }
+}
+
+@media (max-width: 390px) {
+    #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek {
+        top: 184px !important;
+        width: 150px !important;
+        max-width: 38% !important;
+    }
+}

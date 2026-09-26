@@ -49,6 +49,18 @@ function decorateSceneHeader(messageEl) {
     if (!heading) return;
     heading.classList.add('rp2-scene-header');
     messageEl.classList.add('rp2-has-scene-header');
+
+    // v0.6.6 — one lightweight peeking Hanabi in the free header corner.
+    // No observers/timers; this runs only through the same safe message decoration pass.
+    if (!messageEl.querySelector(':scope > .rp2-hanabi-peek')) {
+        const peek = document.createElement('img');
+        peek.className = 'rp2-hanabi-peek';
+        peek.alt = '';
+        peek.draggable = false;
+        peek.setAttribute('aria-hidden', 'true');
+        peek.src = new URL('./assets/hanabi-chibi-peek.webp', import.meta.url).href;
+        messageEl.appendChild(peek);
+    }
 }
 
 function isThoughtsDetails(details) {
@@ -152,7 +164,7 @@ export async function init() {
     window.visualViewport?.addEventListener('resize', queuePlacement, { passive: true });
     window.visualViewport?.addEventListener('scroll', queuePlacement, { passive: true });
 
-    console.info('[RP Glass 2] Visual Novel v0.6.3 Dreamy Thoughts initialized');
+    console.info('[RP Glass 2] Visual Novel v0.6.6 Peek Hanabi initialized');
 }
 
 // Compatibility fallback: current third-party extensions may self-initialize
