@@ -43,10 +43,10 @@ function mountHanabi() {
     hanabi.alt = '';
     hanabi.draggable = false;
     hanabi.src = new URL('./assets/hanabi-chibi-input.webp', import.meta.url).href;
-    // Keep Hanabi inside the composer layer. This naturally places her below
-    // SillyTavern drawers/settings/loading overlays instead of floating over the whole app.
-    const host = getComposer() || document.body;
-    host.appendChild(hanabi);
+    // Keep the mascot in BODY so fixed positioning is not clipped by the composer.
+    // Visibility layering is handled by a deliberately low z-index in CSS: chat UI shows her,
+    // SillyTavern drawers/settings/loading screens naturally cover her.
+    document.body.appendChild(hanabi);
 
     hanabi.addEventListener('load', queuePlacement, { once: true });
     queuePlacement();
@@ -65,7 +65,7 @@ export async function init() {
     window.visualViewport?.addEventListener('resize', queuePlacement, { passive: true });
     window.visualViewport?.addEventListener('scroll', queuePlacement, { passive: true });
 
-    console.info('[RP Glass 2] Visual Novel v0.3.1 initialized');
+    console.info('[RP Glass 2] Visual Novel v0.3.2 initialized');
 }
 
 // Compatibility fallback: current third-party extensions may self-initialize

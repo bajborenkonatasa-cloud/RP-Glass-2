@@ -1,4 +1,4 @@
-/* RP Glass 2 — v0.3.0 Visual Novel Foundation
+/* RP Glass 2 — v0.3.2 Visual Novel Foundation
    Mobile-first decorative layer only. Core SillyTavern message layout is NOT rewritten. */
 
 :root {
@@ -13,10 +13,10 @@
 /* Mascot: deliberately compact on mobile so Scene Blocks remain visible. */
 #rp-glass-2-hanabi-input {
     position: fixed;
-    z-index: 2147483000;
-    width: clamp(122px, 21vw, 160px);
+    z-index: 35;
+    width: clamp(104px, 18vw, 136px);
     height: auto;
-    transform: translate(-50%, -78%);
+    transform: translate(-50%, -70%);
     transform-origin: 50% 100%;
     pointer-events: none !important;
     user-select: none;
@@ -29,7 +29,7 @@
 }
 
 @media (max-width: 520px) {
-    #rp-glass-2-hanabi-input { width: min(142px, 38vw); }
+    #rp-glass-2-hanabi-input { width: min(118px, 31vw); }
 }
 
 /* Message = a page/panel, without touching display/flex/position structure. */
