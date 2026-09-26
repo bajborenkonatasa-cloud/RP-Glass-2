@@ -416,3 +416,54 @@
         margin: -84px -18px 3px 18px !important;
     }
 }
+
+/* ============================================================
+   RP-Glass 2 v0.6.5 — MOBILE COMFORT PASS
+   Lower thoughts portrait + larger avatar and scene plaque.
+   Decorative sizing only; core ST message layout is untouched.
+   ============================================================ */
+@media (max-width: 520px) {
+    /* Dreamy Hanabi: keep the approved size, lower her so the portrait
+       sits more naturally on the upper edge of the thoughts card. */
+    #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {
+        width: clamp(235px, 57vw, 292px) !important;
+        max-width: 58% !important;
+        margin: -58px -18px 3px 18px !important;
+    }
+
+    /* Larger character portrait for easier reading/recognition. */
+    #chat .mes.rp2-has-scene-header .avatar {
+        width: 94px !important;
+        height: 94px !important;
+        min-width: 94px !important;
+        min-height: 94px !important;
+    }
+
+    /* Larger, more readable scene/date/location plaque. */
+    #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+    #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+        top: 16px !important;
+        left: 146px !important;
+        right: 8px !important;
+        min-height: 82px !important;
+        padding: 13px 14px !important;
+        font-size: .91em !important;
+        line-height: 1.50 !important;
+        border-radius: 16px !important;
+    }
+}
+
+@media (max-width: 390px) {
+    #chat .mes.rp2-has-scene-header .avatar {
+        width: 88px !important;
+        height: 88px !important;
+        min-width: 88px !important;
+        min-height: 88px !important;
+    }
+    #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+    #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+        left: 136px !important;
+        font-size: .87em !important;
+        padding: 12px 12px !important;
+    }
+}
