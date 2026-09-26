@@ -1,0 +1,29 @@
+/* RP Glass 2 — Stage 1
+   Intentionally minimal: one mascot, no chat observers, no timers, no particles. */
+
+#rp-glass-2-hanabi-input {
+    position: fixed;
+    z-index: 40;
+    height: auto;
+    max-width: 36vw;
+    transform: translate(-50%, -86%);
+    transform-origin: 50% 100%;
+    pointer-events: none !important;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 8px rgba(183, 85, 255, 0.28));
+}
+
+@media (max-width: 520px) {
+    #rp-glass-2-hanabi-input {
+        max-width: 230px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #rp-glass-2-hanabi-input {
+        transition: none;
+    }
+}
