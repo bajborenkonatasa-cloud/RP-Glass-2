@@ -148,25 +148,25 @@
 #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
     position: absolute !important;
     z-index: 2;
-    top: 22px;
-    left: 138px;
-    right: 20px;
+    top: 20px;
+    left: 124px;
+    right: 14px;
     width: auto !important;
     max-width: none !important;
     box-sizing: border-box;
     margin: 0 !important;
-    padding: 8px 11px !important;
+    padding: 11px 14px !important;
     border: 1px solid rgba(83, 218, 255, .50) !important;
-    border-left: 4px solid rgba(85, 238, 255, .92) !important;
-    border-radius: 13px !important;
+    border-left: 5px solid rgba(85, 238, 255, .92) !important;
+    border-radius: 15px !important;
     background:
       linear-gradient(110deg, rgba(15, 27, 53, .91), rgba(38, 12, 58, .83)) !important;
     box-shadow:
       0 0 16px rgba(65, 190, 255, .08),
       inset 0 0 14px rgba(165, 71, 255, .055) !important;
     font-family: system-ui, sans-serif !important;
-    font-size: .70em !important;
-    line-height: 1.34 !important;
+    font-size: .84em !important;
+    line-height: 1.46 !important;
     letter-spacing: .005em;
     text-align: left !important;
     color: rgba(247, 244, 255, .96) !important;
@@ -178,21 +178,32 @@
 @media (max-width: 520px) {
     #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
     #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-        top: 21px;
-        left: 122px;
-        right: 16px;
-        padding: 7px 9px !important;
-        font-size: .66em !important;
-        line-height: 1.30 !important;
-        border-radius: 12px !important;
+        top: 18px;
+        left: 112px;
+        right: 10px;
+        padding: 10px 12px !important;
+        font-size: .80em !important;
+        line-height: 1.44 !important;
+        border-radius: 14px !important;
     }
 }
 
 @media (max-width: 390px) {
     #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
     #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-        left: 112px;
-        right: 12px;
-        font-size: .63em !important;
+        left: 106px;
+        right: 8px;
+        font-size: .77em !important;
     }
+}
+
+
+/* v0.4.1 — Scene Header readability polish only.
+   Mechanics and mascot placement remain exactly as in v0.4.0/v0.3.4. */
+#chat .mes.rp2-has-scene-header .rp2-scene-header {
+    min-height: 58px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.48);
+}
+@media (max-width: 520px) {
+    #chat .mes.rp2-has-scene-header .rp2-scene-header { min-height: 64px; }
 }

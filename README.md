@@ -1,7 +1,10 @@
-# RP Glass 2 — v0.4.0 Scene Header
+# RP Glass 2 — v0.4.1 Scene Header Polish
 
-Working Hanabi v0.3.4 placement is preserved.
+Micro-fix over v0.4.0.
 
-This build adds a mobile-safe scene header: the existing generated date/time/place/atmosphere heading is visually lifted into the unused message-header area. SillyTavern core `.mes`, `.mes_block`, and `.mes_header` display/flex structure is not rewritten.
-
-No MutationObserver, polling timer, or full-chat mutation scan. Existing messages are decorated once; new/rendered/swiped messages use SillyTavern events.
+- Larger scene plaque and readable mobile typography.
+- More useful width in the free header area.
+- Slightly taller glass card for 2–3 lines.
+- No change to Hanabi size/position or chat-only layering.
+- No change to scene-header mechanics.
+- No MutationObserver, polling, particles, or core SillyTavern flex/display rewrites.
