@@ -135,3 +135,64 @@
     #chat .mes_text { line-height: 1.57 !important; }
     #chat .mes_text h1, #chat .mes_text h2, #chat .mes_text h3 { font-size: .79em !important; }
 }
+
+
+/* v0.4 — Scene Header
+   The original message structure is untouched. We only visually lift the existing
+   RP scene heading into unused header space. No flex/display rewrites. */
+#chat .mes.rp2-has-scene-header {
+    position: relative;
+}
+
+#chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+#chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+    position: absolute !important;
+    z-index: 2;
+    top: 22px;
+    left: 138px;
+    right: 20px;
+    width: auto !important;
+    max-width: none !important;
+    box-sizing: border-box;
+    margin: 0 !important;
+    padding: 8px 11px !important;
+    border: 1px solid rgba(83, 218, 255, .50) !important;
+    border-left: 4px solid rgba(85, 238, 255, .92) !important;
+    border-radius: 13px !important;
+    background:
+      linear-gradient(110deg, rgba(15, 27, 53, .91), rgba(38, 12, 58, .83)) !important;
+    box-shadow:
+      0 0 16px rgba(65, 190, 255, .08),
+      inset 0 0 14px rgba(165, 71, 255, .055) !important;
+    font-family: system-ui, sans-serif !important;
+    font-size: .70em !important;
+    line-height: 1.34 !important;
+    letter-spacing: .005em;
+    text-align: left !important;
+    color: rgba(247, 244, 255, .96) !important;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    pointer-events: none;
+}
+
+@media (max-width: 520px) {
+    #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+    #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+        top: 21px;
+        left: 122px;
+        right: 16px;
+        padding: 7px 9px !important;
+        font-size: .66em !important;
+        line-height: 1.30 !important;
+        border-radius: 12px !important;
+    }
+}
+
+@media (max-width: 390px) {
+    #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+    #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+        left: 112px;
+        right: 12px;
+        font-size: .63em !important;
+    }
+}

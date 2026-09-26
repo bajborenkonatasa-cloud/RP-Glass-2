@@ -1,14 +1,7 @@
-# RP Glass 2 — Visual Novel v0.3.3
+# RP Glass 2 — v0.4.0 Scene Header
 
-Micro-fit update for the input mascot.
+Working Hanabi v0.3.4 placement is preserved.
 
-- Keeps the proven ST 1.19 lifecycle / chat-layer behavior from v0.3.2.
-- Hanabi is larger on mobile (up to 150px).
-- Shifted slightly left so the right-side 1/1 / swipe area stays visually clear.
-- pointer-events:none remains enabled, so Hanabi never blocks taps.
-- No observers, polling, particles, or chat rescans.
-- Existing visual-novel message styling is unchanged.
+This build adds a mobile-safe scene header: the existing generated date/time/place/atmosphere heading is visually lifted into the unused message-header area. SillyTavern core `.mes`, `.mes_block`, and `.mes_header` display/flex structure is not rewritten.
 
-
-## v0.3.4 — Hanabi Right Fit
-Mascot moved right, raised above the composer edge, and enlarged for mobile. Chat-only layering is unchanged.
+No MutationObserver, polling timer, or full-chat mutation scan. Existing messages are decorated once; new/rendered/swiped messages use SillyTavern events.
