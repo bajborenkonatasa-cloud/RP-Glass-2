@@ -3,9 +3,9 @@
   "loading_order": 100,
   "requires": [],
   "optional": [],
-  "js": "index.js",
+  "js": "stage1.js",
   "css": "style.css",
   "author": "bajborenkonatasa-cloud",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homePage": "https://github.com/bajborenkonatasa-cloud/RP-Glass-2"
 }
