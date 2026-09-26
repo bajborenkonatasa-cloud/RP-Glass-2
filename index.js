@@ -21,7 +21,7 @@ function placeHanabi() {
     }
 
     const rect = composer.getBoundingClientRect();
-    hanabi.style.left = `${Math.round(rect.left + rect.width * 0.43)}px`;
+    hanabi.style.left = `${Math.round(rect.left + rect.width * 0.60)}px`;
     hanabi.style.top = `${Math.round(rect.top)}px`;
     hanabi.style.bottom = 'auto';
 }
@@ -65,7 +65,7 @@ export async function init() {
     window.visualViewport?.addEventListener('resize', queuePlacement, { passive: true });
     window.visualViewport?.addEventListener('scroll', queuePlacement, { passive: true });
 
-    console.info('[RP Glass 2] Visual Novel v0.3.3 initialized');
+    console.info('[RP Glass 2] Visual Novel v0.3.4 initialized');
 }
 
 // Compatibility fallback: current third-party extensions may self-initialize

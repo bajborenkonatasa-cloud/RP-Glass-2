@@ -8,3 +8,7 @@ Micro-fit update for the input mascot.
 - pointer-events:none remains enabled, so Hanabi never blocks taps.
 - No observers, polling, particles, or chat rescans.
 - Existing visual-novel message styling is unchanged.
+
+
+## v0.3.4 — Hanabi Right Fit
+Mascot moved right, raised above the composer edge, and enlarged for mobile. Chat-only layering is unchanged.

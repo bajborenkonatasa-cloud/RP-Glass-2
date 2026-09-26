@@ -14,9 +14,9 @@
 #rp-glass-2-hanabi-input {
     position: fixed;
     z-index: 35;
-    width: clamp(128px, 22vw, 160px);
+    width: clamp(150px, 25vw, 184px);
     height: auto;
-    transform: translate(-50%, -64%);
+    transform: translate(-50%, -82%);
     transform-origin: 50% 100%;
     pointer-events: none !important;
     user-select: none;
@@ -29,7 +29,7 @@
 }
 
 @media (max-width: 520px) {
-    #rp-glass-2-hanabi-input { width: min(150px, 39vw); }
+    #rp-glass-2-hanabi-input { width: min(176px, 46vw); }
 }
 
 /* Message = a page/panel, without touching display/flex/position structure. */
