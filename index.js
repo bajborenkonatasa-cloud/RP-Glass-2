@@ -152,7 +152,7 @@ export async function init() {
     window.visualViewport?.addEventListener('resize', queuePlacement, { passive: true });
     window.visualViewport?.addEventListener('scroll', queuePlacement, { passive: true });
 
-    console.info('[RP Glass 2] Visual Novel v0.6.1 Dreamy Thoughts initialized');
+    console.info('[RP Glass 2] Visual Novel v0.6.3 Dreamy Thoughts initialized');
 }
 
 // Compatibility fallback: current third-party extensions may self-initialize

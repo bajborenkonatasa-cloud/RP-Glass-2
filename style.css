@@ -361,7 +361,7 @@
 }
 
 /* ============================================================
-   RP-Glass 2 v0.6.2 — DREAMY THOUGHTS / VISUAL-NOVEL FLOAT
+   RP-Glass 2 v0.6.3 — DREAMY THOUGHTS / VISUAL-NOVEL FLOAT
    Portrait breaks the top edge and text wraps beside the silhouette area.
    ============================================================ */
 #chat .mes_text details.rpg-thoughts {
@@ -377,10 +377,10 @@
 #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {
     display: block !important;
     float: right !important;
-    width: clamp(190px, 45vw, 245px) !important;
-    max-width: 47% !important;
+    width: clamp(215px, 49vw, 275px) !important;
+    max-width: 50% !important;
     height: auto !important;
-    margin: -68px -18px 2px 9px !important;
+    margin: -78px -18px 3px 14px !important;
     border: 0 !important;
     border-radius: 0 !important;
     background: transparent !important;
@@ -411,8 +411,8 @@
         margin-right: -7px !important;
     }
     #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {
-        width: clamp(190px, 46vw, 225px) !important;
-        max-width: 47% !important;
-        margin: -62px -15px 0 8px !important;
+        width: clamp(210px, 49vw, 255px) !important;
+        max-width: 50% !important;
+        margin: -72px -15px 2px 13px !important;
     }
 }
