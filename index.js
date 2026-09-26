@@ -35,6 +35,67 @@ function queuePlacement() {
 
 
 
+const RP2_NAV_RE = /\[hanabi\s*:\s*(dreamy|sad|angry|happy|playful)(?:\s*\|\s*(peek|run|sleep|input|off))?\s*\]/ig;
+const RP2_EMOTION_ASSETS = {
+    dreamy: './assets/hanabi-thoughts-dreamy.webp',
+    sad: './assets/hanabi-thoughts-sad.webp',
+    angry: './assets/hanabi-thoughts-angry.webp',
+    happy: './assets/hanabi-thoughts-happy.webp',
+    playful: './assets/hanabi-thoughts-happy.webp',
+};
+const RP2_CHIBI_ASSETS = {
+    peek: './assets/hanabi-chibi-peek.webp',
+    run: './assets/hanabi-chibi-run.webp',
+    sleep: './assets/hanabi-chibi-sleep.webp',
+};
+
+function readHanabiNavigator(messageEl) {
+    const text = messageEl?.querySelector('.mes_text');
+    if (!text) return { emotion: 'dreamy', chibi: 'peek' };
+    let state = { emotion: 'dreamy', chibi: 'peek' };
+    const walker = document.createTreeWalker(text, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((node) => {
+        const original = node.nodeValue || '';
+        let matched = false;
+        const cleaned = original.replace(RP2_NAV_RE, (_, emotion, chibi) => {
+            state.emotion = String(emotion).toLowerCase();
+            if (chibi) state.chibi = String(chibi).toLowerCase();
+            matched = true;
+            return '';
+        });
+        if (matched) node.nodeValue = cleaned;
+    });
+    messageEl.dataset.rp2Emotion = state.emotion;
+    messageEl.dataset.rp2Chibi = state.chibi;
+    return state;
+}
+
+function applyHanabiState(messageEl, state) {
+    if (!messageEl || !state) return;
+    const portrait = messageEl.querySelector('.rpg-thought-hanabi');
+    const emotionAsset = RP2_EMOTION_ASSETS[state.emotion] || RP2_EMOTION_ASSETS.dreamy;
+    if (portrait) portrait.src = new URL(emotionAsset, import.meta.url).href;
+
+    const chibi = messageEl.querySelector(':scope > .rp2-hanabi-peek');
+    if (!chibi) return;
+    chibi.classList.remove('rp2-chibi-peek', 'rp2-chibi-run', 'rp2-chibi-sleep');
+    if (state.chibi === 'off' || state.chibi === 'input') {
+        chibi.hidden = true;
+        return;
+    }
+    chibi.hidden = false;
+    const kind = RP2_CHIBI_ASSETS[state.chibi] ? state.chibi : 'peek';
+    chibi.classList.add(`rp2-chibi-${kind}`);
+    chibi.src = new URL(RP2_CHIBI_ASSETS[kind], import.meta.url).href;
+}
+
+function decorateHanabiNavigator(messageEl) {
+    const state = readHanabiNavigator(messageEl);
+    applyHanabiState(messageEl, state);
+}
+
 function isSceneHeading(el) {
     if (!el || !el.matches?.('h1, h2, h3')) return false;
     const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
@@ -55,7 +116,7 @@ function decorateSceneHeader(messageEl) {
     // No observers/timers; this runs only through the same safe message decoration pass.
     if (!messageEl.querySelector(':scope > .rp2-hanabi-peek')) {
         const peek = document.createElement('img');
-        peek.className = 'rp2-hanabi-peek';
+        peek.className = 'rp2-hanabi-peek rp2-chibi-peek';
         peek.alt = '';
         peek.draggable = false;
         peek.setAttribute('aria-hidden', 'true');
@@ -98,6 +159,7 @@ function decorateVisibleMessages() {
     document.querySelectorAll('#chat .mes').forEach((messageEl) => {
         decorateSceneHeader(messageEl);
         decorateThoughts(messageEl);
+        decorateHanabiNavigator(messageEl);
     });
 }
 
@@ -106,6 +168,7 @@ function decorateMessageById(messageId) {
     if (el) {
         decorateSceneHeader(el);
         decorateThoughts(el);
+        decorateHanabiNavigator(el);
     }
     else requestAnimationFrame(decorateVisibleMessages);
 }

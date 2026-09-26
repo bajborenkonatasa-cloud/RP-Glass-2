@@ -584,3 +584,43 @@
     max-width: 46vw !important;
     transform: translate(-50%, -82%) !important;
 }
+
+
+/* ============================================================
+   RP-Glass 2 v0.7.0 — HANABI SMART NAVIGATOR
+   Tiny explicit marker: [hanabi:dreamy|peek]
+   Emotions: dreamy / sad / angry / happy(playful)
+   Chibis: peek / run / sleep / input / off
+   No MutationObserver, polling, particles or full-chat rescans on mutations.
+   ============================================================ */
+#chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-run {
+    top: 26px !important;
+    right: -8px !important;
+    width: 205px !important;
+    max-width: 45% !important;
+    filter: drop-shadow(0 0 9px rgba(202,78,255,.22));
+}
+#chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-sleep {
+    top: 36px !important;
+    right: -5px !important;
+    width: 230px !important;
+    max-width: 50% !important;
+    filter: drop-shadow(0 0 9px rgba(202,78,255,.20));
+}
+#chat .mes.rp2-has-scene-header > .rp2-hanabi-peek[hidden] {
+    display: none !important;
+}
+@media (max-width: 520px) {
+    #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-run {
+        top: 28px !important;
+        right: -10px !important;
+        width: 198px !important;
+        max-width: 45% !important;
+    }
+    #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-sleep {
+        top: 42px !important;
+        right: -8px !important;
+        width: 222px !important;
+        max-width: 50% !important;
+    }
+}
