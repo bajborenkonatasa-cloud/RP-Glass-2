@@ -249,3 +249,88 @@
         left: 118px;
     }
 }
+
+
+/* v0.5.0 — Speaker + Emotion Engine
+   Explicit metadata only. No chat-wide mood guessing, observers or polling.
+   Expected markup example:
+   <span class="rp-dialogue rp-char rp-angry">“...”</span>
+*/
+#chat .mes_text .rp-dialogue {
+    --rp-voice: #86f29a;
+    --rp-glow: rgba(92, 255, 132, .18);
+    --rp-line: rgba(92, 255, 132, .50);
+    display: inline;
+    color: var(--rp-voice) !important;
+    font-style: italic;
+    font-weight: 650;
+    letter-spacing: .008em;
+    text-shadow: 0 0 7px var(--rp-glow), 0 1px 1px rgba(0,0,0,.52);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+/* Speaker identities — deliberately readable rather than saturated. */
+#chat .mes_text .rp-dialogue.rp-user {
+    --rp-voice: #f0b8ff;
+    --rp-glow: rgba(222, 115, 255, .18);
+    --rp-line: rgba(222, 115, 255, .50);
+}
+#chat .mes_text .rp-dialogue.rp-char {
+    --rp-voice: #86f29a;
+    --rp-glow: rgba(92, 255, 132, .18);
+    --rp-line: rgba(92, 255, 132, .50);
+}
+#chat .mes_text .rp-dialogue.rp-npc {
+    --rp-voice: #8fdcff;
+    --rp-glow: rgba(89, 199, 255, .18);
+    --rp-line: rgba(89, 199, 255, .50);
+}
+
+/* Mood modifiers. Mood wins over the base speaker hue; speaker identity is
+   retained by a tiny underline accent, not a heavy background. */
+#chat .mes_text .rp-dialogue.rp-angry {
+    --rp-voice: #ff8b82;
+    --rp-glow: rgba(255, 74, 68, .25);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--rp-line) 62%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+#chat .mes_text .rp-dialogue.rp-fear {
+    --rp-voice: #c8efff;
+    --rp-glow: rgba(105, 210, 255, .25);
+}
+#chat .mes_text .rp-dialogue.rp-sad {
+    --rp-voice: #b9b8ff;
+    --rp-glow: rgba(121, 118, 255, .22);
+}
+#chat .mes_text .rp-dialogue.rp-happy {
+    --rp-voice: #f4df86;
+    --rp-glow: rgba(255, 218, 92, .20);
+}
+#chat .mes_text .rp-dialogue.rp-romance {
+    --rp-voice: #ffafd9;
+    --rp-glow: rgba(255, 102, 190, .23);
+}
+#chat .mes_text .rp-dialogue.rp-playful {
+    --rp-voice: #d8a7ff;
+    --rp-glow: rgba(188, 98, 255, .22);
+}
+#chat .mes_text .rp-dialogue.rp-cold {
+    --rp-voice: #a9e9f2;
+    --rp-glow: rgba(75, 218, 239, .20);
+}
+
+/* Optional low-key mood accent on the message card. Applied only when the
+   message itself receives one of these classes later; no automatic scanning. */
+#chat .mes.rp-mood-angry { box-shadow: inset 0 0 28px rgba(255,64,64,.035), 0 0 18px rgba(255,64,64,.035) !important; }
+#chat .mes.rp-mood-fear { box-shadow: inset 0 0 28px rgba(85,205,255,.035), 0 0 18px rgba(85,205,255,.035) !important; }
+#chat .mes.rp-mood-romance { box-shadow: inset 0 0 28px rgba(255,91,190,.035), 0 0 18px rgba(255,91,190,.035) !important; }
+
+@media (max-width: 520px) {
+    #chat .mes_text .rp-dialogue {
+        font-weight: 640;
+        text-shadow: 0 0 6px var(--rp-glow), 0 1px 1px rgba(0,0,0,.55);
+    }
+}

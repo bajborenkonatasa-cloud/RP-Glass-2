@@ -116,7 +116,7 @@ export async function init() {
     window.visualViewport?.addEventListener('resize', queuePlacement, { passive: true });
     window.visualViewport?.addEventListener('scroll', queuePlacement, { passive: true });
 
-    console.info('[RP Glass 2] Visual Novel v0.4.1 Scene Header Polish initialized');
+    console.info('[RP Glass 2] Visual Novel v0.5.0 Speaker + Emotion Engine initialized');
 }
 
 // Compatibility fallback: current third-party extensions may self-initialize

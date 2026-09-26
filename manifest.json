@@ -6,7 +6,7 @@
   "js": "index.js",
   "css": "style.css",
   "author": "bajborenkonatasa-cloud",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "homePage": "https://github.com/bajborenkonatasa-cloud/RP-Glass-2",
   "auto_update": false,
   "minimum_client_version": "1.19.0",

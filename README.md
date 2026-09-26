@@ -1,9 +1,10 @@
-# RP Glass 2 — v0.4.2 Header Balance
+# RP Glass 2 — v0.5.0 Speaker + Emotion Engine
 
-Micro-polish of the already working Scene Header.
+Adds explicit, lightweight dialogue styling for USER / CHAR / NPC and moods: normal, angry, fear, sad, happy, romance, playful, cold.
 
-- Enlarges the portrait/avatar in messages that contain the RP scene header.
-- Keeps the scene card readable and aligned beside it on mobile.
-- Does not rewrite SillyTavern flex/display structure.
-- Does not change Hanabi mascot placement or chat-only behavior.
-- Does not add observers, timers, or particles.
+No MutationObserver, no polling, no full-chat emotion scan. Existing Hanabi and Scene Header placement are unchanged.
+
+Markup contract for the RP prompt (next step):
+`<span class="rp-dialogue rp-char rp-angry">“Dialogue”</span>`
+
+Speaker classes: `rp-user`, `rp-char`, `rp-npc`. Mood classes: `rp-angry`, `rp-fear`, `rp-sad`, `rp-happy`, `rp-romance`, `rp-playful`, `rp-cold`.
