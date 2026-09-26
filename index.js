@@ -2,6 +2,7 @@ const RP2_ID = 'rp-glass-2-hanabi-input';
 let rp2Initialized = false;
 let rp2Raf = 0;
 let rp2EventsBound = false;
+let rp2ComposerObserver = null;
 
 function getComposer() {
     return document.querySelector('#send_form')
@@ -128,6 +129,14 @@ function bindSceneEvents() {
     if (E.MORE_MESSAGES_LOADED) eventSource.on(E.MORE_MESSAGES_LOADED, () => requestAnimationFrame(decorateVisibleMessages));
 }
 
+function watchComposerGeometry() {
+    const composer = getComposer();
+    if (!composer || typeof ResizeObserver === 'undefined') return;
+    rp2ComposerObserver?.disconnect();
+    rp2ComposerObserver = new ResizeObserver(() => queuePlacement());
+    rp2ComposerObserver.observe(composer);
+}
+
 function mountHanabi() {
     let hanabi = document.getElementById(RP2_ID);
     if (hanabi) {
@@ -146,6 +155,7 @@ function mountHanabi() {
     document.body.appendChild(hanabi);
 
     hanabi.addEventListener('load', queuePlacement, { once: true });
+    watchComposerGeometry();
     queuePlacement();
 }
 
@@ -164,7 +174,7 @@ export async function init() {
     window.visualViewport?.addEventListener('resize', queuePlacement, { passive: true });
     window.visualViewport?.addEventListener('scroll', queuePlacement, { passive: true });
 
-    console.info('[RP Glass 2] Visual Novel v0.6.6 Peek Hanabi initialized');
+    console.info('[RP Glass 2] Visual Novel v0.6.7 Header Reflow initialized');
 }
 
 // Compatibility fallback: current third-party extensions may self-initialize
