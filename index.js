@@ -40,26 +40,6 @@ function isSceneHeading(el) {
     return /📅|🕒|📍|🌫️/.test(text) && (text.includes('|') || text.length > 12);
 }
 
-function decorateThoughts(messageEl) {
-    if (!messageEl) return;
-    const text = messageEl.querySelector('.mes_text');
-    if (!text) return;
-    for (const details of text.querySelectorAll('details')) {
-        const summary = details.querySelector(':scope > summary');
-        if (!summary) continue;
-        const label = (summary.textContent || '').replace(/\s+/g, ' ').trim();
-        if (!/распаковать\s+мысли/i.test(label)) continue;
-        details.classList.add('rp2-thoughts');
-        if (details.querySelector(':scope > .rp2-thought-hanabi')) continue;
-        const portrait = document.createElement('img');
-        portrait.className = 'rp2-thought-hanabi';
-        portrait.alt = '';
-        portrait.draggable = false;
-        portrait.src = new URL('./assets/hanabi-thoughts-dreamy.webp', import.meta.url).href;
-        summary.insertAdjacentElement('afterend', portrait);
-    }
-}
-
 function decorateSceneHeader(messageEl) {
     if (!messageEl) return;
     const text = messageEl.querySelector('.mes_text');
@@ -71,6 +51,36 @@ function decorateSceneHeader(messageEl) {
     messageEl.classList.add('rp2-has-scene-header');
 }
 
+function isThoughtsDetails(details) {
+    if (!details || details.closest('story_footer, story-footer')) return false;
+    const summary = details.querySelector(':scope > summary');
+    const label = (summary?.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+    return label.includes('распаковать мысли') || label.includes('мысли');
+}
+
+function decorateThoughts(messageEl) {
+    if (!messageEl) return;
+    const text = messageEl.querySelector('.mes_text');
+    if (!text) return;
+
+    text.querySelectorAll('details').forEach((details) => {
+        if (!isThoughtsDetails(details)) return;
+        details.classList.add('rpg-thoughts');
+        if (details.querySelector(':scope > .rpg-thought-hanabi')) return;
+
+        const portrait = document.createElement('img');
+        portrait.className = 'rpg-thought-hanabi';
+        portrait.alt = '';
+        portrait.draggable = false;
+        portrait.setAttribute('aria-hidden', 'true');
+        portrait.src = new URL('./assets/hanabi-thoughts-dreamy.webp', import.meta.url).href;
+
+        const summary = details.querySelector(':scope > summary');
+        if (summary) summary.insertAdjacentElement('afterend', portrait);
+        else details.prepend(portrait);
+    });
+}
+
 function decorateVisibleMessages() {
     document.querySelectorAll('#chat .mes').forEach((messageEl) => {
         decorateSceneHeader(messageEl);
@@ -80,7 +90,10 @@ function decorateVisibleMessages() {
 
 function decorateMessageById(messageId) {
     const el = document.querySelector(`#chat .mes[mesid="${CSS.escape(String(messageId))}"]`);
-    if (el) { decorateSceneHeader(el); decorateThoughts(el); }
+    if (el) {
+        decorateSceneHeader(el);
+        decorateThoughts(el);
+    }
     else requestAnimationFrame(decorateVisibleMessages);
 }
 
@@ -139,7 +152,7 @@ export async function init() {
     window.visualViewport?.addEventListener('resize', queuePlacement, { passive: true });
     window.visualViewport?.addEventListener('scroll', queuePlacement, { passive: true });
 
-    console.info('[RP Glass 2] Visual Novel v0.6.0 Thoughts Portrait initialized');
+    console.info('[RP Glass 2] Visual Novel v0.6.1 Dreamy Thoughts initialized');
 }
 
 // Compatibility fallback: current third-party extensions may self-initialize
