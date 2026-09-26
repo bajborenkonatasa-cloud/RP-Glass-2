@@ -359,4 +359,60 @@
     color: var(--rpg-npc-color) !important;
     text-shadow: 0 0 6px var(--rpg-npc-glow), 0 0 12px rgba(73,222,255,.10) !important;
 }
-\n\n/* ============================================================\n   RP-Glass 2 v0.6.1 — DREAMY THOUGHTS PORTRAIT\n   Static true-alpha Hanabi. No observers, timers or mood scans.\n   ============================================================ */\n#chat .mes_text details.rpg-thoughts {\n    box-sizing: border-box !important;\n    width: calc(100% + 18px) !important;\n    max-width: none !important;\n    margin-left: -9px !important;\n    margin-right: -9px !important;\n    overflow: visible !important;\n    padding: 11px 13px 13px !important;\n}\n\n#chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {\n    display: block !important;\n    float: right;\n    width: clamp(165px, 39vw, 220px);\n    max-width: 43%;\n    height: auto;\n    margin: -42px -14px 4px 10px;\n    pointer-events: none;\n    user-select: none;\n    -webkit-user-drag: none;\n    filter: drop-shadow(0 0 9px rgba(187, 92, 255, .22));\n}\n\n#chat .mes_text details.rpg-thoughts:not([open]) > .rpg-thought-hanabi {\n    display: none !important;\n}\n\n#chat .mes_text details.rpg-thoughts::after {\n    content: \"\";\n    display: block;\n    clear: both;\n}\n\n@media (max-width: 520px) {\n    #chat .mes_text details.rpg-thoughts {\n        width: calc(100% + 14px) !important;\n        margin-left: -7px !important;\n        margin-right: -7px !important;\n    }\n    #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {\n        width: clamp(170px, 43vw, 205px);\n        max-width: 44%;\n        margin-top: -38px;\n        margin-right: -12px;\n        margin-left: 9px;\n    }\n}\n
+
+/* ============================================================
+   RP-Glass 2 v0.6.2 — DREAMY THOUGHTS / VISUAL-NOVEL FLOAT
+   Portrait breaks the top edge and text wraps beside the silhouette area.
+   ============================================================ */
+#chat .mes_text details.rpg-thoughts {
+    box-sizing: border-box !important;
+    width: calc(100% + 18px) !important;
+    max-width: none !important;
+    margin-left: -9px !important;
+    margin-right: -9px !important;
+    overflow: visible !important;
+    padding: 11px 13px 13px !important;
+}
+
+#chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {
+    display: block !important;
+    float: right !important;
+    width: clamp(190px, 45vw, 245px) !important;
+    max-width: 47% !important;
+    height: auto !important;
+    margin: -68px -18px 2px 9px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    object-fit: contain !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    -webkit-user-drag: none !important;
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,.20)) drop-shadow(0 0 9px rgba(187,92,255,.18));
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+#chat .mes_text details.rpg-thoughts:not([open]) > .rpg-thought-hanabi {
+    display: none !important;
+}
+
+#chat .mes_text details.rpg-thoughts::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+@media (max-width: 520px) {
+    #chat .mes_text details.rpg-thoughts {
+        width: calc(100% + 14px) !important;
+        margin-left: -7px !important;
+        margin-right: -7px !important;
+    }
+    #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {
+        width: clamp(190px, 46vw, 225px) !important;
+        max-width: 47% !important;
+        margin: -62px -15px 0 8px !important;
+    }
+}
