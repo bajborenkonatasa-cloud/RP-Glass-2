@@ -345,7 +345,7 @@ function wrapLiteralCharMarkdown(node) {
 
 function decorateDialogues(messageEl) {
     const text = messageEl?.querySelector('.mes_text');
-    if (!text || text.dataset.rp2DialogueDecorated === '1') return;
+    if (!text) return;
 
     // First catch literal **"..."** if Markdown did NOT convert it to <strong>.
     const literalWalker = document.createTreeWalker(text, NodeFilter.SHOW_TEXT);
@@ -371,7 +371,6 @@ function decorateDialogues(messageEl) {
         nodes.push(node);
     }
     nodes.forEach((node) => wrapQuotedTextNode(node, 'rp-npc'));
-    text.dataset.rp2DialogueDecorated = '1';
 }
 
 function replayHanabiEffect(el, className) {
@@ -426,6 +425,40 @@ function bindSceneEvents() {
     if (E.MORE_MESSAGES_LOADED) eventSource.on(E.MORE_MESSAGES_LOADED, () => requestAnimationFrame(decorateVisibleMessages));
 }
 
+let rp2ChatMutationObserver = null;
+let rp2MutationQueued = false;
+
+function watchDialogueEdits() {
+    const chat = document.querySelector('#chat');
+    if (!chat || typeof MutationObserver === 'undefined') return;
+    rp2ChatMutationObserver?.disconnect();
+
+    rp2ChatMutationObserver = new MutationObserver((mutations) => {
+        // SillyTavern can replace message HTML after edit/streaming without creating
+        // a fresh .mes node. Re-run the idempotent dialogue decorator on changed messages.
+        const changed = new Set();
+        for (const mutation of mutations) {
+            const target = mutation.target?.nodeType === Node.TEXT_NODE
+                ? mutation.target.parentElement
+                : mutation.target;
+            const mes = target?.closest?.('#chat .mes');
+            if (mes) changed.add(mes);
+            for (const node of mutation.addedNodes || []) {
+                const el = node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
+                const addedMes = el?.closest?.('#chat .mes') || el?.querySelector?.('#chat .mes');
+                if (addedMes) changed.add(addedMes);
+            }
+        }
+        if (!changed.size || rp2MutationQueued) return;
+        rp2MutationQueued = true;
+        requestAnimationFrame(() => {
+            rp2MutationQueued = false;
+            changed.forEach((mes) => decorateDialogues(mes));
+        });
+    });
+    rp2ChatMutationObserver.observe(chat, { childList: true, subtree: true, characterData: true });
+}
+
 function watchComposerGeometry() {
     const composer = getComposer();
     if (!composer || typeof ResizeObserver === 'undefined') return;
@@ -466,12 +499,13 @@ export async function init() {
     mountHanabi();
     decorateVisibleMessages();
     bindSceneEvents();
+    watchDialogueEdits();
 
     window.addEventListener('resize', () => { queuePlacement(); refreshPeekSafeZones(); }, { passive: true });
     window.visualViewport?.addEventListener('resize', () => { queuePlacement(); refreshPeekSafeZones(); }, { passive: true });
     window.visualViewport?.addEventListener('scroll', queuePlacement, { passive: true });
 
-    console.info('[RP Glass 2] Visual Novel v0.9.0 Dialogue + Book Reader + Emotion Engine initialized');
+    console.info('[RP Glass 2] Visual Novel v0.9.4 Live Dialogue + Book Reader + Emotion Engine initialized');
 }
 
 // Compatibility fallback: current third-party extensions may self-initialize

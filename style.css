@@ -76,8 +76,8 @@
 #chat .mes_text i,
 #chat .mes_text q,
 #chat .mes_text .quote {
-    color: #79ef8c !important;
-    text-shadow: 0 0 8px rgba(70,255,113,.18);
+    color: inherit !important;
+    text-shadow: none;
 }
 
 #chat .mes_text strong,
@@ -661,16 +661,12 @@
 
 
 /* ============================================================
-   RP-Glass 2 v0.9.0 — USER CONTROL PANEL
-   Change ONLY these values whenever you want new colors/fonts.
+   RP-Glass 2 v0.9.5 — READER DEFAULTS
+   Dialogue colors/fonts are intentionally NOT defined here.
+   Define --rpg-char-dialogue / --rpg-npc-dialogue / font variables
+   in SillyTavern Custom CSS so your own CSS always wins.
    ============================================================ */
 :root {
-    --rpg-char-dialogue: #ff8c00;       /* **"CHAR"** */
-    --rpg-char-glow: rgba(255,140,0,.58);
-    --rpg-npc-dialogue: #20e6dc;        /* "NPC" */
-    --rpg-npc-glow: rgba(32,230,220,.50);
-    --rpg-dialogue-font: Georgia, "Times New Roman", serif;
-    --rpg-dialogue-size: 1.08em;
 
     --rpg-reader-bg-1: rgba(27,10,10,.97);
     --rpg-reader-bg-2: rgba(8,5,8,.98);
@@ -683,21 +679,21 @@
 
 /* CHAR / NPC — isolated classes, no global i/em recoloring required. */
 #chat .mes_text .rp-dialogue.rp-char {
-    color: var(--rpg-char-dialogue) !important;
-    font-family: var(--rpg-dialogue-font) !important;
-    font-size: var(--rpg-dialogue-size) !important;
+    color: var(--rpg-char-dialogue, #ff8c00) !important;
+    font-family: var(--rpg-dialogue-font, Georgia, "Times New Roman", serif) !important;
+    font-size: var(--rpg-dialogue-size, 1.08em) !important;
     font-style: italic !important;
     font-weight: 650 !important;
-    text-shadow: 0 1px 1px #000, 0 0 5px #000, 0 0 10px var(--rpg-char-glow) !important;
+    text-shadow: 0 1px 1px #000, 0 0 5px #000, 0 0 10px var(--rpg-char-glow, rgba(255,140,0,.58)) !important;
     animation: rp2DialogueWake .42s ease-out both;
 }
 #chat .mes_text .rp-dialogue.rp-npc {
-    color: var(--rpg-npc-dialogue) !important;
-    font-family: var(--rpg-dialogue-font) !important;
-    font-size: var(--rpg-dialogue-size) !important;
+    color: var(--rpg-npc-dialogue, #20e6dc) !important;
+    font-family: var(--rpg-dialogue-font, Georgia, "Times New Roman", serif) !important;
+    font-size: var(--rpg-dialogue-size, 1.08em) !important;
     font-style: italic !important;
     font-weight: 600 !important;
-    text-shadow: 0 1px 1px #000, 0 0 5px #000, 0 0 10px var(--rpg-npc-glow) !important;
+    text-shadow: 0 1px 1px #000, 0 0 5px #000, 0 0 10px var(--rpg-npc-glow, rgba(32,230,220,.50)) !important;
     animation: rp2DialogueWake .42s ease-out both;
 }
 @keyframes rp2DialogueWake {
