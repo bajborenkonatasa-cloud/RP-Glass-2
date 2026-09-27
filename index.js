@@ -168,6 +168,7 @@ function applyInputChibi(kind) {
     const safeKind = RP2_INPUT_CHIBI_ASSETS[kind] ? kind : 'input';
     hanabi.dataset.rp2InputChibi = safeKind;
     hanabi.src = new URL(RP2_INPUT_CHIBI_ASSETS[safeKind], import.meta.url).href;
+    replayHanabiEffect(hanabi, 'rp2-chibi-change');
     queuePlacement();
 }
 
@@ -198,7 +199,13 @@ function applyHanabiState(messageEl, state) {
     // ONLY the portrait inside “Распаковать мысли…” changes emotion.
     const portrait = messageEl.querySelector('.rpg-thought-hanabi');
     const emotionAsset = RP2_EMOTION_ASSETS[state.emotion] || RP2_EMOTION_ASSETS.dreamy;
-    if (portrait) portrait.src = new URL(emotionAsset, import.meta.url).href;
+    if (portrait) {
+        const nextSrc = new URL(emotionAsset, import.meta.url).href;
+        if (portrait.src !== nextSrc) {
+            portrait.src = nextSrc;
+            replayHanabiEffect(portrait, 'rp2-emotion-change');
+        }
+    }
 
     // Header Hanabi is deliberately untouched: always hanabi-chibi-peek.webp.
 }
@@ -270,12 +277,89 @@ function decorateThoughts(messageEl) {
     });
 }
 
+
+// v0.9.0 — Dialogue + Book Reader decorator.
+// Authoring convention requested by the user:
+//   **"CHAR dialogue"** -> orange CHAR class
+//   "NPC dialogue"     -> turquoise NPC class
+// Colors/fonts stay in CSS variables so they are user-editable.
+function isIndependentReader(details) {
+    if (!details) return false;
+    if (details.closest('story_footer, story-footer')) return true;
+    const summary = details.querySelector(':scope > summary');
+    const label = (summary?.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+    return label.includes('независимый читатель') || label.includes('independent reader');
+}
+
+function decorateIndependentReader(messageEl) {
+    const text = messageEl?.querySelector('.mes_text');
+    if (!text) return;
+    text.querySelectorAll('details').forEach((details) => {
+        if (isIndependentReader(details)) details.classList.add('rpg-independent-reader');
+    });
+}
+
+function wrapQuotedTextNode(node, className) {
+    if (!node?.nodeValue || node.parentElement?.closest('.rp-dialogue, summary, script, style')) return;
+    const raw = node.nodeValue;
+    const re = /(["“«])([^"”»\n]{1,900})(["”»])/g;
+    if (!re.test(raw)) return;
+    re.lastIndex = 0;
+    const frag = document.createDocumentFragment();
+    let last = 0;
+    let m;
+    while ((m = re.exec(raw))) {
+        if (m.index > last) frag.append(document.createTextNode(raw.slice(last, m.index)));
+        const span = document.createElement('span');
+        span.className = `rp-dialogue ${className}`;
+        span.textContent = m[0];
+        frag.append(span);
+        last = m.index + m[0].length;
+    }
+    if (last < raw.length) frag.append(document.createTextNode(raw.slice(last)));
+    node.replaceWith(frag);
+}
+
+function decorateDialogues(messageEl) {
+    const text = messageEl?.querySelector('.mes_text');
+    if (!text || text.dataset.rp2DialogueDecorated === '1') return;
+
+    // **"..."** is rendered by Markdown as <strong>/<b>; mark it as CHAR.
+    text.querySelectorAll('strong, b').forEach((el) => {
+        if (el.closest('details, summary, .rp-dialogue')) return;
+        const value = (el.textContent || '').trim();
+        if (/^["“«].+["”»]$/s.test(value)) el.classList.add('rp-dialogue', 'rp-char');
+    });
+
+    // Plain quoted speech outside CHAR markup becomes NPC dialogue.
+    const walker = document.createTreeWalker(text, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) {
+        const node = walker.currentNode;
+        const parent = node.parentElement;
+        if (!parent) continue;
+        if (parent.closest('details, summary, .rp-dialogue, strong, b, code, pre, h1, h2, h3')) continue;
+        nodes.push(node);
+    }
+    nodes.forEach((node) => wrapQuotedTextNode(node, 'rp-npc'));
+    text.dataset.rp2DialogueDecorated = '1';
+}
+
+function replayHanabiEffect(el, className) {
+    if (!el) return;
+    el.classList.remove(className);
+    void el.offsetWidth;
+    el.classList.add(className);
+}
+
 function decorateVisibleMessages() {
     const messages = [...document.querySelectorAll('#chat .mes')];
     messages.forEach((messageEl) => {
         decorateSceneHeader(messageEl);
         decorateThoughts(messageEl);
         decorateHanabiNavigator(messageEl);
+        decorateIndependentReader(messageEl);
+        decorateDialogues(messageEl);
     });
     const latest = messages.at(-1);
     if (latest) applyInputChibi(detectInputChibi(latest));
@@ -287,6 +371,8 @@ function decorateMessageById(messageId) {
         decorateSceneHeader(el);
         decorateThoughts(el);
         decorateHanabiNavigator(el);
+        decorateIndependentReader(el);
+        decorateDialogues(el);
         applyInputChibi(detectInputChibi(el));
     }
     else requestAnimationFrame(decorateVisibleMessages);
@@ -356,7 +442,7 @@ export async function init() {
     window.visualViewport?.addEventListener('resize', () => { queuePlacement(); refreshPeekSafeZones(); }, { passive: true });
     window.visualViewport?.addEventListener('scroll', queuePlacement, { passive: true });
 
-    console.info('[RP Glass 2] Visual Novel v0.8.2 Correct Roles Emotion Engine initialized');
+    console.info('[RP Glass 2] Visual Novel v0.9.0 Dialogue + Book Reader + Emotion Engine initialized');
 }
 
 // Compatibility fallback: current third-party extensions may self-initialize
