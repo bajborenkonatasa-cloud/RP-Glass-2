@@ -706,57 +706,87 @@
 }
 
 /* ============================================================
-   INDEPENDENT READER — wide dark-book page.
-   This overrides the old generic purple details card ONLY for Reader.
+   INDEPENDENT READER — v0.9.1 compact manuscript page
+   Wide on mobile, low vertical waste, no divider under title.
    ============================================================ */
 #chat .mes_text details.rpg-independent-reader {
     position: relative !important;
     overflow: hidden !important;
     box-sizing: border-box !important;
-    width: calc(100% + 28px) !important;
+    width: calc(100% + 42px) !important;
     max-width: none !important;
-    margin-left: -14px !important;
-    margin-right: -14px !important;
-    padding: 18px 18px 20px !important;
+    margin-left: -21px !important;
+    margin-right: -21px !important;
+    padding: 13px 15px 14px !important;
     border: 1px solid var(--rpg-reader-border) !important;
-    border-left: 4px solid var(--rpg-reader-border) !important;
-    border-radius: 24px !important;
+    border-left: 3px solid var(--rpg-reader-border) !important;
+    border-radius: 20px !important;
     background:
-        radial-gradient(circle at 82% 16%, rgba(132,49,34,.18), transparent 34%),
-        radial-gradient(circle at 18% 84%, rgba(103,50,32,.10), transparent 30%),
+        radial-gradient(circle at 84% 14%, rgba(157,61,40,.20), transparent 31%),
+        radial-gradient(circle at 12% 86%, rgba(112,58,33,.12), transparent 28%),
         repeating-linear-gradient(0deg, rgba(255,255,255,.010) 0 1px, transparent 1px 4px),
         linear-gradient(135deg, var(--rpg-reader-bg-1), var(--rpg-reader-bg-2)) !important;
     box-shadow:
         inset 0 0 0 1px rgba(238,190,140,.06),
-        inset 0 0 42px rgba(111,42,30,.13),
-        0 8px 24px rgba(0,0,0,.30) !important;
+        inset 0 0 34px rgba(111,42,30,.13),
+        0 5px 18px rgba(0,0,0,.28),
+        0 0 12px rgba(169,91,64,.10) !important;
     color: var(--rpg-reader-text) !important;
     font-family: var(--rpg-reader-font) !important;
-    font-size: 1.04em !important;
-    line-height: 1.68 !important;
+    font-size: 1.02em !important;
+    line-height: 1.52 !important;
+    animation: rp2ReaderWake .55s ease-out both;
 }
 #chat .mes_text details.rpg-independent-reader::before {
     content: "";
     position: absolute;
-    inset: 7px;
-    border: 1px solid rgba(211,155,109,.13);
-    border-radius: 18px;
+    inset: 6px;
+    border: 1px solid rgba(224,169,116,.16);
+    border-radius: 15px;
     pointer-events: none;
+    box-shadow: inset 0 0 12px rgba(211,133,84,.035);
+}
+/* Decorative manuscript flourish — visual only. */
+#chat .mes_text details.rpg-independent-reader::after {
+    content: "❧";
+    position: absolute;
+    right: 14px;
+    top: 8px;
+    z-index: 2;
+    color: var(--rpg-reader-accent);
+    font-family: Georgia, serif;
+    font-size: 1.35em;
+    opacity: .88;
+    text-shadow: 0 0 6px rgba(255,191,112,.40), 0 0 14px rgba(255,122,72,.22);
+    pointer-events: none;
+    animation: rp2ReaderSpark 3.4s ease-in-out infinite;
 }
 #chat .mes_text details.rpg-independent-reader > summary {
     position: relative;
-    z-index: 1;
+    z-index: 3;
     color: var(--rpg-reader-title) !important;
-    font-family: var(--rpg-reader-font) !important;
-    font-size: 1.08em !important;
+    font-family: "Segoe Script", "Brush Script MT", "Comic Sans MS", cursive !important;
+    font-size: 1.13em !important;
     font-weight: 700 !important;
-    text-shadow: 0 1px 2px #000, 0 0 10px rgba(182,104,76,.20) !important;
-    padding: 2px 5px 13px !important;
-    margin: 0 0 14px !important;
-    border-bottom: 1px solid rgba(190,124,91,.24) !important;
+    letter-spacing: .01em !important;
+    text-shadow: 0 1px 2px #000, 0 0 9px rgba(216,135,92,.28) !important;
+    padding: 0 34px 3px 3px !important;
+    margin: 0 0 6px !important;
+    border: 0 !important;
+    border-bottom: 0 !important;
+}
+#chat .mes_text details.rpg-independent-reader > summary::after {
+    content: " ✦";
+    color: var(--rpg-reader-accent);
+    font-family: Georgia, serif;
+    font-size: .72em;
+    opacity: .78;
+    text-shadow: 0 0 7px rgba(255,187,103,.55);
 }
 #chat .mes_text details.rpg-independent-reader p,
 #chat .mes_text details.rpg-independent-reader div:not(.rp-dialogue) {
+    position: relative;
+    z-index: 1;
     color: var(--rpg-reader-text) !important;
     font-family: var(--rpg-reader-font) !important;
     text-shadow: 0 1px 1px rgba(0,0,0,.72) !important;
@@ -764,13 +794,37 @@
 #chat .mes_text details.rpg-independent-reader p {
     text-align: justify !important;
     text-align-last: left !important;
-    text-indent: 1.35em !important;
-    margin: .55em 0 !important;
+    text-indent: 1.15em !important;
+    margin: .30em 0 !important;
 }
 #chat .mes_text details.rpg-independent-reader strong,
 #chat .mes_text details.rpg-independent-reader b {
     color: var(--rpg-reader-accent) !important;
-    text-shadow: 0 1px 1px #000 !important;
+    text-shadow: 0 1px 1px #000, 0 0 5px rgba(208,165,109,.18) !important;
+}
+@keyframes rp2ReaderWake {
+    from { opacity: .50; filter: brightness(.82); transform: translateY(3px); }
+    to   { opacity: 1; filter: brightness(1); transform: translateY(0); }
+}
+@keyframes rp2ReaderSpark {
+    0%,100% { opacity: .48; transform: rotate(-5deg) scale(.96); filter: brightness(.9); }
+    50%     { opacity: 1; transform: rotate(4deg) scale(1.08); filter: brightness(1.28); }
+}
+
+@media (max-width: 520px) {
+    #chat .mes_text details.rpg-independent-reader {
+        width: calc(100% + 54px) !important;
+        margin-left: -27px !important;
+        margin-right: -27px !important;
+        padding: 12px 12px 13px !important;
+        border-radius: 18px !important;
+        font-size: 1.01em !important;
+        line-height: 1.49 !important;
+    }
+    #chat .mes_text details.rpg-independent-reader::before {
+        inset: 5px;
+        border-radius: 14px;
+    }
 }
 
 /* Hanabi state-change effects: visible but calm, no particles/timers. */
