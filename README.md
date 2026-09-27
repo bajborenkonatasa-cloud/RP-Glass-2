@@ -1,10 +1,9 @@
-# RP Glass 2 — v0.5.0 Speaker + Emotion Engine
+# RP Glass 2 — v0.7.2 Visual Novel
 
-Adds explicit, lightweight dialogue styling for USER / CHAR / NPC and moods: normal, angry, fear, sad, happy, romance, playful, cold.
+Current clean build.
 
-No MutationObserver, no polling, no full-chat emotion scan. Existing Hanabi and Scene Header placement are unchanged.
-
-Markup contract for the RP prompt (next step):
-`<span class="rp-dialogue rp-char rp-angry">“Dialogue”</span>`
-
-Speaker classes: `rp-user`, `rp-char`, `rp-npc`. Mood classes: `rp-angry`, `rp-fear`, `rp-sad`, `rp-happy`, `rp-romance`, `rp-playful`, `rp-cold`.
+- Scene plaque stays inside roleplay text.
+- Header Hanabi uses an adaptive safe zone around SillyTavern message controls.
+- Input Hanabi is pinned to the composer geometry and follows composer resize/position, not chat font size.
+- Smart Hanabi navigator assets are included for later roleplay testing.
+- No MutationObserver, polling, or particle loops.
