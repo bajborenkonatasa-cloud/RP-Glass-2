@@ -112,10 +112,93 @@ const RP2_CHIBI_ASSETS = {
     sleep: './assets/hanabi-chibi-sleep.webp',
 };
 
+// v0.8.1 — local semantic-lite emotion engine.
+// Important: it only CHOOSES existing assets. It does not alter layout/CSS/DOM structure.
+const RP2_EMOTION_HINTS = {
+    angry: [
+        ['ненавиж', 4], ['ярост', 4], ['бесит', 4], ['злост', 3], ['злой', 3], ['зла', 3],
+        ['раздраж', 2], ['убью', 4], ['убить', 3], ['чёрт', 2], ['черт', 2], ['сука', 3], ['блять', 3], ['бляд', 3],
+        ['hate', 4], ['furious', 4], ['angry', 3], ['rage', 4], ['damn', 2], ['fuck', 3],
+    ],
+    sad: [
+        ['слез', 3], ['плак', 3], ['рыда', 4], ['больно', 3], ['боль', 2], ['груст', 3], ['печал', 3],
+        ['одинок', 3], ['разбит', 3], ['отчаян', 4], ['потеря', 2], ['потерять', 2], ['страшно', 2], ['боюсь', 2],
+        ['cry', 3], ['tears', 3], ['sad', 3], ['hurt', 2], ['lonely', 3], ['broken', 3], ['despair', 4],
+    ],
+    happy: [
+        ['улыб', 2], ['сме', 2], ['хихик', 3], ['счаст', 3], ['радост', 3], ['весел', 3], ['доволь', 2],
+        ['игрив', 3], ['дразн', 2], ['приятно', 1], ['нравится', 1], ['обожаю', 3],
+        ['smil', 2], ['laugh', 2], ['happy', 3], ['joy', 3], ['playful', 3], ['teas', 2],
+    ],
+};
+
+const RP2_CHIBI_HINTS = {
+    sleep: [
+        ['засып', 4], ['уснул', 4], ['уснула', 4], ['спит', 4], ['сон', 2], ['дрем', 4], ['проснул', 2],
+        ['устал', 2], ['сонн', 3], ['подуш', 2], ['sleep', 4], ['asleep', 4], ['doz', 4], ['sleepy', 3], ['pillow', 2],
+    ],
+    run: [
+        ['беж', 4], ['побеж', 4], ['убег', 4], ['догон', 3], ['преслед', 3], ['ринул', 3], ['рванул', 3],
+        ['мчал', 3], ['тороп', 2], ['вбеж', 3], ['выбеж', 3], ['run', 4], ['running', 4], ['chase', 3], ['rush', 3], ['sprint', 4],
+    ],
+};
+
+function rp2PlainText(root) {
+    if (!root) return '';
+    const clone = root.cloneNode(true);
+    clone.querySelectorAll('summary, img, story_footer, story-footer, script, style').forEach((el) => el.remove());
+    return (clone.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+}
+
+function rp2Score(text, hints) {
+    let score = 0;
+    for (const [needle, weight] of hints) {
+        let at = 0;
+        while ((at = text.indexOf(needle, at)) !== -1) {
+            score += weight;
+            at += needle.length || 1;
+        }
+    }
+    return score;
+}
+
+function detectHanabiEmotion(messageEl) {
+    // Portrait follows the CHARACTER'S THOUGHTS first, exactly as requested.
+    const thoughts = [...messageEl.querySelectorAll('.rpg-thoughts, details')].find((el) =>
+        el.classList.contains('rpg-thoughts') || isThoughtsDetails(el));
+    const source = rp2PlainText(thoughts);
+    if (!source) return 'dreamy';
+
+    const scores = Object.fromEntries(Object.entries(RP2_EMOTION_HINTS).map(([key, hints]) => [key, rp2Score(source, hints)]));
+    const [winner, points] = Object.entries(scores).sort((a, b) => b[1] - a[1])[0] || ['dreamy', 0];
+    // A single weak word must not make Hanabi flicker into another emotion.
+    return points >= 3 ? winner : 'dreamy';
+}
+
+function detectHanabiChibi(messageEl) {
+    // Chibi follows scene ACTION, not the thoughts portrait.
+    const text = messageEl.querySelector('.mes_text');
+    const source = rp2PlainText(text);
+    if (!source) return 'peek';
+    const sleep = rp2Score(source, RP2_CHIBI_HINTS.sleep);
+    const run = rp2Score(source, RP2_CHIBI_HINTS.run);
+    if (sleep >= 4 && sleep > run) return 'sleep';
+    if (run >= 4 && run > sleep) return 'run';
+    return 'peek';
+}
+
 function readHanabiNavigator(messageEl) {
     const text = messageEl?.querySelector('.mes_text');
     if (!text) return { emotion: 'dreamy', chibi: 'peek' };
-    let state = { emotion: 'dreamy', chibi: 'peek' };
+
+    // Automatic state is the normal path.
+    let state = {
+        emotion: detectHanabiEmotion(messageEl),
+        chibi: detectHanabiChibi(messageEl),
+    };
+
+    // Existing [hanabi:emotion|chibi] syntax remains an OPTIONAL manual override.
+    // We preserve the original parser behaviour and only override fields explicitly supplied.
     const walker = document.createTreeWalker(text, NodeFilter.SHOW_TEXT);
     const nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
@@ -130,6 +213,7 @@ function readHanabiNavigator(messageEl) {
         });
         if (matched) node.nodeValue = cleaned;
     });
+
     messageEl.dataset.rp2Emotion = state.emotion;
     messageEl.dataset.rp2Chibi = state.chibi;
     return state;
@@ -304,7 +388,7 @@ export async function init() {
     window.visualViewport?.addEventListener('resize', () => { queuePlacement(); refreshPeekSafeZones(); }, { passive: true });
     window.visualViewport?.addEventListener('scroll', queuePlacement, { passive: true });
 
-    console.info('[RP Glass 2] Visual Novel v0.7.3 Adaptive Safe-Zone initialized');
+    console.info('[RP Glass 2] Visual Novel v0.8.1 Emotion Engine initialized');
 }
 
 // Compatibility fallback: current third-party extensions may self-initialize
