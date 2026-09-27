@@ -4,7 +4,7 @@ let rp2Raf = 0;
 let rp2EventsBound = false;
 let rp2ComposerObserver = null;
 let rp2MessageObserver = null;
-const RP2_SAFE_GAP = 12;
+const RP2_SAFE_GAP = 14;
 
 function getComposer() {
     return document.querySelector('#send_form')
@@ -75,11 +75,15 @@ function keepPeekClearOfToolbar(messageEl) {
     if (!overlapsX || !overlapsY) return;
 
     const lift = Math.ceil(mascotRect.bottom - toolbarRect.top + RP2_SAFE_GAP);
-    chibi.style.setProperty('--rp2-safe-lift', `${Math.max(0, Math.min(lift, 84))}px`);
+    chibi.style.setProperty('--rp2-safe-lift', `${Math.max(0, Math.min(lift, 104))}px`);
 }
 
 function queuePeekSafeZone(messageEl) {
     requestAnimationFrame(() => keepPeekClearOfToolbar(messageEl));
+}
+
+function refreshPeekSafeZones() {
+    document.querySelectorAll('#chat .mes.rp2-has-scene-header').forEach(queuePeekSafeZone);
 }
 
 function observeMessageGeometry(messageEl) {
@@ -296,11 +300,11 @@ export async function init() {
     decorateVisibleMessages();
     bindSceneEvents();
 
-    window.addEventListener('resize', queuePlacement, { passive: true });
-    window.visualViewport?.addEventListener('resize', queuePlacement, { passive: true });
+    window.addEventListener('resize', () => { queuePlacement(); refreshPeekSafeZones(); }, { passive: true });
+    window.visualViewport?.addEventListener('resize', () => { queuePlacement(); refreshPeekSafeZones(); }, { passive: true });
     window.visualViewport?.addEventListener('scroll', queuePlacement, { passive: true });
 
-    console.info('[RP Glass 2] Visual Novel v0.7.2 Safe-Zone initialized');
+    console.info('[RP Glass 2] Visual Novel v0.7.3 Adaptive Safe-Zone initialized');
 }
 
 // Compatibility fallback: current third-party extensions may self-initialize

@@ -637,3 +637,24 @@
     transition: margin-top .16s ease-out !important;
     pointer-events: none !important;
 }
+
+
+/* ============================================================
+   RP-Glass 2 v0.7.3 — TOOLBAR + FONT-SIZE SAFETY POLISH
+   The card mascot keeps a slightly larger visual gap from ST controls.
+   Input Hanabi remains tied to the composer's top border in viewport px,
+   so changing chat font size cannot re-anchor her to story text.
+   ============================================================ */
+#chat .mes.rp2-has-scene-header > .rp2-hanabi-peek {
+    --rp2-toolbar-gap: 14px;
+    will-change: margin-top;
+}
+
+#rp-glass-2-hanabi-input {
+    position: fixed !important;
+    height: auto !important;
+    margin: 0 !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    -webkit-user-drag: none !important;
+}
