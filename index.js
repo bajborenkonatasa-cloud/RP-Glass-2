@@ -112,35 +112,24 @@ const RP2_CHIBI_ASSETS = {
     sleep: './assets/hanabi-chibi-sleep.webp',
 };
 
-// v0.8.1 — local semantic-lite emotion engine.
-// Important: it only CHOOSES existing assets. It does not alter layout/CSS/DOM structure.
+// v0.8.2 — SAFE emotion engine.
+// IMPORTANT ROLES:
+//   1) Header Hanabi (.rp2-hanabi-peek) is ALWAYS the original peeking image.
+//   2) Thoughts portrait changes emotion from the unspoken thoughts only.
+//   3) Composer/input Hanabi changes between input/run/sleep from scene meaning.
 const RP2_EMOTION_HINTS = {
-    angry: [
-        ['ненавиж', 4], ['ярост', 4], ['бесит', 4], ['злост', 3], ['злой', 3], ['зла', 3],
-        ['раздраж', 2], ['убью', 4], ['убить', 3], ['чёрт', 2], ['черт', 2], ['сука', 3], ['блять', 3], ['бляд', 3],
-        ['hate', 4], ['furious', 4], ['angry', 3], ['rage', 4], ['damn', 2], ['fuck', 3],
-    ],
-    sad: [
-        ['слез', 3], ['плак', 3], ['рыда', 4], ['больно', 3], ['боль', 2], ['груст', 3], ['печал', 3],
-        ['одинок', 3], ['разбит', 3], ['отчаян', 4], ['потеря', 2], ['потерять', 2], ['страшно', 2], ['боюсь', 2],
-        ['cry', 3], ['tears', 3], ['sad', 3], ['hurt', 2], ['lonely', 3], ['broken', 3], ['despair', 4],
-    ],
-    happy: [
-        ['улыб', 2], ['сме', 2], ['хихик', 3], ['счаст', 3], ['радост', 3], ['весел', 3], ['доволь', 2],
-        ['игрив', 3], ['дразн', 2], ['приятно', 1], ['нравится', 1], ['обожаю', 3],
-        ['smil', 2], ['laugh', 2], ['happy', 3], ['joy', 3], ['playful', 3], ['teas', 2],
-    ],
+    angry: [['ненавиж',4],['ярост',4],['бесит',4],['злост',3],['злой',3],['зла',3],['раздраж',2],['убью',4],['убить',3],['чёрт',2],['черт',2],['сука',3],['блять',3],['бляд',3],['hate',4],['furious',4],['angry',3],['rage',4],['damn',2],['fuck',3]],
+    sad: [['слез',3],['плак',3],['рыда',4],['больно',3],['боль',2],['груст',3],['печал',3],['одинок',3],['разбит',3],['отчаян',4],['потеря',2],['потерять',2],['страшно',2],['боюсь',2],['cry',3],['tears',3],['sad',3],['hurt',2],['lonely',3],['broken',3],['despair',4]],
+    happy: [['улыб',2],['сме',2],['хихик',3],['счаст',3],['радост',3],['весел',3],['доволь',2],['игрив',3],['дразн',2],['приятно',1],['нравится',1],['обожаю',3],['smil',2],['laugh',2],['happy',3],['joy',3],['playful',3],['teas',2]],
 };
-
-const RP2_CHIBI_HINTS = {
-    sleep: [
-        ['засып', 4], ['уснул', 4], ['уснула', 4], ['спит', 4], ['сон', 2], ['дрем', 4], ['проснул', 2],
-        ['устал', 2], ['сонн', 3], ['подуш', 2], ['sleep', 4], ['asleep', 4], ['doz', 4], ['sleepy', 3], ['pillow', 2],
-    ],
-    run: [
-        ['беж', 4], ['побеж', 4], ['убег', 4], ['догон', 3], ['преслед', 3], ['ринул', 3], ['рванул', 3],
-        ['мчал', 3], ['тороп', 2], ['вбеж', 3], ['выбеж', 3], ['run', 4], ['running', 4], ['chase', 3], ['rush', 3], ['sprint', 4],
-    ],
+const RP2_INPUT_CHIBI_HINTS = {
+    sleep: [['засып',4],['уснул',4],['уснула',4],['спит',4],['дрем',4],['сонн',3],['подуш',2],['sleep',4],['asleep',4],['doz',4],['sleepy',3],['pillow',2]],
+    run: [['беж',4],['побеж',4],['убег',4],['догон',3],['преслед',3],['ринул',3],['рванул',3],['мчал',3],['тороп',2],['вбеж',3],['выбеж',3],['run',4],['running',4],['chase',3],['rush',3],['sprint',4]],
+};
+const RP2_INPUT_CHIBI_ASSETS = {
+    input: './assets/hanabi-chibi-input.webp',
+    run: './assets/hanabi-chibi-run.webp',
+    sleep: './assets/hanabi-chibi-sleep.webp',
 };
 
 function rp2PlainText(root) {
@@ -149,94 +138,69 @@ function rp2PlainText(root) {
     clone.querySelectorAll('summary, img, story_footer, story-footer, script, style').forEach((el) => el.remove());
     return (clone.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
 }
-
 function rp2Score(text, hints) {
     let score = 0;
     for (const [needle, weight] of hints) {
         let at = 0;
-        while ((at = text.indexOf(needle, at)) !== -1) {
-            score += weight;
-            at += needle.length || 1;
-        }
+        while ((at = text.indexOf(needle, at)) !== -1) { score += weight; at += Math.max(1, needle.length); }
     }
     return score;
 }
-
-function detectHanabiEmotion(messageEl) {
-    // Portrait follows the CHARACTER'S THOUGHTS first, exactly as requested.
-    const thoughts = [...messageEl.querySelectorAll('.rpg-thoughts, details')].find((el) =>
-        el.classList.contains('rpg-thoughts') || isThoughtsDetails(el));
+function detectThoughtEmotion(messageEl) {
+    const thoughts = [...messageEl.querySelectorAll('details')].find(isThoughtsDetails);
     const source = rp2PlainText(thoughts);
     if (!source) return 'dreamy';
-
-    const scores = Object.fromEntries(Object.entries(RP2_EMOTION_HINTS).map(([key, hints]) => [key, rp2Score(source, hints)]));
-    const [winner, points] = Object.entries(scores).sort((a, b) => b[1] - a[1])[0] || ['dreamy', 0];
-    // A single weak word must not make Hanabi flicker into another emotion.
-    return points >= 3 ? winner : 'dreamy';
+    const scores = Object.entries(RP2_EMOTION_HINTS).map(([key,hints]) => [key, rp2Score(source,hints)]).sort((a,b)=>b[1]-a[1]);
+    return scores[0] && scores[0][1] >= 3 ? scores[0][0] : 'dreamy';
 }
-
-function detectHanabiChibi(messageEl) {
-    // Chibi follows scene ACTION, not the thoughts portrait.
-    const text = messageEl.querySelector('.mes_text');
-    const source = rp2PlainText(text);
-    if (!source) return 'peek';
-    const sleep = rp2Score(source, RP2_CHIBI_HINTS.sleep);
-    const run = rp2Score(source, RP2_CHIBI_HINTS.run);
+function detectInputChibi(messageEl) {
+    const source = rp2PlainText(messageEl?.querySelector('.mes_text'));
+    if (!source) return 'input';
+    const sleep = rp2Score(source, RP2_INPUT_CHIBI_HINTS.sleep);
+    const run = rp2Score(source, RP2_INPUT_CHIBI_HINTS.run);
     if (sleep >= 4 && sleep > run) return 'sleep';
     if (run >= 4 && run > sleep) return 'run';
-    return 'peek';
+    return 'input';
+}
+function applyInputChibi(kind) {
+    const hanabi = document.getElementById(RP2_ID);
+    if (!hanabi) return;
+    const safeKind = RP2_INPUT_CHIBI_ASSETS[kind] ? kind : 'input';
+    hanabi.dataset.rp2InputChibi = safeKind;
+    hanabi.src = new URL(RP2_INPUT_CHIBI_ASSETS[safeKind], import.meta.url).href;
+    queuePlacement();
 }
 
 function readHanabiNavigator(messageEl) {
     const text = messageEl?.querySelector('.mes_text');
-    if (!text) return { emotion: 'dreamy', chibi: 'peek' };
+    if (!text) return { emotion: 'dreamy' };
+    let state = { emotion: detectThoughtEmotion(messageEl) };
 
-    // Automatic state is the normal path.
-    let state = {
-        emotion: detectHanabiEmotion(messageEl),
-        chibi: detectHanabiChibi(messageEl),
-    };
-
-    // Existing [hanabi:emotion|chibi] syntax remains an OPTIONAL manual override.
-    // We preserve the original parser behaviour and only override fields explicitly supplied.
+    // Optional legacy manual override: emotion is still honored.
+    // The old chibi part is consumed but NEVER changes the header mascot.
     const walker = document.createTreeWalker(text, NodeFilter.SHOW_TEXT);
     const nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach((node) => {
         const original = node.nodeValue || '';
-        let matched = false;
-        const cleaned = original.replace(RP2_NAV_RE, (_, emotion, chibi) => {
+        node.nodeValue = original.replace(RP2_NAV_RE, (_, emotion) => {
             state.emotion = String(emotion).toLowerCase();
-            if (chibi) state.chibi = String(chibi).toLowerCase();
-            matched = true;
             return '';
         });
-        if (matched) node.nodeValue = cleaned;
     });
-
     messageEl.dataset.rp2Emotion = state.emotion;
-    messageEl.dataset.rp2Chibi = state.chibi;
     return state;
 }
 
 function applyHanabiState(messageEl, state) {
     if (!messageEl || !state) return;
+
+    // ONLY the portrait inside “Распаковать мысли…” changes emotion.
     const portrait = messageEl.querySelector('.rpg-thought-hanabi');
     const emotionAsset = RP2_EMOTION_ASSETS[state.emotion] || RP2_EMOTION_ASSETS.dreamy;
     if (portrait) portrait.src = new URL(emotionAsset, import.meta.url).href;
 
-    const chibi = messageEl.querySelector(':scope > .rp2-hanabi-peek');
-    if (!chibi) return;
-    chibi.classList.remove('rp2-chibi-peek', 'rp2-chibi-run', 'rp2-chibi-sleep');
-    if (state.chibi === 'off' || state.chibi === 'input') {
-        chibi.hidden = true;
-        return;
-    }
-    chibi.hidden = false;
-    const kind = RP2_CHIBI_ASSETS[state.chibi] ? state.chibi : 'peek';
-    chibi.classList.add(`rp2-chibi-${kind}`);
-    chibi.src = new URL(RP2_CHIBI_ASSETS[kind], import.meta.url).href;
-    queuePeekSafeZone(messageEl);
+    // Header Hanabi is deliberately untouched: always hanabi-chibi-peek.webp.
 }
 
 function decorateHanabiNavigator(messageEl) {
@@ -307,11 +271,14 @@ function decorateThoughts(messageEl) {
 }
 
 function decorateVisibleMessages() {
-    document.querySelectorAll('#chat .mes').forEach((messageEl) => {
+    const messages = [...document.querySelectorAll('#chat .mes')];
+    messages.forEach((messageEl) => {
         decorateSceneHeader(messageEl);
         decorateThoughts(messageEl);
         decorateHanabiNavigator(messageEl);
     });
+    const latest = messages.at(-1);
+    if (latest) applyInputChibi(detectInputChibi(latest));
 }
 
 function decorateMessageById(messageId) {
@@ -320,6 +287,7 @@ function decorateMessageById(messageId) {
         decorateSceneHeader(el);
         decorateThoughts(el);
         decorateHanabiNavigator(el);
+        applyInputChibi(detectInputChibi(el));
     }
     else requestAnimationFrame(decorateVisibleMessages);
 }
@@ -388,7 +356,7 @@ export async function init() {
     window.visualViewport?.addEventListener('resize', () => { queuePlacement(); refreshPeekSafeZones(); }, { passive: true });
     window.visualViewport?.addEventListener('scroll', queuePlacement, { passive: true });
 
-    console.info('[RP Glass 2] Visual Novel v0.8.1 Emotion Engine initialized');
+    console.info('[RP Glass 2] Visual Novel v0.8.2 Correct Roles Emotion Engine initialized');
 }
 
 // Compatibility fallback: current third-party extensions may self-initialize
