@@ -852,3 +852,23 @@
         line-height: 1.64 !important;
     }
 }
+
+/* v0.9.3 — CHAR COLOR HARD FIX
+   SillyTavern can render **\"...\"** as nested <strong><em>...</em></strong>.
+   The old global em/i rule painted the inner element green, so the child won
+   over the orange color on .rp-char. Force the entire CHAR subtree to use
+   the user-control variables. */
+#chat .mes_text .rp-dialogue.rp-char,
+#chat .mes_text .rp-dialogue.rp-char *,
+#chat .mes_text strong.rp-dialogue.rp-char,
+#chat .mes_text strong.rp-dialogue.rp-char em,
+#chat .mes_text strong.rp-dialogue.rp-char i,
+#chat .mes_text b.rp-dialogue.rp-char,
+#chat .mes_text b.rp-dialogue.rp-char em,
+#chat .mes_text b.rp-dialogue.rp-char i {
+    color: var(--rpg-char-dialogue, #ff8c00) !important;
+    text-shadow: 0 1px 1px #000, 0 0 4px #000, 0 0 9px #000, 0 0 12px var(--rpg-char-glow, rgba(255,140,0,.58)) !important;
+    font-family: var(--rpg-dialogue-font, Georgia, "Times New Roman", serif) !important;
+    font-size: var(--rpg-dialogue-size, 1.08em) !important;
+    font-style: italic !important;
+}
