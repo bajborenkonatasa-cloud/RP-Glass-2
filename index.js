@@ -123,8 +123,22 @@ const RP2_EMOTION_HINTS = {
     happy: [['улыб',2],['сме',2],['хихик',3],['счаст',3],['радост',3],['весел',3],['доволь',2],['игрив',3],['дразн',2],['приятно',1],['нравится',1],['обожаю',3],['smil',2],['laugh',2],['happy',3],['joy',3],['playful',3],['teas',2]],
 };
 const RP2_INPUT_CHIBI_HINTS = {
-    sleep: [['засып',4],['уснул',4],['уснула',4],['спит',4],['дрем',4],['сонн',3],['подуш',2],['sleep',4],['asleep',4],['doz',4],['sleepy',3],['pillow',2]],
-    run: [['беж',4],['побеж',4],['убег',4],['догон',3],['преслед',3],['ринул',3],['рванул',3],['мчал',3],['тороп',2],['вбеж',3],['выбеж',3],['run',4],['running',4],['chase',3],['rush',3],['sprint',4]],
+    // Sleep gets contextual clues too, not only literal "sleep" words. This lets scenes like
+    // "ran to the bed, tucked under the blanket and closed her eyes" correctly end on sleep.
+    sleep: [
+        ['засып',5],['уснул',5],['уснула',5],['спит',5],['дрем',5],['сонн',4],
+        ['кроват',3],['постел',2],['одеял',3],['укут',3],['закут',3],['подуш',3],
+        ['закрыл глаза',4],['закрыла глаза',4],['закрывает глаза',4],['закрывая глаза',4],
+        ['прикрыл глаза',3],['прикрыла глаза',3],['легла',2],['лёг',2],['лег под',2],['лежала',1],
+        ['ночь',1],['ночью',1],['ко сну',3],['пора спать',5],
+        ['sleep',5],['asleep',5],['doz',5],['sleepy',4],['bed',3],['blanket',3],['pillow',3],
+        ['closed her eyes',4],['closed his eyes',4],['tucked',3],['curled up',2]
+    ],
+    run: [
+        ['беж',4],['побеж',4],['убег',4],['догон',3],['преслед',3],['ринул',3],['рванул',3],
+        ['мчал',3],['тороп',2],['вбеж',3],['выбеж',3],['погон',3],['спринт',4],
+        ['run',4],['running',4],['chase',3],['rush',3],['sprint',4]
+    ],
 };
 const RP2_INPUT_CHIBI_ASSETS = {
     input: './assets/hanabi-chibi-input.webp',
@@ -153,14 +167,31 @@ function detectThoughtEmotion(messageEl) {
     const scores = Object.entries(RP2_EMOTION_HINTS).map(([key,hints]) => [key, rp2Score(source,hints)]).sort((a,b)=>b[1]-a[1]);
     return scores[0] && scores[0][1] >= 3 ? scores[0][0] : 'dreamy';
 }
+function rp2StableChibiFallback(text) {
+    // Stable pseudo-random fallback: the same message keeps the same mascot after re-renders.
+    // Mostly default Hanabi, with a small chance for the two special poses so they are not wasted.
+    let hash = 2166136261;
+    for (let i = 0; i < text.length; i++) {
+        hash ^= text.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+    }
+    const roll = (hash >>> 0) % 100;
+    if (roll < 12) return 'sleep';
+    if (roll < 24) return 'run';
+    return 'input';
+}
+
 function detectInputChibi(messageEl) {
     const source = rp2PlainText(messageEl?.querySelector('.mes_text'));
     if (!source) return 'input';
     const sleep = rp2Score(source, RP2_INPUT_CHIBI_HINTS.sleep);
     const run = rp2Score(source, RP2_INPUT_CHIBI_HINTS.run);
-    if (sleep >= 4 && sleep > run) return 'sleep';
+
+    // Sleep wins ties because movement that ends in bed/under a blanket should display the final mood,
+    // not the earlier verb "ran". Strong running still wins when there is no real sleep context.
+    if (sleep >= 4 && sleep >= run) return 'sleep';
     if (run >= 4 && run > sleep) return 'run';
-    return 'input';
+    return rp2StableChibiFallback(source);
 }
 function applyInputChibi(kind) {
     const hanabi = document.getElementById(RP2_ID);
@@ -505,7 +536,7 @@ export async function init() {
     window.visualViewport?.addEventListener('resize', () => { queuePlacement(); refreshPeekSafeZones(); }, { passive: true });
     window.visualViewport?.addEventListener('scroll', queuePlacement, { passive: true });
 
-    console.info('[RP Glass 2] Visual Novel v0.9.4 Live Dialogue + Book Reader + Emotion Engine initialized');
+    console.info('[RP Glass 2] Visual Novel v0.9.6 Live Dialogue + Book Reader + Emotion Engine initialized');
 }
 
 // Compatibility fallback: current third-party extensions may self-initialize
