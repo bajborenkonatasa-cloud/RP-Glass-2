@@ -320,11 +320,40 @@ function wrapQuotedTextNode(node, className) {
     node.replaceWith(frag);
 }
 
+function wrapLiteralCharMarkdown(node) {
+    if (!node?.nodeValue || node.parentElement?.closest('.rp-dialogue, summary, script, style, code, pre')) return;
+    const raw = node.nodeValue;
+    // Fallback for SillyTavern/streaming cases where **"..."** stays literal text.
+    // Supports straight, curly and guillemet quotes and removes the visible ** markers.
+    const re = /\*\*(["“«][^"”»\n]{1,900}["”»])\*\*/g;
+    if (!re.test(raw)) return;
+    re.lastIndex = 0;
+    const frag = document.createDocumentFragment();
+    let last = 0;
+    let m;
+    while ((m = re.exec(raw))) {
+        if (m.index > last) frag.append(document.createTextNode(raw.slice(last, m.index)));
+        const span = document.createElement('span');
+        span.className = 'rp-dialogue rp-char';
+        span.textContent = m[1];
+        frag.append(span);
+        last = m.index + m[0].length;
+    }
+    if (last < raw.length) frag.append(document.createTextNode(raw.slice(last)));
+    node.replaceWith(frag);
+}
+
 function decorateDialogues(messageEl) {
     const text = messageEl?.querySelector('.mes_text');
     if (!text || text.dataset.rp2DialogueDecorated === '1') return;
 
-    // **"..."** is rendered by Markdown as <strong>/<b>; mark it as CHAR.
+    // First catch literal **"..."** if Markdown did NOT convert it to <strong>.
+    const literalWalker = document.createTreeWalker(text, NodeFilter.SHOW_TEXT);
+    const literalNodes = [];
+    while (literalWalker.nextNode()) literalNodes.push(literalWalker.currentNode);
+    literalNodes.forEach(wrapLiteralCharMarkdown);
+
+    // **"..."** normally renders by Markdown as <strong>/<b>; mark it as CHAR.
     text.querySelectorAll('strong, b').forEach((el) => {
         if (el.closest('details, summary, .rp-dialogue')) return;
         const value = (el.textContent || '').trim();
