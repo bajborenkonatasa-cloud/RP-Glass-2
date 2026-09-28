@@ -548,3 +548,44 @@ if (typeof jQuery === 'function') {
 } else {
     init();
 }
+
+// v1.0.0 — Opal UI shell. This intentionally styles SillyTavern chrome, not chat messages.
+const RP2_OPAL_KEY = 'rpGlass2OpalUI';
+const RP2_OPAL_GLOW_KEY = 'rpGlass2OpalGlow';
+
+function rp2ReadBool(key, fallback = true) {
+    const value = localStorage.getItem(key);
+    return value == null ? fallback : value === '1';
+}
+function rp2ApplyOpalUI() {
+    document.body.classList.toggle('rp2-opal-ui', rp2ReadBool(RP2_OPAL_KEY, true));
+    document.body.classList.toggle('rp2-opal-motion', rp2ReadBool(RP2_OPAL_GLOW_KEY, true));
+}
+function rp2MountOpalSettings() {
+    if (document.getElementById('rp2-opal-settings')) return;
+    const host = document.querySelector('#extensions_settings2, #extensions_settings, .extensions_settings, #extensionsMenu');
+    if (!host) return;
+    const panel = document.createElement('div');
+    panel.id = 'rp2-opal-settings';
+    panel.className = 'rp2-opal-settings';
+    panel.innerHTML = `
+      <div class="rp2-opal-title"><span>💎</span><b>RP Glass · Opal UI</b><small>v1.0.0</small></div>
+      <label><input id="rp2-opal-enabled" type="checkbox"> Оформлять интерфейс Tavern</label>
+      <label><input id="rp2-opal-motion" type="checkbox"> Живые переливы опала</label>
+      <div class="rp2-opal-note">Чат и поле ввода не трогаются этим слоем — твой Custom CSS остаётся главным.</div>`;
+    host.appendChild(panel);
+    const enabled = panel.querySelector('#rp2-opal-enabled');
+    const motion = panel.querySelector('#rp2-opal-motion');
+    enabled.checked = rp2ReadBool(RP2_OPAL_KEY, true);
+    motion.checked = rp2ReadBool(RP2_OPAL_GLOW_KEY, true);
+    enabled.addEventListener('change', () => { localStorage.setItem(RP2_OPAL_KEY, enabled.checked ? '1' : '0'); rp2ApplyOpalUI(); });
+    motion.addEventListener('change', () => { localStorage.setItem(RP2_OPAL_GLOW_KEY, motion.checked ? '1' : '0'); rp2ApplyOpalUI(); });
+}
+
+rp2ApplyOpalUI();
+const rp2OpalMountTimer = setInterval(() => {
+    rp2ApplyOpalUI();
+    rp2MountOpalSettings();
+    if (document.getElementById('rp2-opal-settings')) clearInterval(rp2OpalMountTimer);
+}, 700);
+setTimeout(() => clearInterval(rp2OpalMountTimer), 20000);

@@ -868,3 +868,137 @@
     font-size: var(--rpg-dialogue-size, 1.08em) !important;
     font-style: italic !important;
 }
+
+/* ================================================================
+   RP Glass 2 v1.0 — OPAL UI
+   Scope: SillyTavern chrome only. #chat and #send_form are deliberately
+   excluded so the user's Custom CSS keeps full control of roleplay chat.
+   ================================================================ */
+body.rp2-opal-ui {
+  --opal-void: rgba(3, 8, 18, .94);
+  --opal-glass: rgba(6, 15, 29, .78);
+  --opal-glass-2: rgba(14, 10, 31, .72);
+  --opal-violet: 190, 92, 255;
+  --opal-blue: 67, 126, 255;
+  --opal-cyan: 74, 238, 255;
+  --opal-rose: 255, 83, 214;
+  --opal-line: rgba(132, 166, 255, .42);
+  --opal-text: rgba(242, 245, 255, .94);
+}
+
+/* Main drawers / settings surfaces. Chat is excluded on purpose. */
+body.rp2-opal-ui :is(#right-nav-panel, #left-nav-panel, #extensions_settings, #extensions_settings2,
+  #user-settings-block, #character_popup, #character-management-block, .drawer-content, .drawer-contentOpen,
+  .popup, .large_dialogue_popup, .wide_dialogue_popup):not(#chat):not(#send_form):not(#send_form_sheld) {
+  background:
+    radial-gradient(circle at 88% 4%, rgba(var(--opal-violet),.12), transparent 30%),
+    radial-gradient(circle at 8% 96%, rgba(var(--opal-cyan),.08), transparent 32%),
+    linear-gradient(145deg, rgba(3,10,20,.95), rgba(9,8,25,.91)) !important;
+  border-color: rgba(115, 162, 255, .42) !important;
+  box-shadow: inset 0 0 34px rgba(var(--opal-blue),.035), 0 0 28px rgba(0,0,0,.24) !important;
+}
+
+/* Accordion rows and setting blocks. Avoid message/chat selectors entirely. */
+body.rp2-opal-ui #extensions_settings :is(.inline-drawer, .inline-drawer-header),
+body.rp2-opal-ui #extensions_settings2 :is(.inline-drawer, .inline-drawer-header),
+body.rp2-opal-ui #user-settings-block :is(.inline-drawer, .inline-drawer-header),
+body.rp2-opal-ui .drawer-content :is(.inline-drawer, .inline-drawer-header) {
+  border-color: rgba(101, 178, 255, .38) !important;
+}
+body.rp2-opal-ui #extensions_settings .inline-drawer-header,
+body.rp2-opal-ui #extensions_settings2 .inline-drawer-header,
+body.rp2-opal-ui #user-settings-block .inline-drawer-header,
+body.rp2-opal-ui .drawer-content .inline-drawer-header {
+  background:
+    linear-gradient(100deg, rgba(var(--opal-cyan),.035), rgba(var(--opal-violet),.07), rgba(var(--opal-blue),.035)) !important;
+  border: 1px solid rgba(112, 171, 255, .34) !important;
+  border-radius: 15px !important;
+  box-shadow: inset 0 0 14px rgba(var(--opal-violet),.025), 0 0 10px rgba(var(--opal-cyan),.025) !important;
+}
+
+/* Native controls outside the chat composer. */
+body.rp2-opal-ui :is(#right-nav-panel, #left-nav-panel, #extensions_settings, #extensions_settings2,
+  #user-settings-block, #character_popup, #character-management-block, .drawer-content)
+  :is(button, .menu_button, select, input[type="text"], input[type="number"], input[type="search"], textarea):not(#send_textarea) {
+  border-color: rgba(111, 170, 255, .48) !important;
+  background-color: rgba(4, 13, 24, .72) !important;
+  box-shadow: inset 0 0 12px rgba(var(--opal-violet),.025) !important;
+}
+body.rp2-opal-ui :is(#right-nav-panel, #left-nav-panel, #extensions_settings, #extensions_settings2,
+  #user-settings-block, #character_popup, #character-management-block, .drawer-content)
+  :is(button, .menu_button):active {
+  box-shadow: 0 0 16px rgba(var(--opal-cyan),.16), inset 0 0 18px rgba(var(--opal-violet),.08) !important;
+}
+
+/* Top navigation: keep ST's own icons, give them an opal aura only. */
+body.rp2-opal-ui #top-bar :is(.drawer-icon, .fa-solid, .fa-regular, .fa),
+body.rp2-opal-ui #top-settings-holder :is(.drawer-icon, .fa-solid, .fa-regular, .fa) {
+  filter: drop-shadow(0 0 5px rgba(var(--opal-cyan),.16));
+  transition: filter .22s ease, color .22s ease, transform .22s ease;
+}
+body.rp2-opal-ui #top-bar :is(.drawer-icon, .fa-solid, .fa-regular, .fa):hover,
+body.rp2-opal-ui #top-settings-holder :is(.drawer-icon, .fa-solid, .fa-regular, .fa):hover {
+  color: rgb(205, 184, 255) !important;
+  filter: drop-shadow(0 0 7px rgba(var(--opal-violet),.48)) drop-shadow(0 0 12px rgba(var(--opal-cyan),.22));
+}
+
+/* Character cards/list: preserve ST geometry, polish surfaces only. */
+body.rp2-opal-ui :is(#rm_print_characters_block, #character-management-block, #character_popup)
+  :is(.character_select, .character_select_container, .chara_card, .bogus_folder_select) {
+  border-color: rgba(104, 158, 255, .34) !important;
+  background: linear-gradient(120deg, rgba(5,15,27,.68), rgba(17,9,31,.54)) !important;
+  border-radius: 15px !important;
+}
+body.rp2-opal-ui :is(#rm_print_characters_block, #character-management-block, #character_popup) .avatar img {
+  box-shadow: 0 0 0 1px rgba(var(--opal-violet),.34), 0 0 12px rgba(var(--opal-cyan),.08) !important;
+}
+
+/* Scrollbars: dark crystal track + cyan/violet thumb. */
+body.rp2-opal-ui :is(#right-nav-panel, #left-nav-panel, #extensions_settings, #extensions_settings2,
+  #user-settings-block, #character_popup, #character-management-block, .drawer-content) {
+  scrollbar-color: rgba(91, 220, 255, .58) rgba(4, 10, 18, .46);
+}
+body.rp2-opal-ui :is(#right-nav-panel, #left-nav-panel, #extensions_settings, #extensions_settings2,
+  #user-settings-block, #character_popup, #character-management-block, .drawer-content)::-webkit-scrollbar-thumb {
+  background: linear-gradient(rgba(var(--opal-violet),.64), rgba(var(--opal-cyan),.58)) !important;
+  border-radius: 999px;
+}
+
+/* Tiny opal shard motif — our equivalent of the wolf-paw signature. */
+body.rp2-opal-ui #extensions_settings .inline-drawer-header::before,
+body.rp2-opal-ui #extensions_settings2 .inline-drawer-header::before,
+body.rp2-opal-ui #user-settings-block .inline-drawer-header::before {
+  content: "✦";
+  color: rgba(161, 235, 255, .40);
+  margin-right: 7px;
+  font-size: .72em;
+  text-shadow: 0 0 8px rgba(var(--opal-cyan),.38), 0 0 13px rgba(var(--opal-violet),.20);
+}
+
+/* Optional subtle living iridescence. */
+@keyframes rp2OpalBreath {
+  0%,100% { filter: saturate(1) brightness(1); }
+  50% { filter: saturate(1.08) brightness(1.025); }
+}
+body.rp2-opal-ui.rp2-opal-motion :is(#right-nav-panel, #left-nav-panel, #extensions_settings, #extensions_settings2,
+  #user-settings-block, #character_popup, #character-management-block) {
+  animation: rp2OpalBreath 7s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.rp2-opal-ui.rp2-opal-motion :is(#right-nav-panel, #left-nav-panel, #extensions_settings, #extensions_settings2,
+    #user-settings-block, #character_popup, #character-management-block) { animation: none !important; }
+}
+
+/* Extension's own compact settings card. */
+.rp2-opal-settings {
+  margin: 10px 0 !important;
+  padding: 12px 14px !important;
+  border: 1px solid rgba(116, 170, 255, .42) !important;
+  border-radius: 17px !important;
+  background: linear-gradient(125deg, rgba(5,15,29,.88), rgba(22,9,37,.76)) !important;
+  box-shadow: inset 0 0 20px rgba(170,79,255,.035), 0 0 18px rgba(60,190,255,.035) !important;
+}
+.rp2-opal-title { display:flex; align-items:center; gap:8px; margin-bottom:9px; color:rgba(239,238,255,.96); }
+.rp2-opal-title small { margin-left:auto; opacity:.48; font-weight:500; }
+.rp2-opal-settings label { display:block; margin:8px 0; }
+.rp2-opal-note { opacity:.58; font-size:.86em; line-height:1.35; margin-top:8px; }
