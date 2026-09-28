@@ -563,7 +563,7 @@ function rp2ApplyOpalUI() {
     document.body.classList.toggle('rp2-opal-ui', rp2ReadBool(RP2_OPAL_KEY, true));
     document.body.classList.toggle('rp2-opal-motion', rp2ReadBool(RP2_OPAL_GLOW_KEY, true));
     const palette = localStorage.getItem(RP2_OPAL_PALETTE_KEY) || 'violet';
-    document.body.dataset.rp2Opal = ['violet','ocean','rose'].includes(palette) ? palette : 'violet';
+    document.body.dataset.rp2Opal = ['ocean','fire','moss'].includes(palette) ? palette : ({violet:'ocean',rose:'fire'}[palette] || 'ocean');
 }
 function rp2MountOpalSettings() {
     if (document.getElementById('rp2-opal-settings')) return;
@@ -574,12 +574,12 @@ function rp2MountOpalSettings() {
     panel.className = 'rp2-opal-settings';
     panel.innerHTML = `
       <button class="rp2-opal-title" type="button" aria-expanded="false">
-        <span class="rp2-opal-gem">💎</span><b>RP Glass · Opal UI</b><small>v1.1.0</small><span class="rp2-opal-chevron">⌄</span>
+        <span class="rp2-opal-gem">💎</span><b>RP Glass · Opal UI</b><small>v1.2.0</small><span class="rp2-opal-chevron">⌄</span>
       </button>
       <div class="rp2-opal-body">
         <label><input id="rp2-opal-enabled" type="checkbox"> Оформлять интерфейс Tavern</label>
         <label><input id="rp2-opal-motion" type="checkbox"> Живые переливы опала</label>
-        <label class="rp2-opal-select-row"><span>Оттенок опала</span><select id="rp2-opal-palette"><option value="violet">Violet Opal</option><option value="ocean">Deep Ocean</option><option value="rose">Rose Opal</option></select></label>
+        <label class="rp2-opal-select-row"><span>Оттенок опала</span><select id="rp2-opal-palette"><option value="ocean">Ocean Opal</option><option value="fire">Fire Opal 🔥</option><option value="moss">Moss Opal</option></select></label>
         <div class="rp2-opal-note">Чат и поле ввода не трогаются этим слоем — твой Custom CSS остаётся главным.</div>
       </div>`;
     host.appendChild(panel);
@@ -596,7 +596,7 @@ function rp2MountOpalSettings() {
     title.addEventListener('click', () => setOpen(!panel.classList.contains('is-open')));
     enabled.checked = rp2ReadBool(RP2_OPAL_KEY, true);
     motion.checked = rp2ReadBool(RP2_OPAL_GLOW_KEY, true);
-    palette.value = localStorage.getItem(RP2_OPAL_PALETTE_KEY) || 'violet';
+    { const saved = localStorage.getItem(RP2_OPAL_PALETTE_KEY) || 'ocean'; palette.value = ({violet:'ocean',rose:'fire'}[saved] || saved); if (!['ocean','fire','moss'].includes(palette.value)) palette.value='ocean'; }
     enabled.addEventListener('change', () => { localStorage.setItem(RP2_OPAL_KEY, enabled.checked ? '1' : '0'); rp2ApplyOpalUI(); });
     motion.addEventListener('change', () => { localStorage.setItem(RP2_OPAL_GLOW_KEY, motion.checked ? '1' : '0'); rp2ApplyOpalUI(); });
     palette.addEventListener('change', () => { localStorage.setItem(RP2_OPAL_PALETTE_KEY, palette.value); rp2ApplyOpalUI(); });

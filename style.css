@@ -1158,3 +1158,136 @@ body.rp2-opal-ui :is(#user-settings-block,#extensions_settings,#extensions_setti
 /* Opal UI drawer itself. */
 .rp2-opal-select-row { display:flex !important; align-items:center; justify-content:space-between; gap:10px; }
 .rp2-opal-select-row select { width:min(190px,52%) !important; margin:0 !important; }
+
+
+/* =========================================================
+   v1.2.0 — Three mineral moods + restrained jewel detailing
+   Dark glass remains the common base; only the inner fire changes.
+   ========================================================= */
+
+/* 1 — Ocean Opal: violet + turquoise + abyssal blue */
+body.rp2-opal-ui[data-rp2-opal="ocean"] {
+  --opal-void: rgba(2, 7, 18, .955);
+  --opal-glass: rgba(4, 13, 29, .80);
+  --opal-glass-2: rgba(18, 8, 35, .72);
+  --opal-violet: 169, 78, 255;
+  --opal-blue: 34, 105, 255;
+  --opal-cyan: 43, 236, 221;
+  --opal-rose: 203, 83, 255;
+  --opal-line: rgba(87, 176, 255, .43);
+  --opal-gem-a: 52, 236, 218;
+  --opal-gem-b: 178, 76, 255;
+  --opal-gem-c: 46, 120, 255;
+}
+
+/* 2 — Fire Opal: black glass with garnet / ember / amber inside */
+body.rp2-opal-ui[data-rp2-opal="fire"] {
+  --opal-void: rgba(15, 5, 7, .955);
+  --opal-glass: rgba(25, 8, 11, .82);
+  --opal-glass-2: rgba(31, 12, 8, .75);
+  --opal-violet: 220, 49, 61;
+  --opal-blue: 185, 58, 34;
+  --opal-cyan: 255, 170, 48;
+  --opal-rose: 255, 83, 38;
+  --opal-line: rgba(235, 104, 57, .43);
+  --opal-gem-a: 255, 178, 55;
+  --opal-gem-b: 239, 52, 49;
+  --opal-gem-c: 255, 104, 31;
+}
+
+/* 3 — Moss Opal: swamp emerald + teal + peridot sparks */
+body.rp2-opal-ui[data-rp2-opal="moss"] {
+  --opal-void: rgba(3, 12, 10, .96);
+  --opal-glass: rgba(5, 24, 20, .80);
+  --opal-glass-2: rgba(10, 28, 19, .74);
+  --opal-violet: 42, 160, 111;
+  --opal-blue: 25, 139, 137;
+  --opal-cyan: 65, 220, 181;
+  --opal-rose: 151, 226, 72;
+  --opal-line: rgba(69, 177, 145, .43);
+  --opal-gem-a: 151, 226, 72;
+  --opal-gem-b: 37, 194, 153;
+  --opal-gem-c: 20, 121, 99;
+}
+
+/* More mineral depth: irregular light trapped inside dark glass. */
+body.rp2-opal-ui :is(#right-nav-panel,#left-nav-panel,#extensions_settings,#extensions_settings2,#user-settings-block,#rm_print_characters_block,#character-management-block,#character_popup) {
+  background-image:
+    radial-gradient(ellipse at 87% 6%, rgba(var(--opal-gem-b),.105), transparent 27%),
+    radial-gradient(ellipse at 13% 82%, rgba(var(--opal-gem-a),.075), transparent 31%),
+    radial-gradient(ellipse at 64% 55%, rgba(var(--opal-gem-c),.045), transparent 36%),
+    linear-gradient(145deg, rgba(3,8,18,.965), var(--opal-glass-2)) !important;
+}
+
+/* Faceted jewel edge on avatars — no size/layout changes. */
+body.rp2-opal-ui :is(#rm_print_characters_block,#character-management-block,#character_popup) .avatar img {
+  border:1px solid rgba(var(--opal-gem-a),.48) !important;
+  box-shadow:
+    0 0 0 1px rgba(var(--opal-gem-b),.34),
+    0 0 9px rgba(var(--opal-gem-a),.15),
+    0 0 17px rgba(var(--opal-gem-b),.08) !important;
+}
+
+/* Small cut-gem signature only on our own Opal settings card. */
+.rp2-opal-settings { position:relative; overflow:hidden; }
+.rp2-opal-settings::before,
+.rp2-opal-settings::after {
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  width:13px; height:13px;
+  transform:rotate(45deg);
+  border:1px solid rgba(var(--opal-gem-a),.58);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.25), transparent 38%),
+    linear-gradient(315deg, rgba(var(--opal-gem-b),.52), rgba(var(--opal-gem-a),.18));
+  box-shadow:0 0 8px rgba(var(--opal-gem-a),.28), 0 0 14px rgba(var(--opal-gem-b),.15);
+  opacity:.72;
+}
+.rp2-opal-settings::before { right:17px; top:-7px; }
+.rp2-opal-settings::after  { left:20px; bottom:-8px; width:10px; height:10px; opacity:.48; }
+
+/* Jewel glint on extension headers: tiny and decorative, never participates in layout. */
+body.rp2-opal-ui #extensions_settings .inline-drawer-header::after,
+body.rp2-opal-ui #extensions_settings2 .inline-drawer-header::after,
+body.rp2-opal-ui #user-settings-block .inline-drawer-header::after {
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  right:44px;
+  top:7px;
+  width:5px; height:5px;
+  border-radius:50%;
+  background:rgba(255,255,255,.72);
+  box-shadow:0 0 5px rgba(var(--opal-gem-a),.70), 0 0 10px rgba(var(--opal-gem-b),.42);
+  opacity:.38;
+}
+
+/* Active controls get a gemstone rim instead of simply becoming brighter. */
+body.rp2-opal-ui :is(button,.menu_button,select,input[type="text"],input[type="search"]):focus,
+body.rp2-opal-ui :is(button,.menu_button):active {
+  border-color:rgba(var(--opal-gem-a),.52) !important;
+  box-shadow:0 0 0 1px rgba(var(--opal-gem-b),.18), 0 0 12px rgba(var(--opal-gem-a),.12) !important;
+}
+
+/* Fire stays readable: amber is an accent, never a text/background wash. */
+body.rp2-opal-ui[data-rp2-opal="fire"] :is(#right-nav-panel,#left-nav-panel,#extensions_settings,#extensions_settings2,#user-settings-block) {
+  color:rgba(248,244,241,.94) !important;
+}
+
+/* A very restrained traveling glint. */
+@keyframes rp2JewelGlint {
+  0%,72%,100% { opacity:.22; filter:brightness(.85); }
+  78% { opacity:.72; filter:brightness(1.35); }
+  84% { opacity:.30; filter:brightness(1); }
+}
+body.rp2-opal-ui.rp2-opal-motion #extensions_settings .inline-drawer-header::after,
+body.rp2-opal-ui.rp2-opal-motion #extensions_settings2 .inline-drawer-header::after,
+body.rp2-opal-ui.rp2-opal-motion #user-settings-block .inline-drawer-header::after {
+  animation:rp2JewelGlint 8.5s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.rp2-opal-ui.rp2-opal-motion #extensions_settings .inline-drawer-header::after,
+  body.rp2-opal-ui.rp2-opal-motion #extensions_settings2 .inline-drawer-header::after,
+  body.rp2-opal-ui.rp2-opal-motion #user-settings-block .inline-drawer-header::after { animation:none !important; }
+}
