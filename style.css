@@ -1090,3 +1090,71 @@ body.rp2-opal-ui :is(.recentChat, .recent-chat, .recent_chat, [class*="recent-ch
   border-color: rgba(166,126,255,.54) !important;
   box-shadow: inset 0 0 18px rgba(var(--opal-violet),.05), 0 0 12px rgba(var(--opal-cyan),.07) !important;
 }
+
+/* ================================================================
+   RP Glass 2 v1.1.0 — OPAL POLISH
+   Visual-only shell polish. Chat bubbles/composer remain untouched.
+   ================================================================ */
+body.rp2-opal-ui[data-rp2-opal="ocean"] {
+  --opal-violet: 86, 113, 255; --opal-blue: 35, 119, 255;
+  --opal-cyan: 55, 236, 255; --opal-rose: 118, 104, 255;
+}
+body.rp2-opal-ui[data-rp2-opal="rose"] {
+  --opal-violet: 204, 86, 255; --opal-blue: 104, 98, 255;
+  --opal-cyan: 103, 211, 255; --opal-rose: 255, 80, 194;
+}
+
+/* Native top toolbar — keep original icons, make the active drawer feel jewel-lit. */
+body.rp2-opal-ui #top-settings-holder > *,
+body.rp2-opal-ui #top-bar > * { transition: filter .18s ease, color .18s ease, text-shadow .18s ease; }
+body.rp2-opal-ui #top-settings-holder :is(.drawer-icon.openIcon,.drawer-icon.opened,.drawer-icon.selected,.drawer-icon.active),
+body.rp2-opal-ui #top-bar :is(.drawer-icon.openIcon,.drawer-icon.opened,.drawer-icon.selected,.drawer-icon.active) {
+  color: rgb(var(--opal-violet)) !important;
+  filter: drop-shadow(0 0 5px rgba(var(--opal-violet),.72)) drop-shadow(0 0 13px rgba(var(--opal-cyan),.26)) !important;
+}
+
+/* Welcome / Recent Chats in ST 1.19: style conservatively by structure as well as names. */
+body.rp2-opal-ui :is(#welcomePanel,#welcome_panel,#welcome-screen,#welcome_screen,.welcomePanel,.welcome-panel,.welcome-screen) :is(.recentChat,.recent-chat,.recent_chat,[class*="recent-chat"],[class*="recentChat"]),
+body.rp2-opal-ui :is(#welcomePanel,#welcome_panel,#welcome-screen,#welcome_screen,.welcomePanel,.welcome-panel,.welcome-screen) > div > div {
+  border-color: rgba(var(--opal-blue),.34) !important;
+}
+body.rp2-opal-ui :is(#welcomePanel,#welcome_panel,#welcome-screen,#welcome_screen,.welcomePanel,.welcome-panel,.welcome-screen) :is(button,.menu_button):not(.interactable) {
+  background: linear-gradient(135deg, rgba(9,16,30,.82), rgba(var(--opal-violet),.055)) !important;
+  border-color: rgba(var(--opal-cyan),.28) !important;
+  box-shadow: inset 0 0 12px rgba(var(--opal-violet),.035) !important;
+}
+
+/* Recent-chat-like cards visible on the welcome page. This only applies outside #chat. */
+body.rp2-opal-ui :is(#right-nav-panel,#left-nav-panel) :is([class*="recent"],[class*="Recent"]) > :is(div,li) {
+  background: linear-gradient(108deg, rgba(6,13,27,.78), rgba(var(--opal-violet),.045), rgba(var(--opal-blue),.025)) !important;
+  border-color: rgba(var(--opal-blue),.35) !important;
+  box-shadow: inset 0 0 18px rgba(var(--opal-violet),.025), 0 0 9px rgba(var(--opal-cyan),.018) !important;
+}
+
+/* Character browser: deeper opal sheet + jewel avatar rim, without changing layout. */
+body.rp2-opal-ui :is(#rm_print_characters_block,#character-management-block,#character_popup) {
+  background-image:
+    radial-gradient(circle at 90% 8%, rgba(var(--opal-violet),.095), transparent 31%),
+    radial-gradient(circle at 4% 80%, rgba(var(--opal-blue),.075), transparent 34%) !important;
+}
+body.rp2-opal-ui :is(#rm_print_characters_block,#character-management-block,#character_popup) .avatar img {
+  border-color: rgba(var(--opal-rose),.46) !important;
+  box-shadow: 0 0 0 1px rgba(var(--opal-blue),.34), 0 0 10px rgba(var(--opal-violet),.13) !important;
+}
+body.rp2-opal-ui :is(#rm_print_characters_block,#character-management-block,#character_popup) :is(input[type="search"],input[type="text"],select) {
+  background: rgba(4,10,23,.76) !important;
+  border-color: rgba(var(--opal-cyan),.34) !important;
+}
+
+/* Settings controls — subtle gemstone controls, no geometry changes. */
+body.rp2-opal-ui :is(#user-settings-block,#extensions_settings,#extensions_settings2) input[type="range"] {
+  accent-color: rgb(var(--opal-violet));
+  filter: drop-shadow(0 0 4px rgba(var(--opal-cyan),.16));
+}
+body.rp2-opal-ui :is(#user-settings-block,#extensions_settings,#extensions_settings2) input[type="checkbox"] {
+  accent-color: rgb(var(--opal-violet));
+}
+
+/* Opal UI drawer itself. */
+.rp2-opal-select-row { display:flex !important; align-items:center; justify-content:space-between; gap:10px; }
+.rp2-opal-select-row select { width:min(190px,52%) !important; margin:0 !important; }
