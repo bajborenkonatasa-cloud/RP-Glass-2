@@ -574,7 +574,7 @@ function rp2MountOpalSettings() {
     panel.className = 'rp2-opal-settings';
     panel.innerHTML = `
       <button class="rp2-opal-title" type="button" aria-expanded="false">
-        <span class="rp2-opal-gem">💎</span><b>RP Glass · Opal UI</b><small>v1.2.0</small><span class="rp2-opal-chevron">⌄</span>
+        <span class="rp2-opal-gem">💎</span><b>RP Glass · Opal UI</b><small>v1.3.0</small><span class="rp2-opal-chevron">⌄</span>
       </button>
       <div class="rp2-opal-body">
         <label><input id="rp2-opal-enabled" type="checkbox"> Оформлять интерфейс Tavern</label>

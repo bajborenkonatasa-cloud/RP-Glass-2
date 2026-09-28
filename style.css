@@ -1291,3 +1291,135 @@ body.rp2-opal-ui.rp2-opal-motion #user-settings-block .inline-drawer-header::aft
   body.rp2-opal-ui.rp2-opal-motion #extensions_settings2 .inline-drawer-header::after,
   body.rp2-opal-ui.rp2-opal-motion #user-settings-block .inline-drawer-header::after { animation:none !important; }
 }
+
+/* =========================================================
+   v1.3.0 — JEWEL FINALE
+   More sparkle, still shell-only: never styles #chat / #send_form.
+   ========================================================= */
+
+/* Layered gemstone sheen on major Tavern sheets. */
+body.rp2-opal-ui :is(#right-nav-panel,#left-nav-panel,#extensions_settings,#extensions_settings2,#user-settings-block,#rm_print_characters_block,#character-management-block,#character_popup) {
+  box-shadow:
+    inset 0 0 38px rgba(var(--opal-gem-b),.045),
+    inset 0 0 1px rgba(255,255,255,.16),
+    0 0 22px rgba(var(--opal-gem-c),.055),
+    0 14px 34px rgba(0,0,0,.26) !important;
+}
+
+/* Thin iridescent edge on drawers; geometry stays unchanged. */
+body.rp2-opal-ui #extensions_settings :is(.inline-drawer-header),
+body.rp2-opal-ui #extensions_settings2 :is(.inline-drawer-header),
+body.rp2-opal-ui #user-settings-block :is(.inline-drawer-header) {
+  background-image:
+    linear-gradient(105deg, rgba(var(--opal-gem-a),.055), rgba(var(--opal-gem-b),.095) 47%, rgba(var(--opal-gem-c),.055)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.055),
+    inset 0 -1px 0 rgba(var(--opal-gem-a),.075),
+    0 0 11px rgba(var(--opal-gem-b),.035) !important;
+}
+
+/* A tiny constellation: two glints, absolute and non-layout. */
+body.rp2-opal-ui #extensions_settings .inline-drawer-header::before,
+body.rp2-opal-ui #extensions_settings2 .inline-drawer-header::before,
+body.rp2-opal-ui #user-settings-block .inline-drawer-header::before {
+  content:"✦";
+  position:absolute;
+  pointer-events:none;
+  right:67px;
+  top:50%;
+  transform:translateY(-52%) scale(.72);
+  color:rgba(var(--opal-gem-a),.72);
+  text-shadow:
+    0 0 4px rgba(var(--opal-gem-a),.82),
+    0 0 10px rgba(var(--opal-gem-b),.50),
+    0 0 16px rgba(var(--opal-gem-c),.28);
+  opacity:.46;
+  z-index:0;
+}
+
+/* Our Opal card gets a real faceted rim and inner fire. */
+.rp2-opal-settings {
+  border-color:rgba(var(--opal-gem-a),.42) !important;
+  background:
+    radial-gradient(circle at 84% 12%, rgba(var(--opal-gem-b),.13), transparent 25%),
+    radial-gradient(circle at 12% 88%, rgba(var(--opal-gem-a),.085), transparent 28%),
+    linear-gradient(145deg, rgba(5,10,25,.94), rgba(var(--opal-gem-c),.055)) !important;
+  box-shadow:
+    inset 0 0 26px rgba(var(--opal-gem-b),.07),
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 15px rgba(var(--opal-gem-a),.07),
+    0 0 30px rgba(var(--opal-gem-b),.045) !important;
+}
+.rp2-opal-title {
+  text-shadow:0 0 9px rgba(var(--opal-gem-b),.18);
+}
+.rp2-opal-gem {
+  filter:drop-shadow(0 0 5px rgba(var(--opal-gem-a),.58)) drop-shadow(0 0 10px rgba(var(--opal-gem-b),.30));
+}
+
+/* Gem-cut select / input focus and selected controls. */
+body.rp2-opal-ui :is(#right-nav-panel,#left-nav-panel,#extensions_settings,#extensions_settings2,#user-settings-block)
+:is(select,input[type="text"],input[type="search"],textarea):focus {
+  outline:none !important;
+  border-color:rgba(var(--opal-gem-a),.60) !important;
+  box-shadow:
+    inset 0 0 12px rgba(var(--opal-gem-b),.055),
+    0 0 0 1px rgba(var(--opal-gem-b),.18),
+    0 0 12px rgba(var(--opal-gem-a),.16) !important;
+}
+
+/* Jewel scrollbar thumb in shell panels. */
+body.rp2-opal-ui :is(#right-nav-panel,#left-nav-panel,#extensions_settings,#extensions_settings2,#user-settings-block,#rm_print_characters_block,#character-management-block,#character_popup)::-webkit-scrollbar-thumb {
+  background:linear-gradient(180deg, rgba(var(--opal-gem-a),.78), rgba(var(--opal-gem-b),.68), rgba(var(--opal-gem-c),.72)) !important;
+  box-shadow:0 0 7px rgba(var(--opal-gem-a),.24) !important;
+}
+
+/* Character portraits: a stronger jewel flash on hover/tap without moving them. */
+body.rp2-opal-ui :is(#rm_print_characters_block,#character-management-block,#character_popup) .avatar img:hover {
+  box-shadow:
+    0 0 0 1px rgba(var(--opal-gem-a),.72),
+    0 0 8px rgba(var(--opal-gem-a),.34),
+    0 0 18px rgba(var(--opal-gem-b),.25),
+    0 0 27px rgba(var(--opal-gem-c),.13) !important;
+}
+
+/* Occasional shimmer across our own settings header only. */
+.rp2-opal-title { position:relative; overflow:hidden; }
+.rp2-opal-title::after {
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  top:-55%; bottom:-55%;
+  left:-28%; width:18%;
+  transform:skewX(-20deg);
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.16), rgba(var(--opal-gem-a),.13), transparent);
+  opacity:0;
+}
+@keyframes rp2GemSweep {
+  0%,68% { left:-28%; opacity:0; }
+  72% { opacity:.72; }
+  82% { left:112%; opacity:.20; }
+  83%,100% { left:112%; opacity:0; }
+}
+body.rp2-opal-ui.rp2-opal-motion .rp2-opal-title::after { animation:rp2GemSweep 9.5s ease-in-out infinite; }
+
+/* Independent twinkle phases so the extension list doesn't blink in unison. */
+@keyframes rp2StarTwinkle {
+  0%,66%,100% { opacity:.25; transform:translateY(-52%) scale(.62) rotate(0deg); }
+  72% { opacity:.92; transform:translateY(-52%) scale(.90) rotate(22deg); }
+  78% { opacity:.38; transform:translateY(-52%) scale(.68) rotate(38deg); }
+}
+body.rp2-opal-ui.rp2-opal-motion #extensions_settings .inline-drawer-header::before,
+body.rp2-opal-ui.rp2-opal-motion #extensions_settings2 .inline-drawer-header::before,
+body.rp2-opal-ui.rp2-opal-motion #user-settings-block .inline-drawer-header::before {
+  animation:rp2StarTwinkle 7.8s ease-in-out infinite;
+}
+body.rp2-opal-ui.rp2-opal-motion #extensions_settings .inline-drawer:nth-of-type(3n+2) .inline-drawer-header::before { animation-delay:-2.6s; }
+body.rp2-opal-ui.rp2-opal-motion #extensions_settings .inline-drawer:nth-of-type(3n) .inline-drawer-header::before { animation-delay:-5.1s; }
+
+@media (prefers-reduced-motion: reduce) {
+  body.rp2-opal-ui.rp2-opal-motion .rp2-opal-title::after,
+  body.rp2-opal-ui.rp2-opal-motion #extensions_settings .inline-drawer-header::before,
+  body.rp2-opal-ui.rp2-opal-motion #extensions_settings2 .inline-drawer-header::before,
+  body.rp2-opal-ui.rp2-opal-motion #user-settings-block .inline-drawer-header::before { animation:none !important; }
+}
