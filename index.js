@@ -549,9 +549,10 @@ if (typeof jQuery === 'function') {
     init();
 }
 
-// v1.0.0 — Opal UI shell. This intentionally styles SillyTavern chrome, not chat messages.
+// v1.0.1 — Opal UI shell: compact drawer settings + safer native layout styling.
 const RP2_OPAL_KEY = 'rpGlass2OpalUI';
 const RP2_OPAL_GLOW_KEY = 'rpGlass2OpalGlow';
+const RP2_OPAL_OPEN_KEY = 'rpGlass2OpalSettingsOpen';
 
 function rp2ReadBool(key, fallback = true) {
     const value = localStorage.getItem(key);
@@ -569,13 +570,25 @@ function rp2MountOpalSettings() {
     panel.id = 'rp2-opal-settings';
     panel.className = 'rp2-opal-settings';
     panel.innerHTML = `
-      <div class="rp2-opal-title"><span>💎</span><b>RP Glass · Opal UI</b><small>v1.0.0</small></div>
-      <label><input id="rp2-opal-enabled" type="checkbox"> Оформлять интерфейс Tavern</label>
-      <label><input id="rp2-opal-motion" type="checkbox"> Живые переливы опала</label>
-      <div class="rp2-opal-note">Чат и поле ввода не трогаются этим слоем — твой Custom CSS остаётся главным.</div>`;
+      <button class="rp2-opal-title" type="button" aria-expanded="false">
+        <span class="rp2-opal-gem">💎</span><b>RP Glass · Opal UI</b><small>v1.0.1</small><span class="rp2-opal-chevron">⌄</span>
+      </button>
+      <div class="rp2-opal-body">
+        <label><input id="rp2-opal-enabled" type="checkbox"> Оформлять интерфейс Tavern</label>
+        <label><input id="rp2-opal-motion" type="checkbox"> Живые переливы опала</label>
+        <div class="rp2-opal-note">Чат и поле ввода не трогаются этим слоем — твой Custom CSS остаётся главным.</div>
+      </div>`;
     host.appendChild(panel);
+    const title = panel.querySelector('.rp2-opal-title');
     const enabled = panel.querySelector('#rp2-opal-enabled');
     const motion = panel.querySelector('#rp2-opal-motion');
+    const setOpen = (open) => {
+        panel.classList.toggle('is-open', open);
+        title.setAttribute('aria-expanded', open ? 'true' : 'false');
+        localStorage.setItem(RP2_OPAL_OPEN_KEY, open ? '1' : '0');
+    };
+    setOpen(rp2ReadBool(RP2_OPAL_OPEN_KEY, false));
+    title.addEventListener('click', () => setOpen(!panel.classList.contains('is-open')));
     enabled.checked = rp2ReadBool(RP2_OPAL_KEY, true);
     motion.checked = rp2ReadBool(RP2_OPAL_GLOW_KEY, true);
     enabled.addEventListener('change', () => { localStorage.setItem(RP2_OPAL_KEY, enabled.checked ? '1' : '0'); rp2ApplyOpalUI(); });

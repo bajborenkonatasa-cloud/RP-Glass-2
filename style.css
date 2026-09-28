@@ -870,7 +870,7 @@
 }
 
 /* ================================================================
-   RP Glass 2 v1.0 — OPAL UI
+   RP Glass 2 v1.0.1 — OPAL UI
    Scope: SillyTavern chrome only. #chat and #send_form are deliberately
    excluded so the user's Custom CSS keeps full control of roleplay chat.
    ================================================================ */
@@ -1002,3 +1002,91 @@ body.rp2-opal-ui.rp2-opal-motion :is(#right-nav-panel, #left-nav-panel, #extensi
 .rp2-opal-title small { margin-left:auto; opacity:.48; font-weight:500; }
 .rp2-opal-settings label { display:block; margin:8px 0; }
 .rp2-opal-note { opacity:.58; font-size:.86em; line-height:1.35; margin-top:8px; }
+
+
+/* ================================================================
+   v1.0.1 polish — compact settings, geometry-safe shards, Welcome UI
+   ================================================================ */
+
+/* Decorative shard must NEVER participate in flex layout. This fixes
+   custom extension headers (Phone etc.) being pushed sideways. */
+body.rp2-opal-ui #extensions_settings .inline-drawer-header,
+body.rp2-opal-ui #extensions_settings2 .inline-drawer-header,
+body.rp2-opal-ui #user-settings-block .inline-drawer-header {
+  position: relative;
+}
+body.rp2-opal-ui #extensions_settings .inline-drawer-header::before,
+body.rp2-opal-ui #extensions_settings2 .inline-drawer-header::before,
+body.rp2-opal-ui #user-settings-block .inline-drawer-header::before {
+  position: absolute !important;
+  left: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin: 0 !important;
+  width: 10px !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+/* Keep native/custom extension header geometry intact. We paint the skin,
+   but do not re-layout its title, controls or language selectors. */
+body.rp2-opal-ui #extensions_settings .inline-drawer-header > *,
+body.rp2-opal-ui #extensions_settings2 .inline-drawer-header > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Compact RP Glass / Opal settings accordion. */
+.rp2-opal-settings {
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+.rp2-opal-title {
+  appearance: none !important;
+  width: 100% !important;
+  min-height: 46px !important;
+  margin: 0 !important;
+  padding: 9px 12px !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  background: linear-gradient(100deg, rgba(74,238,255,.025), rgba(190,92,255,.075), rgba(67,126,255,.025)) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  color: rgba(239,238,255,.96) !important;
+  text-align: left !important;
+  cursor: pointer !important;
+}
+.rp2-opal-title small { margin-left:auto !important; opacity:.48; font-weight:500; }
+.rp2-opal-chevron { margin-left:3px; opacity:.72; font-size:1.25em; transform:rotate(0deg); transition:transform .2s ease; }
+.rp2-opal-settings.is-open .rp2-opal-chevron { transform:rotate(180deg); }
+.rp2-opal-body {
+  display: none;
+  padding: 2px 14px 12px;
+  border-top: 1px solid rgba(116,170,255,.14);
+}
+.rp2-opal-settings.is-open .rp2-opal-body { display:block; }
+.rp2-opal-settings:not(.is-open) { margin-top:7px !important; margin-bottom:7px !important; }
+
+/* Welcome / Recent Chats — visual polish only; no dimensions or positioning.
+   Multiple selectors intentionally cover the current 1.19 welcome component
+   and older/forked class names without touching #chat. */
+body.rp2-opal-ui :is(#welcomePanel, #welcome_panel, #welcome-screen, #welcome_screen,
+  .welcomePanel, .welcome-panel, .welcome-screen, [class*="welcome-screen"], [class*="welcomeScreen"]):not(#chat) {
+  background:
+    radial-gradient(circle at 82% 10%, rgba(var(--opal-violet),.10), transparent 30%),
+    radial-gradient(circle at 12% 88%, rgba(var(--opal-cyan),.055), transparent 30%),
+    linear-gradient(145deg, rgba(3,10,20,.82), rgba(12,7,27,.78)) !important;
+  border-color: rgba(116,166,255,.40) !important;
+  box-shadow: inset 0 0 30px rgba(var(--opal-blue),.025), 0 0 22px rgba(0,0,0,.20) !important;
+}
+body.rp2-opal-ui :is(.recentChat, .recent-chat, .recent_chat, [class*="recent-chat"], [class*="recentChat"]):not(#chat) {
+  background: linear-gradient(115deg, rgba(5,15,28,.68), rgba(20,9,34,.48)) !important;
+  border-color: rgba(112,169,255,.36) !important;
+  box-shadow: inset 0 0 15px rgba(var(--opal-violet),.025), 0 0 9px rgba(var(--opal-cyan),.025) !important;
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease !important;
+}
+body.rp2-opal-ui :is(.recentChat, .recent-chat, .recent_chat, [class*="recent-chat"], [class*="recentChat"]):not(#chat):hover {
+  border-color: rgba(166,126,255,.54) !important;
+  box-shadow: inset 0 0 18px rgba(var(--opal-violet),.05), 0 0 12px rgba(var(--opal-cyan),.07) !important;
+}
