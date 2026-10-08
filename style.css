@@ -1425,31 +1425,37 @@ body.rp2-opal-ui.rp2-opal-motion #extensions_settings .inline-drawer:nth-of-type
 }
 
 /* ===========================================================
-   HANABI MOON SCENE — date/time/location only.
-   Keeps original markup, JS, avatars and dialogue system intact.
+   HANABI MOON SCENE v1.3.2 — flexible decorative ends.
+   No JS/layout changes. The decorations do NOT stretch when
+   the scene description wraps across multiple lines.
    =========================================================== */
 #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
 #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-    background-color: rgba(8, 11, 31, .9) !important;
-    background-image: url('./assets/hanabi-moon-date.png') !important;
-    background-position: center center !important;
-    background-size: 100% 100% !important;
-    background-repeat: no-repeat !important;
-    border: 0 !important;
-    border-left: 0 !important;
-    border-radius: 14px !important;
-    box-shadow: none !important;
-    padding: 24px 48px 24px 65px !important;
-    min-height: 90px !important;
-    color: #effaff !important;
-    text-shadow: 0 1px 3px #040817 !important;
+    background-color: rgba(9, 15, 42, .92) !important;
+    background-image:
+      url('./assets/hanabi-date-left.png'),
+      url('./assets/hanabi-date-right.png'),
+      linear-gradient(105deg, rgba(13,20,52,.97), rgba(20,14,51,.94)) !important;
+    background-repeat: no-repeat, no-repeat, no-repeat !important;
+    background-position: left center, right center, center center !important;
+    background-size: auto 100%, auto 100%, 100% 100% !important;
+    border: 1px solid rgba(68,205,247,.58) !important;
+    border-left: 1px solid rgba(68,205,247,.58) !important;
+    border-radius: 18px !important;
+    box-shadow: inset 0 0 11px rgba(23,156,220,.10), 0 0 12px rgba(6,119,187,.12) !important;
+    padding: 18px 43px 18px 49px !important;
+    min-height: 110px !important;
+    height: auto !important;
+    overflow-wrap: anywhere !important;
+    color: #f0faff !important;
+    text-shadow: 0 1px 3px #030915, 0 0 3px #030915 !important;
 }
 @media (max-width: 520px) {
   #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
   #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-    padding: 20px 33px 20px 52px !important;
-    min-height: 82px !important;
-    font-size: .82em !important;
-    line-height: 1.45 !important;
+    padding: 15px 38px 15px 44px !important;
+    min-height: 120px !important;
+    font-size: .81em !important;
+    line-height: 1.50 !important;
   }
 }
