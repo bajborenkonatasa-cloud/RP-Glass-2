@@ -1423,3 +1423,33 @@ body.rp2-opal-ui.rp2-opal-motion #extensions_settings .inline-drawer:nth-of-type
   body.rp2-opal-ui.rp2-opal-motion #extensions_settings2 .inline-drawer-header::before,
   body.rp2-opal-ui.rp2-opal-motion #user-settings-block .inline-drawer-header::before { animation:none !important; }
 }
+
+/* ===========================================================
+   HANABI MOON SCENE — date/time/location only.
+   Keeps original markup, JS, avatars and dialogue system intact.
+   =========================================================== */
+#chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+#chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+    background-color: rgba(8, 11, 31, .9) !important;
+    background-image: url('./assets/hanabi-moon-date.png') !important;
+    background-position: center center !important;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    border: 0 !important;
+    border-left: 0 !important;
+    border-radius: 14px !important;
+    box-shadow: none !important;
+    padding: 24px 48px 24px 65px !important;
+    min-height: 90px !important;
+    color: #effaff !important;
+    text-shadow: 0 1px 3px #040817 !important;
+}
+@media (max-width: 520px) {
+  #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+  #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+    padding: 20px 33px 20px 52px !important;
+    min-height: 82px !important;
+    font-size: .82em !important;
+    line-height: 1.45 !important;
+  }
+}
