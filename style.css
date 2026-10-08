@@ -1424,175 +1424,58 @@ body.rp2-opal-ui.rp2-opal-motion #extensions_settings .inline-drawer:nth-of-type
   body.rp2-opal-ui.rp2-opal-motion #user-settings-block .inline-drawer-header::before { animation:none !important; }
 }
 
-/* ===========================================================
-   HANABI MOON SCENE v1.3.2 — flexible decorative ends.
-   No JS/layout changes. The decorations do NOT stretch when
-   the scene description wraps across multiple lines.
-   =========================================================== */
+
+/* HANABI MOON DATE v1.5.0 — compact, responsive, no overlays across text */
 #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
 #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-    background-color: rgba(9, 15, 42, .92) !important;
-    background-image:
-      url('./assets/hanabi-date-left.png'),
-      url('./assets/hanabi-date-right.png'),
-      linear-gradient(105deg, rgba(13,20,52,.97), rgba(20,14,51,.94)) !important;
-    background-repeat: no-repeat, no-repeat, no-repeat !important;
-    background-position: left center, right center, center center !important;
-    background-size: auto 100%, auto 100%, 100% 100% !important;
-    border: 1px solid rgba(68,205,247,.58) !important;
-    border-left: 1px solid rgba(68,205,247,.58) !important;
-    border-radius: 18px !important;
-    box-shadow: inset 0 0 11px rgba(23,156,220,.10), 0 0 12px rgba(6,119,187,.12) !important;
-    padding: 18px 43px 18px 49px !important;
-    min-height: 110px !important;
-    height: auto !important;
-    overflow-wrap: anywhere !important;
-    color: #f0faff !important;
-    text-shadow: 0 1px 3px #030915, 0 0 3px #030915 !important;
-}
-@media (max-width: 520px) {
-  #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
-  #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-    padding: 15px 38px 15px 44px !important;
-    min-height: 120px !important;
-    font-size: .81em !important;
-    line-height: 1.50 !important;
-  }
-}
-
-
-/* ============================================================
-   HANABI MOON SCENE v1.3.3 — clear central reading area.
-   Moon and stars are confined visually to the decorative ends.
-   No JS, dialogue, chibi or message layout changes.
-   ============================================================ */
-#chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
-#chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-  position: relative !important;
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-  min-height: 116px !important;
-  height: auto !important;
-  margin: 0 auto 16px !important;
-  padding: 18px 61px 18px 101px !important;
-  background-color: #0e1230 !important;
+  position:relative !important;
+  display:block !important;
+  box-sizing:border-box !important;
+  width:100% !important;
+  max-width:100% !important;
+  height:auto !important;
+  min-height:0 !important;
+  margin:0 auto 16px !important;
+  padding:19px 31px !important;
+  border:1px solid rgba(83,213,255,.69) !important;
+  border-radius:24px !important;
+  background-color:rgba(12,15,39,.75) !important;
   background-image:
-    linear-gradient(90deg,
-      rgba(12,18,45,0) 0%,
-      rgba(12,18,45,.05) 13%,
-      #0c122d 25%,
-      #0c122d 75%,
-      rgba(12,18,45,.08) 91%,
-      rgba(12,18,45,0) 100%),
-    url('./assets/hanabi-date-left.png'),
-    url('./assets/hanabi-date-right.png'),
-    linear-gradient(100deg, #111b40, #10102e) !important;
-  background-position: center, left center, right center, center !important;
-  background-size: 100% 100%, auto 100%, auto 100%, 100% 100% !important;
-  background-repeat: no-repeat !important;
-  border: 1px solid rgba(71,201,243,.44) !important;
-  border-radius: 22px !important;
-  box-shadow: inset 0 0 12px rgba(75,156,220,.10), 0 0 10px rgba(75,156,220,.12) !important;
-  color: #f4faff !important;
-  text-align: left !important;
-  text-shadow: 0 1px 3px #030615 !important;
-  overflow-wrap: break-word !important;
-  word-break: normal !important;
+    url('./assets/hanabi-moon-edge-left.png'),
+    url('./assets/hanabi-moon-edge-right.png'),
+    linear-gradient(135deg,rgba(10,21,57,.72),rgba(22,11,47,.80)) !important;
+  background-repeat:no-repeat,no-repeat,no-repeat !important;
+  background-position:left center,right center,center center !important;
+  background-size:105px auto,105px auto,100% 100% !important;
+  box-shadow:0 0 15px rgba(58,170,250,.16),inset 0 0 20px rgba(105,85,255,.10) !important;
+  color:#ecf3ff !important;
+  font-family:Georgia,'Palatino Linotype','Book Antiqua',serif !important;
+  font-style:italic !important;
+  font-weight:400 !important;
+  font-size:1.0em !important;
+  line-height:1.5 !important;
+  letter-spacing:.01em !important;
+  text-align:center !important;
+  text-shadow:0 1px 3px #020512,0 0 5px #020512 !important;
+  overflow-wrap:break-word !important;
+  word-break:normal !important;
+  backdrop-filter:blur(5px) !important;
+  -webkit-backdrop-filter:blur(5px) !important;
 }
-@media (max-width: 520px) {
+@media (max-width:520px) {
   #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
   #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-    min-height: 120px !important;
-    padding: 16px 49px 16px 87px !important;
-    font-size: .80em !important;
-    line-height: 1.45 !important;
-    background-image:
-      linear-gradient(90deg,
-        rgba(12,18,45,0) 0%,
-        rgba(12,18,45,.10) 13%,
-        #0c122d 23%,
-        #0c122d 78%,
-        rgba(12,18,45,.08) 92%,
-        rgba(12,18,45,0) 100%),
-      url('./assets/hanabi-date-left.png'),
-      url('./assets/hanabi-date-right.png'),
-      linear-gradient(100deg, #111b40, #10102e) !important;
+    padding:17px 24px !important;
+    background-size:80px auto,80px auto,100% 100% !important;
+    font-size:.97em !important;
+    line-height:1.48 !important;
   }
 }
-
-
-/* ============================================================
-   HANABI MOON SCENE v1.4.0 — elegant clean plaque.
-   Decorative moon/flowers stay on the sides, center stays clear.
-   ============================================================ */
-#chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
-#chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-  position: relative !important;
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-  margin: 0 auto 18px !important;
-  min-height: 118px !important;
-  padding: 20px 104px 20px 104px !important;
-  overflow: hidden !important;
-  border-radius: 24px !important;
-  border: 1px solid rgba(80, 216, 255, .48) !important;
-  background-color: rgba(10, 15, 38, .94) !important;
-  background-image:
-    url('./assets/hanabi-date-elegant-left.png'),
-    url('./assets/hanabi-date-elegant-right.png'),
-    radial-gradient(circle at 24% 50%, rgba(86, 138, 255, .18), rgba(86, 138, 255, 0) 26%),
-    radial-gradient(circle at 76% 50%, rgba(110, 94, 255, .14), rgba(110, 94, 255, 0) 24%),
-    linear-gradient(180deg, rgba(16, 24, 60, .90), rgba(9, 15, 36, .94)) !important;
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat !important;
-  background-position: left center, right center, left center, right center, center center !important;
-  background-size: 136px auto, 136px auto, 100% 100%, 100% 100%, 100% 100% !important;
-  box-shadow:
-    inset 0 0 24px rgba(84, 143, 255, .10),
-    inset 0 1px 0 rgba(214, 244, 255, .12),
-    0 0 16px rgba(74, 180, 255, .14) !important;
-  color: #f3f8ff !important;
-  text-shadow: 0 1px 2px rgba(2, 6, 18, .92), 0 0 4px rgba(8, 12, 28, .60) !important;
-  text-align: center !important;
-  overflow-wrap: anywhere !important;
-  word-break: normal !important;
-  line-height: 1.55 !important;
-  font-family: "Apple Chancery", "URW Chancery L", "Gabriola", "Palatino Linotype", "Book Antiqua", Georgia, serif !important;
-  font-style: italic !important;
-  font-weight: 500 !important;
-  font-size: .93em !important;
-  letter-spacing: .01em !important;
-}
-
-/* Slightly nicer separators/icons if present as plain text */
-#chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header strong,
-#chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header strong {
-  color: #ffffff !important;
-  font-weight: 600 !important;
-}
-
-@media (max-width: 700px) {
+@media (max-width:370px) {
   #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
   #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-    min-height: 114px !important;
-    padding: 18px 92px 18px 92px !important;
-    background-size: 120px auto, 120px auto, 100% 100%, 100% 100%, 100% 100% !important;
-    font-size: .90em !important;
-    line-height: 1.52 !important;
-  }
-}
-
-@media (max-width: 520px) {
-  #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
-  #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-    min-height: 108px !important;
-    padding: 16px 78px 16px 78px !important;
-    border-radius: 22px !important;
-    background-size: 96px auto, 96px auto, 100% 100%, 100% 100%, 100% 100% !important;
-    font-size: .87em !important;
-    line-height: 1.48 !important;
+    padding:15px 20px !important;
+    background-size:69px auto,69px auto,100% 100% !important;
+    font-size:.94em !important;
   }
 }
