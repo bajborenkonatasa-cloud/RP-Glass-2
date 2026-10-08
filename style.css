@@ -1480,181 +1480,132 @@ body.rp2-opal-ui.rp2-opal-motion #extensions_settings .inline-drawer:nth-of-type
   }
 }
 
-
-/* v1.7.0 — Hanabi Moon Date, rebuilt cleanly.
-   Goal: ornaments sit on the header lines, not inside the text block.
-   Old date-image experiments are retired in this build. */
+/* HANABI MOON DATE v1.9.0 — line-hug side ornaments, original in-flow layout kept
+   Goal: restore the good message flow, keep the date block below the dropdown,
+   and make the moon/star PNGs visually sit on the inner glowing lines. */
 #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
 #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-    position: absolute !important;
-    z-index: 2;
-    top: 20px !important;
-    left: 124px !important;
-    right: 14px !important;
-    width: auto !important;
-    max-width: none !important;
-    box-sizing: border-box !important;
-    margin: 0 !important;
-    min-height: 102px !important;
-    padding: 17px 68px !important;
-    overflow: hidden !important;
-    border: 1px solid rgba(88, 214, 255, .68) !important;
-    border-left: 1px solid rgba(88, 214, 255, .68) !important;
-    border-radius: 22px !important;
-    text-align: center !important;
-    color: rgba(247, 250, 255, .98) !important;
-    font-family: "URW Chancery L", "Apple Chancery", Gabriola, "Palatino Linotype", "Segoe Script", Georgia, serif !important;
-    font-size: .91em !important;
-    font-style: italic !important;
-    font-weight: 500 !important;
-    line-height: 1.28 !important;
-    letter-spacing: .01em !important;
-    text-shadow: 0 1px 1px rgba(0,0,0,.60), 0 0 8px rgba(90, 170, 255, .14) !important;
-    backdrop-filter: blur(3px) !important;
-    -webkit-backdrop-filter: blur(3px) !important;
-    pointer-events: none !important;
-    box-shadow:
-      0 0 18px rgba(64, 183, 255, .10),
-      inset 0 0 18px rgba(128, 80, 255, .06),
-      inset 0 1px 0 rgba(255,255,255,.05) !important;
-    background-color: rgba(10, 18, 48, .78) !important;
-    background-image:
-      linear-gradient(90deg,
-        rgba(117,229,255,0) 0%,
-        rgba(117,229,255,.35) 8%,
-        rgba(196,245,255,.90) 24%,
-        rgba(196,245,255,.90) 76%,
-        rgba(117,229,255,.35) 92%,
-        rgba(117,229,255,0) 100%),
-      linear-gradient(90deg,
-        rgba(117,229,255,0) 0%,
-        rgba(117,229,255,.35) 8%,
-        rgba(196,245,255,.90) 24%,
-        rgba(196,245,255,.90) 76%,
-        rgba(117,229,255,.35) 92%,
-        rgba(117,229,255,0) 100%),
-      radial-gradient(circle at 22% 28%, rgba(255,255,255,.55) 0 1px, transparent 2px),
-      radial-gradient(circle at 33% 71%, rgba(133,197,255,.34) 0 1px, transparent 2px),
-      radial-gradient(circle at 49% 39%, rgba(255,255,255,.42) 0 1.1px, transparent 2.1px),
-      radial-gradient(circle at 58% 62%, rgba(161,219,255,.30) 0 1px, transparent 2px),
-      radial-gradient(circle at 69% 29%, rgba(255,255,255,.48) 0 1px, transparent 2px),
-      radial-gradient(circle at 81% 68%, rgba(161,219,255,.32) 0 1px, transparent 2px),
-      linear-gradient(180deg, rgba(17, 27, 77, .92), rgba(13, 15, 44, .90)) !important;
-    background-repeat: no-repeat !important;
-    background-size:
-      calc(100% - 116px) 1px,
-      calc(100% - 116px) 1px,
-      auto, auto, auto, auto, auto, auto,
-      auto !important;
-    background-position:
-      center calc(50% - 19px),
-      center calc(50% + 19px),
-      22% 28%, 33% 71%, 49% 39%, 58% 62%, 69% 29%, 81% 68%,
-      center !important;
-}
-
-#chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header::before,
-#chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::before {
-    content: "";
-    position: absolute;
-    left: -16px;
-    top: 50%;
-    width: 114px;
-    height: 114px;
-    transform: translateY(-50%);
-    background: url('./assets/hanabi-date-side-left.png') center / contain no-repeat;
-    pointer-events: none;
-    z-index: 0;
-    filter: drop-shadow(0 0 7px rgba(114, 191, 255, .18));
-}
-
-#chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header::after,
-#chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::after {
-    content: "";
-    position: absolute;
-    right: -16px;
-    top: 50%;
-    width: 114px;
-    height: 114px;
-    transform: translateY(-50%);
-    background: url('./assets/hanabi-date-side-right.png') center / contain no-repeat;
-    pointer-events: none;
-    z-index: 0;
-    filter: drop-shadow(0 0 7px rgba(114, 191, 255, .18));
-}
-
-#chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header > *,
-#chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header > * {
-    position: relative;
-    z-index: 1;
+  position: relative !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 104px !important;
+  height: auto !important;
+  margin: 8px auto 18px !important;
+  padding: 18px 58px !important;
+  border: 1px solid rgba(82, 219, 255, .62) !important;
+  border-radius: 24px !important;
+  background-color: rgba(9, 15, 38, .76) !important;
+  background-image:
+    url('./assets/hanabi-date-line-left.png'),
+    url('./assets/hanabi-date-line-right.png'),
+    radial-gradient(circle, rgba(185, 236, 255, .95) 0 1.6px, rgba(185, 236, 255, .65) 1.7px 2.4px, transparent 2.5px),
+    radial-gradient(circle, rgba(185, 236, 255, .95) 0 1.6px, rgba(185, 236, 255, .65) 1.7px 2.4px, transparent 2.5px),
+    linear-gradient(to right, rgba(132, 228, 255, .00), rgba(132, 228, 255, .78) 10%, rgba(230, 245, 255, .92) 50%, rgba(132, 228, 255, .78) 90%, rgba(132, 228, 255, .00)),
+    linear-gradient(to right, rgba(132, 228, 255, .00), rgba(132, 228, 255, .78) 10%, rgba(230, 245, 255, .92) 50%, rgba(132, 228, 255, .78) 90%, rgba(132, 228, 255, .00)),
+    linear-gradient(135deg, rgba(10, 21, 57, .70), rgba(19, 12, 44, .82)) !important;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat !important;
+  background-position:
+    left -10px center,
+    right -10px center,
+    center 18px,
+    center calc(100% - 18px),
+    center 18px,
+    center calc(100% - 18px),
+    center center !important;
+  background-size:
+    122px 122px,
+    122px 122px,
+    20px 20px,
+    20px 20px,
+    calc(100% - 112px) 1px,
+    calc(100% - 112px) 1px,
+    100% 100% !important;
+  box-shadow:
+    0 0 14px rgba(63, 174, 255, .14),
+    inset 0 0 18px rgba(104, 86, 255, .09),
+    inset 0 0 0 1px rgba(160, 234, 255, .06) !important;
+  color: #eef5ff !important;
+  font-family: "Cinzel Decorative", "Cormorant Garamond", "Palatino Linotype", "Book Antiqua", "Apple Chancery", "URW Chancery L", Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 500 !important;
+  font-size: 1em !important;
+  line-height: 1.46 !important;
+  letter-spacing: .01em !important;
+  text-align: center !important;
+  text-shadow: 0 1px 3px rgba(2, 5, 18, .92), 0 0 6px rgba(2, 5, 18, .70) !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
 }
 
 @media (max-width: 520px) {
-    #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
-    #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-        top: 18px !important;
-        left: 124px !important;
-        right: 10px !important;
-        min-height: 98px !important;
-        padding: 16px 62px !important;
-        font-size: .87em !important;
-        line-height: 1.25 !important;
-        background-size:
-          calc(100% - 104px) 1px,
-          calc(100% - 104px) 1px,
-          auto, auto, auto, auto, auto, auto,
-          auto !important;
-        background-position:
-          center calc(50% - 17px),
-          center calc(50% + 17px),
-          22% 28%, 33% 71%, 49% 39%, 58% 62%, 69% 29%, 81% 68%,
-          center !important;
-    }
-    #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header::before,
-    #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::before {
-        left: -14px;
-        width: 102px;
-        height: 102px;
-    }
-    #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header::after,
-    #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::after {
-        right: -14px;
-        width: 102px;
-        height: 102px;
-    }
+  #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+  #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+    min-height: 98px !important;
+    padding: 17px 50px !important;
+    font-size: .98em !important;
+    line-height: 1.44 !important;
+    background-position:
+      left -8px center,
+      right -8px center,
+      center 16px,
+      center calc(100% - 16px),
+      center 16px,
+      center calc(100% - 16px),
+      center center !important;
+    background-size:
+      108px 108px,
+      108px 108px,
+      18px 18px,
+      18px 18px,
+      calc(100% - 96px) 1px,
+      calc(100% - 96px) 1px,
+      100% 100% !important;
+  }
 }
 
 @media (max-width: 390px) {
-    #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
-    #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-        left: 118px !important;
-        right: 8px !important;
-        min-height: 94px !important;
-        padding: 15px 56px !important;
-        font-size: .83em !important;
-        line-height: 1.22 !important;
-        border-radius: 20px !important;
-        background-size:
-          calc(100% - 94px) 1px,
-          calc(100% - 94px) 1px,
-          auto, auto, auto, auto, auto, auto,
-          auto !important;
-        background-position:
-          center calc(50% - 16px),
-          center calc(50% + 16px),
-          22% 28%, 33% 71%, 49% 39%, 58% 62%, 69% 29%, 81% 68%,
-          center !important;
-    }
-    #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header::before,
-    #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::before {
-        left: -12px;
-        width: 92px;
-        height: 92px;
-    }
-    #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header::after,
-    #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::after {
-        right: -12px;
-        width: 92px;
-        height: 92px;
-    }
+  #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+  #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+    min-height: 92px !important;
+    padding: 16px 42px !important;
+    font-size: .95em !important;
+    line-height: 1.42 !important;
+    background-position:
+      left -6px center,
+      right -6px center,
+      center 14px,
+      center calc(100% - 14px),
+      center 14px,
+      center calc(100% - 14px),
+      center center !important;
+    background-size:
+      92px 92px,
+      92px 92px,
+      16px 16px,
+      16px 16px,
+      calc(100% - 82px) 1px,
+      calc(100% - 82px) 1px,
+      100% 100% !important;
+  }
 }
+
+@media (max-width: 340px) {
+  #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+  #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+    padding: 15px 36px !important;
+    font-size: .92em !important;
+    background-size:
+      82px 82px,
+      82px 82px,
+      14px 14px,
+      14px 14px,
+      calc(100% - 72px) 1px,
+      calc(100% - 72px) 1px,
+      100% 100% !important;
+  }
+}
+
