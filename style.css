@@ -1521,3 +1521,78 @@ body.rp2-opal-ui.rp2-opal-motion #extensions_settings .inline-drawer:nth-of-type
       linear-gradient(100deg, #111b40, #10102e) !important;
   }
 }
+
+
+/* ============================================================
+   HANABI MOON SCENE v1.4.0 — elegant clean plaque.
+   Decorative moon/flowers stay on the sides, center stays clear.
+   ============================================================ */
+#chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+#chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  margin: 0 auto 18px !important;
+  min-height: 118px !important;
+  padding: 20px 104px 20px 104px !important;
+  overflow: hidden !important;
+  border-radius: 24px !important;
+  border: 1px solid rgba(80, 216, 255, .48) !important;
+  background-color: rgba(10, 15, 38, .94) !important;
+  background-image:
+    url('./assets/hanabi-date-elegant-left.png'),
+    url('./assets/hanabi-date-elegant-right.png'),
+    radial-gradient(circle at 24% 50%, rgba(86, 138, 255, .18), rgba(86, 138, 255, 0) 26%),
+    radial-gradient(circle at 76% 50%, rgba(110, 94, 255, .14), rgba(110, 94, 255, 0) 24%),
+    linear-gradient(180deg, rgba(16, 24, 60, .90), rgba(9, 15, 36, .94)) !important;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat !important;
+  background-position: left center, right center, left center, right center, center center !important;
+  background-size: 136px auto, 136px auto, 100% 100%, 100% 100%, 100% 100% !important;
+  box-shadow:
+    inset 0 0 24px rgba(84, 143, 255, .10),
+    inset 0 1px 0 rgba(214, 244, 255, .12),
+    0 0 16px rgba(74, 180, 255, .14) !important;
+  color: #f3f8ff !important;
+  text-shadow: 0 1px 2px rgba(2, 6, 18, .92), 0 0 4px rgba(8, 12, 28, .60) !important;
+  text-align: center !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  line-height: 1.55 !important;
+  font-family: "Apple Chancery", "URW Chancery L", "Gabriola", "Palatino Linotype", "Book Antiqua", Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 500 !important;
+  font-size: .93em !important;
+  letter-spacing: .01em !important;
+}
+
+/* Slightly nicer separators/icons if present as plain text */
+#chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header strong,
+#chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header strong {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+@media (max-width: 700px) {
+  #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+  #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+    min-height: 114px !important;
+    padding: 18px 92px 18px 92px !important;
+    background-size: 120px auto, 120px auto, 100% 100%, 100% 100%, 100% 100% !important;
+    font-size: .90em !important;
+    line-height: 1.52 !important;
+  }
+}
+
+@media (max-width: 520px) {
+  #chat .mes.rp2-has-scene-header .mes_text > .rp2-scene-header,
+  #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+    min-height: 108px !important;
+    padding: 16px 78px 16px 78px !important;
+    border-radius: 22px !important;
+    background-size: 96px auto, 96px auto, 100% 100%, 100% 100%, 100% 100% !important;
+    font-size: .87em !important;
+    line-height: 1.48 !important;
+  }
+}
