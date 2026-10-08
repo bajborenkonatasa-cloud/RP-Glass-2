@@ -1,6 +1,6 @@
-RP Glass 2 Hanabi Moon Date Elegant v1.4.0
+RP Glass 2 Hanabi Moon Date Side Ornaments v1.6.0
 
-- Clean moon date plaque
-- Decorative ends only
-- Clear center for readable scene text
-- Elegant fantasy-like header font
+- New transparent left/right moon ornaments
+- Sparkle inside the date plaque
+- Elegant fantasy font
+- Old experimental date assets removed
