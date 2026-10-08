@@ -1,6 +1,8 @@
-RP Glass 2 Hanabi Moon Date Side Ornaments v1.6.0
+RP Glass 2 — Hanabi Moon Date Side Ornaments Rebuilt v1.7.0
 
-- New transparent left/right moon ornaments
-- Sparkle inside the date plaque
-- Elegant fantasy font
-- Old experimental date assets removed
+Changes:
+- removed old experimental date assets
+- added clean left moon and right star ornaments
+- ornaments are attached visually to the glowing top/bottom lines
+- sparkles inside the date frame
+- more fantasy/elven style font for the date header
