@@ -1714,3 +1714,26 @@ body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chib
     width: min(122px, 29vw) !important; max-width: 29vw !important; height: 165px !important;
   }
 }
+
+/* Forest v4: larger fairy in the upper-right header, never inside thoughts.
+   Keep the composer fairy and original Opal theme unchanged. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek,
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-run,
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-sleep {
+    top: 10px !important;
+    right: -7px !important;
+    width: min(205px, 48vw) !important;
+    max-width: 48vw !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: right top !important;
+    margin-top: calc(-1 * var(--rp2-safe-lift, 0px)) !important;
+}
+body.rp2-chat-forest #chat .mes_text details.rpg-thoughts > .rpg-thought-hanabi {
+    display: none !important;
+}
+@media (max-width: 390px) {
+    body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek {
+        width: min(188px, 48vw) !important;
+    }
+}

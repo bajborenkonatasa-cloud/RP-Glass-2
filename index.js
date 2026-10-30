@@ -18,7 +18,7 @@ function rp2ApplyChatTheme() {
     document.body.style.setProperty('--rp2-forest-panel-alpha', (rp2ForestAlpha() / 100).toFixed(2));
     document.querySelectorAll('#chat .rp2-hanabi-peek, #chat .rpg-thought-hanabi').forEach(img => {
         const opal = img.classList.contains('rp2-hanabi-peek') ? './assets/hanabi-chibi-peek.webp' : (RP2_EMOTION_ASSETS[img.closest('.mes')?.dataset.rp2Emotion] || RP2_EMOTION_ASSETS.dreamy);
-        const next = new URL(forest ? RP2_FOREST_PORTRAIT : opal, import.meta.url).href;
+        const next = new URL(forest && img.classList.contains('rp2-hanabi-peek') ? RP2_FOREST_PORTRAIT : opal, import.meta.url).href;
         if (img.src !== next) img.src = next;
     });
     const mascot = document.getElementById(RP2_ID);
@@ -253,7 +253,7 @@ function applyHanabiState(messageEl, state) {
 
     // ONLY the portrait inside “Распаковать мысли…” changes emotion.
     const portrait = messageEl.querySelector('.rpg-thought-hanabi');
-    const emotionAsset = rp2IsForest() ? RP2_FOREST_PORTRAIT : (RP2_EMOTION_ASSETS[state.emotion] || RP2_EMOTION_ASSETS.dreamy);
+    const emotionAsset = RP2_EMOTION_ASSETS[state.emotion] || RP2_EMOTION_ASSETS.dreamy;
     if (portrait) {
         const nextSrc = new URL(emotionAsset, import.meta.url).href;
         if (portrait.src !== nextSrc) {
@@ -324,7 +324,7 @@ function decorateThoughts(messageEl) {
         portrait.alt = '';
         portrait.draggable = false;
         portrait.setAttribute('aria-hidden', 'true');
-        portrait.src = new URL(rp2IsForest() ? RP2_FOREST_PORTRAIT : './assets/hanabi-thoughts-dreamy.webp', import.meta.url).href;
+        portrait.src = new URL('./assets/hanabi-thoughts-dreamy.webp', import.meta.url).href;
 
         const summary = details.querySelector(':scope > summary');
         if (summary) summary.insertAdjacentElement('afterend', portrait);
