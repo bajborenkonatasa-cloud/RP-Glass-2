@@ -8,7 +8,7 @@ const RP2_SAFE_GAP = 14;
 // Independent chat-theme layer. Opal is the untouched default.
 const RP2_CHAT_THEME_KEY = 'rpGlass2ChatTheme';
 const RP2_FOREST_HANABI = './assets/enchanted-forest/hanabi-fairy-elf-input.png';
-const RP2_FOREST_PORTRAIT = './assets/enchanted-forest/hanabi-fairy-portrait.png';
+const RP2_FOREST_PORTRAIT = './assets/enchanted-forest/hanabi-fairy-side.png';
 const RP2_FOREST_ALPHA_KEY = 'rpGlass2ForestPanelOpacity';
 function rp2ForestAlpha() { const n = Number(localStorage.getItem(RP2_FOREST_ALPHA_KEY)); return Number.isFinite(n) && n >= 20 && n <= 100 ? n : 72; }
 function rp2IsForest() { return localStorage.getItem(RP2_CHAT_THEME_KEY) === 'forest'; }
@@ -49,7 +49,7 @@ function placeHanabi() {
     }
 
     const rect = composer.getBoundingClientRect();
-    hanabi.style.left = `${Math.round(rect.left + rect.width * 0.60)}px`;
+    hanabi.style.left = `${Math.round(rect.left + rect.width * (rp2IsForest() ? 0.43 : 0.60))}px`;
     hanabi.style.top = `${Math.round(rect.top)}px`;
     hanabi.style.bottom = 'auto';
 }

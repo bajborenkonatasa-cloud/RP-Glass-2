@@ -1682,3 +1682,35 @@ body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader {
 .rp2-forest-opacity-row { display:flex; flex-direction:column; gap:10px; padding:12px 2px; }
 .rp2-forest-opacity-row[hidden] { display:none !important; }
 .rp2-forest-opacity-row input { width:100%; accent-color:#86b68b; }
+
+/* Forest v3: compact, left-shifted composer fairy and a smaller right-edge peek.
+   Scoped to forest; Opal and other theme CSS remains untouched. */
+body.rp2-chat-forest #rp-glass-2-hanabi-input {
+    width: min(285px, 73vw) !important;
+    max-width: 73vw !important;
+    max-height: 108px !important;
+    transform: translate(-50%, -91%) !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+    z-index: 35 !important;
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek,
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-run,
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-sleep {
+    top: 13px !important;
+    right: -5px !important;
+    width: min(132px, 31vw) !important;
+    max-width: 31vw !important;
+    height: 175px !important;
+    object-fit: contain !important;
+    object-position: right top !important;
+    pointer-events: none !important;
+}
+@media (max-width: 520px) {
+  body.rp2-chat-forest #rp-glass-2-hanabi-input {
+    width: min(270px, 72vw) !important; max-height: 103px !important;
+  }
+  body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek {
+    width: min(122px, 29vw) !important; max-width: 29vw !important; height: 165px !important;
+  }
+}
