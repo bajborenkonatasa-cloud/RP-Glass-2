@@ -1609,3 +1609,45 @@ body.rp2-opal-ui.rp2-opal-motion #extensions_settings .inline-drawer:nth-of-type
   }
 }
 
+
+
+/* =============================================================
+   ENCHANTED FOREST — opt-in only; Opal rules above stay intact.
+   No structural changes to messages, composer, or toolbar.
+   ============================================================= */
+body.rp2-chat-forest #chat .mes {
+    background: linear-gradient(150deg, rgba(12,31,27,.92), rgba(8,18,19,.91)) !important;
+    border-color: rgba(115,158,113,.54) !important;
+    box-shadow: inset 0 0 0 1px rgba(212,231,183,.035), 0 8px 24px rgba(0,0,0,.25) !important;
+}
+body.rp2-chat-forest #chat .mes_text details.rpg-thoughts {
+    --rpg-reader-accent: #c8dca9;
+    border-color: rgba(132,181,129,.68) !important;
+    background: linear-gradient(150deg, rgba(13,35,29,.96), rgba(9,20,21,.96)) !important;
+}
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader {
+    --rpg-reader-bg-1: rgba(27,38,28,.97);
+    --rpg-reader-bg-2: rgba(12,23,20,.98);
+    --rpg-reader-border: #829f72;
+    --rpg-reader-title: #e0e7cb;
+    --rpg-reader-text: #eeeede;
+    --rpg-reader-accent: #c6b789;
+}
+body.rp2-chat-forest #chat .mes_text .rp2-scene-header {
+    border-color: rgba(137,183,139,.75) !important;
+    background: linear-gradient(130deg, rgba(9,36,33,.91), rgba(12,28,27,.93)) !important;
+    box-shadow: 0 0 13px rgba(135,169,111,.12) !important;
+}
+body.rp2-chat-forest #rp-glass-2-hanabi-input {
+    width: min(410px, 92vw) !important;
+    max-height: 165px !important;
+    object-fit: contain !important;
+    transform: translate(-50%, -87%) !important;
+    filter: drop-shadow(0 3px 8px rgba(15,44,22,.5)) !important;
+}
+@media (max-width: 520px) {
+    body.rp2-chat-forest #rp-glass-2-hanabi-input {
+        width: min(370px, 92vw) !important;
+        max-height: 140px !important;
+    }
+}

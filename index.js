@@ -5,6 +5,21 @@ let rp2EventsBound = false;
 let rp2ComposerObserver = null;
 let rp2MessageObserver = null;
 const RP2_SAFE_GAP = 14;
+// Independent chat-theme layer. Opal is the untouched default.
+const RP2_CHAT_THEME_KEY = 'rpGlass2ChatTheme';
+const RP2_FOREST_HANABI = './assets/forest/hanabi-fairy-elf-input.png';
+function rp2IsForest() { return localStorage.getItem(RP2_CHAT_THEME_KEY) === 'forest'; }
+function rp2ApplyChatTheme() {
+    const forest = rp2IsForest();
+    document.body.classList.toggle('rp2-chat-forest', forest);
+    const mascot = document.getElementById(RP2_ID);
+    if (mascot) {
+        const next = new URL(forest ? RP2_FOREST_HANABI : (RP2_INPUT_CHIBI_ASSETS[mascot.dataset.rp2InputChibi] || RP2_INPUT_CHIBI_ASSETS.input), import.meta.url).href;
+        if (mascot.src !== next) mascot.src = next;
+    }
+    queuePlacement();
+}
+
 
 function getComposer() {
     return document.querySelector('#send_form')
@@ -198,7 +213,7 @@ function applyInputChibi(kind) {
     if (!hanabi) return;
     const safeKind = RP2_INPUT_CHIBI_ASSETS[kind] ? kind : 'input';
     hanabi.dataset.rp2InputChibi = safeKind;
-    hanabi.src = new URL(RP2_INPUT_CHIBI_ASSETS[safeKind], import.meta.url).href;
+    hanabi.src = new URL(rp2IsForest() ? RP2_FOREST_HANABI : RP2_INPUT_CHIBI_ASSETS[safeKind], import.meta.url).href;
     replayHanabiEffect(hanabi, 'rp2-chibi-change');
     queuePlacement();
 }
@@ -509,7 +524,7 @@ function mountHanabi() {
     hanabi.id = RP2_ID;
     hanabi.alt = '';
     hanabi.draggable = false;
-    hanabi.src = new URL('./assets/hanabi-chibi-input.webp', import.meta.url).href;
+    hanabi.src = new URL(rp2IsForest() ? RP2_FOREST_HANABI : './assets/hanabi-chibi-input.webp', import.meta.url).href;
     // Keep the mascot in BODY so fixed positioning is not clipped by the composer.
     // Visibility layering is handled by a deliberately low z-index in CSS: chat UI shows her,
     // SillyTavern drawers/settings/loading screens naturally cover her.
@@ -580,13 +595,22 @@ function rp2MountOpalSettings() {
         <label><input id="rp2-opal-enabled" type="checkbox"> Оформлять интерфейс Tavern</label>
         <label><input id="rp2-opal-motion" type="checkbox"> Живые переливы опала</label>
         <label class="rp2-opal-select-row"><span>Оттенок опала</span><select id="rp2-opal-palette"><option value="ocean">Ocean Opal</option><option value="fire">Fire Opal 🔥</option><option value="moss">Moss Opal</option></select></label>
-        <div class="rp2-opal-note">Чат и поле ввода не трогаются этим слоем — твой Custom CSS остаётся главным.</div>
+        <div class="rp2-opal-note">Настройки Opal UI выше по-прежнему управляют только оболочкой Tavern.</div>
+        <label class="rp2-opal-select-row"><span>Тема ролевого чата</span><select id="rp2-chat-theme"><option value="opal">💜 Opal Hanabi — оригинал</option><option value="forest">🌿 Enchanted Forest</option></select></label>
+        <div class="rp2-opal-note">Лесная тема меняет только декоративный слой чата. Фон леса можно поставить отдельно в настройках SillyTavern. Оригинальные изображения Opal сохранены.</div>
       </div>`;
     host.appendChild(panel);
     const title = panel.querySelector('.rp2-opal-title');
     const enabled = panel.querySelector('#rp2-opal-enabled');
     const motion = panel.querySelector('#rp2-opal-motion');
     const palette = panel.querySelector('#rp2-opal-palette');
+    const chatTheme = panel.querySelector('#rp2-chat-theme');
+    chatTheme.value = rp2IsForest() ? 'forest' : 'opal';
+    chatTheme.addEventListener('change', () => {
+        localStorage.setItem(RP2_CHAT_THEME_KEY, chatTheme.value);
+        rp2ApplyChatTheme();
+    });
+
     const setOpen = (open) => {
         panel.classList.toggle('is-open', open);
         title.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -603,6 +627,7 @@ function rp2MountOpalSettings() {
 }
 
 rp2ApplyOpalUI();
+rp2ApplyChatTheme();
 const rp2OpalMountTimer = setInterval(() => {
     rp2ApplyOpalUI();
     rp2MountOpalSettings();
