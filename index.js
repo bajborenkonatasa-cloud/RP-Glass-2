@@ -53,7 +53,7 @@ function placeHanabi() {
     }
 
     const rect = composer.getBoundingClientRect();
-    hanabi.style.left = `${Math.round(rect.left + rect.width * (rp2IsForest() ? (hanabi.dataset.rp2InputChibi === 'sleep' ? 0.35 : 0.43) : 0.60))}px`;
+    hanabi.style.left = `${Math.round(rect.left + rect.width * (rp2IsForest() ? (hanabi.dataset.rp2InputChibi === 'sleep' ? 0.49 : 0.43) : 0.60))}px`;
     hanabi.style.top = `${Math.round(rect.top)}px`;
     hanabi.style.bottom = 'auto';
 }

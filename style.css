@@ -2326,3 +2326,54 @@ body.rp2-chat-forest #rp-glass-2-hanabi-input[data-rp2-input-chibi="sleep"] {
   max-width:94vw !important;
   max-height:135px !important;
 }
+
+/* Forest V14: quiet fixed butterflies, clear right-side avatar foliage, compact fairy. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar::before {
+  content:'' !important;
+  inset:-5px -8px -5px -7px !important;
+  width:auto !important;height:auto !important;
+  background:
+    radial-gradient(ellipse 7px 4px at 16% 3%,rgba(156,226,166,.92) 35%,transparent 72%),
+    radial-gradient(ellipse 4px 7px at 36% 3%,rgba(123,212,154,.9) 35%,transparent 72%),
+    radial-gradient(ellipse 7px 4px at 58% 3%,rgba(169,232,163,.9) 35%,transparent 72%),
+    radial-gradient(ellipse 4px 7px at 80% 3%,rgba(126,210,151,.9) 35%,transparent 72%),
+    radial-gradient(ellipse 8px 4px at 99% 12%,rgba(163,230,161,.94) 35%,transparent 72%),
+    radial-gradient(ellipse 4px 8px at 99% 26%,rgba(123,210,149,.94) 35%,transparent 72%),
+    radial-gradient(ellipse 8px 4px at 99% 42%,rgba(168,228,161,.94) 35%,transparent 72%),
+    radial-gradient(ellipse 4px 8px at 99% 58%,rgba(126,216,156,.94) 35%,transparent 72%),
+    radial-gradient(ellipse 8px 4px at 99% 75%,rgba(165,232,166,.94) 35%,transparent 72%),
+    radial-gradient(ellipse 4px 8px at 99% 90%,rgba(126,211,156,.94) 35%,transparent 72%),
+    linear-gradient(90deg,transparent,rgba(119,205,149,.65) 12%,rgba(119,205,149,.65) 90%,transparent) top 4px left /100% 1px no-repeat,
+    linear-gradient(180deg,transparent,rgba(119,205,149,.7) 10%,rgba(119,205,149,.7) 90%,transparent) right 5px top /1px 100% no-repeat !important;
+  color:transparent !important;
+  text-shadow:none !important;
+  filter:drop-shadow(0 0 2px rgba(125,229,159,.35)) !important;
+  pointer-events:none !important;
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header::before {
+  content:'🦋       🦋       🦋     🦋      🦋       🦋      🦋' !important;
+  position:absolute !important;
+  top:45px !important;right:23% !important;
+  width:43% !important;height:225px !important;
+  line-height:4.7 !important;letter-spacing:12px !important;
+  font-size:17px !important;white-space:normal !important;
+  text-align:center !important;
+  opacity:.9 !important;
+  filter:drop-shadow(0 0 4px rgba(215,169,255,.8)) !important;
+  animation:none !important;transform:none !important;
+  pointer-events:none !important;
+}
+body.rp2-chat-forest #rp-glass-2-hanabi-input[data-rp2-input-chibi="sleep"] {
+  width:min(338px,80vw) !important;
+  max-width:80vw !important;
+  max-height:116px !important;
+  transform:translate(-50%,-96%) !important;
+  object-fit:contain !important;
+  object-position:center bottom !important;
+  pointer-events:none !important;
+}
+@media(max-width:520px) {
+ body.rp2-chat-forest #rp-glass-2-hanabi-input[data-rp2-input-chibi="sleep"] {
+  width:min(320px,78vw) !important;max-width:78vw !important;max-height:110px !important;
+ }
+}
