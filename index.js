@@ -8,7 +8,7 @@ const RP2_SAFE_GAP = 14;
 // Independent chat-theme layer. Opal is the untouched default.
 const RP2_CHAT_THEME_KEY = 'rpGlass2ChatTheme';
 const RP2_FOREST_HANABI = './assets/enchanted-forest/hanabi-fairy-elf-input.png';
-const RP2_FOREST_INPUT_ASSETS = { input: './assets/enchanted-forest/hanabi-fairy-meadow-input.png', run: './assets/enchanted-forest/hanabi-fairy-elf-input.png', sleep: './assets/enchanted-forest/hanabi-fairy-meadow-input.png' };
+const RP2_FOREST_INPUT_ASSETS = { input: './assets/enchanted-forest/hanabi-fairy-meadow-input.png', run: './assets/enchanted-forest/hanabi-fairy-elf-input.png', sleep: './assets/enchanted-forest/hanabi-fairy-woodland-input.png' };
 const rp2ForestInputAsset = kind => RP2_FOREST_INPUT_ASSETS[kind] || RP2_FOREST_INPUT_ASSETS.input;
 const RP2_FOREST_PORTRAIT = './assets/enchanted-forest/hanabi-fairy-side.png';
 const RP2_FOREST_EMOTION_ASSETS = { dreamy:'./assets/enchanted-forest/hanabi-emotion-dreamy.webp', angry:'./assets/enchanted-forest/hanabi-emotion-angry.webp', sad:'./assets/enchanted-forest/hanabi-emotion-sad.webp', happy:'./assets/enchanted-forest/hanabi-emotion-happy.webp', playful:'./assets/enchanted-forest/hanabi-emotion-happy.webp' };
@@ -53,7 +53,7 @@ function placeHanabi() {
     }
 
     const rect = composer.getBoundingClientRect();
-    hanabi.style.left = `${Math.round(rect.left + rect.width * (rp2IsForest() ? 0.43 : 0.60))}px`;
+    hanabi.style.left = `${Math.round(rect.left + rect.width * (rp2IsForest() ? (hanabi.dataset.rp2InputChibi === 'sleep' ? 0.35 : 0.43) : 0.60))}px`;
     hanabi.style.top = `${Math.round(rect.top)}px`;
     hanabi.style.bottom = 'auto';
 }
@@ -204,8 +204,8 @@ function rp2StableChibiFallback(text) {
         hash = Math.imul(hash, 16777619);
     }
     const roll = (hash >>> 0) % 100;
-    if (roll < 12) return 'sleep';
-    if (roll < 24) return 'run';
+    if (roll < 33) return 'sleep';
+    if (roll < 66) return 'run';
     return 'input';
 }
 

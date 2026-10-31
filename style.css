@@ -2285,3 +2285,44 @@ body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader > p {margin-
 @media(prefers-reduced-motion:reduce) {
   body.rp2-chat-forest #chat .mes.rp2-has-scene-header::before {animation:none !important;}
 }
+
+/* Forest V13: visible delicate emerald leaves, without luminous square edges. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar {
+  outline:1px solid rgba(124,209,159,.43) !important;
+  outline-offset:1px !important;
+  border:1px solid rgba(126,209,158,.55) !important;
+  box-shadow:0 0 3px rgba(84,195,139,.24),0 0 7px rgba(84,195,139,.10) !important;
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar::before {
+  content:'❧  ❦  ❧' !important;
+  position:absolute !important;
+  inset:-15px -11px -9px -10px !important;
+  width:auto !important;height:auto !important;
+  background:none !important;
+  color:#9bdfab !important;
+  font-size:15px !important;letter-spacing:2px !important;
+  white-space:nowrap !important;
+  text-shadow:0 0 3px rgba(149,242,172,.62) !important;
+  filter:none !important;
+  z-index:5 !important;pointer-events:none !important;
+}
+/* Right-hand vine is painted separately so the leaves cannot be obscured by gradients. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar img {
+  border-right:2px solid rgba(111,197,146,.48) !important;
+}
+/* More scattered butterflies in the open area, softly animated, no generated artwork. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header::before {
+  content:'🦋    ✦    🦋   ✧  🦋    ✦   🦋' !important;
+  top:54px !important;right:27% !important;
+  width:37% !important;height:175px !important;
+  font-size:16px !important;line-height:3.8 !important;
+  letter-spacing:4px !important;
+  opacity:.8 !important;
+  filter:drop-shadow(0 0 5px rgba(212,171,255,.72)) !important;
+}
+/* The third pose sits on the left edge of the composer, all three use same positioning logic. */
+body.rp2-chat-forest #rp-glass-2-hanabi-input[data-rp2-input-chibi="sleep"] {
+  width:min(400px,94vw) !important;
+  max-width:94vw !important;
+  max-height:135px !important;
+}
