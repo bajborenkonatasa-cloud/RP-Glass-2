@@ -1974,3 +1974,68 @@ body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader p:first-of-t
  body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader > summary {padding-right:115px !important; min-height:31px !important;}
  body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader::after {width:130px !important;height:65px !important;}
 }
+
+/* Enchanted Forest V8 — butterflies and fireflies FOLLOW the date frame. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+  border: 1px solid rgba(231,197,124,.91) !important;
+  padding: 19px 31px !important;
+  background-image:
+    radial-gradient(circle at 8% 9%,rgba(255,241,164,.95) 0 1.5px,transparent 3px),
+    radial-gradient(circle at 23% 2%,rgba(255,225,146,.95) 0 1px,transparent 3px),
+    radial-gradient(circle at 69% 1%,rgba(240,199,255,.95) 0 1.4px,transparent 3px),
+    radial-gradient(circle at 95% 91%,rgba(255,238,166,.95) 0 1.5px,transparent 3px),
+    radial-gradient(circle at 48% 99%,rgba(252,222,149,.95) 0 1.5px,transparent 3px),
+    linear-gradient(100deg,rgba(10,38,32,.90),rgba(12,24,41,.94)) !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+  box-shadow: 0 0 9px rgba(212,179,110,.37),0 0 23px rgba(163,106,246,.19),inset 0 0 14px rgba(131,226,174,.13) !important;
+  outline: 1px solid rgba(190,158,239,.22) !important;
+  outline-offset: 4px !important;
+}
+/* Place winged creatures ON the border rather than across the text. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::before,
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::after {
+  position: absolute !important;
+  content: '🦋 ✨ ❧ ✨' !important;
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  top: -17px !important;
+  bottom: auto !important;
+  background: none !important;
+  font-size: 19px !important;
+  white-space: nowrap !important;
+  line-height: 1.2 !important;
+  filter: drop-shadow(0 0 5px #f7d777) drop-shadow(0 0 7px #b977ff) !important;
+  pointer-events: none !important;
+  opacity: .98 !important;
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::before {left: -11px !important;right:auto !important;transform: rotate(-9deg) !important;}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::after {right: -10px !important;left:auto !important;top:auto !important;bottom:-15px !important;transform:rotate(-8deg) !important;content:'✨ ❧ 🦋 ✨' !important;}
+/* A larger fairy, extending toward the message controls without covering them. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek,
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-run,
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-sleep {
+  width: min(191px, 43vw) !important;
+  max-width: 43vw !important;
+  height: 229px !important;
+  top: 12px !important;
+  right: -3px !important;
+  filter: drop-shadow(0 0 7px rgba(255,219,128,.9)) drop-shadow(0 0 16px rgba(191,109,255,.67)) drop-shadow(-8px 0 17px rgba(126,245,199,.3)) !important;
+}
+/* A few ambient fireflies in the fairy's region, without extra hit targets. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header {background-image: radial-gradient(circle at 69% 14%,rgba(255,231,140,.85) 0 1px,transparent 3px),radial-gradient(circle at 76% 33%,rgba(225,171,255,.85) 0 1.3px,transparent 4px),radial-gradient(circle at 91% 36%,rgba(255,239,173,.8) 0 1px,transparent 4px),linear-gradient(150deg,rgba(12,31,27,var(--rp2-forest-panel-alpha,.72)),rgba(8,18,19,var(--rp2-forest-panel-alpha,.72))) !important;}
+/* Opal: same natural spacing as the improved forest panels. */
+body:not(.rp2-chat-forest) #chat .mes_text details.rpg-thoughts,
+body:not(.rp2-chat-forest) #chat .mes_text details.rpg-thoughts p,
+body:not(.rp2-chat-forest) #chat .mes_text details.rpg-independent-reader p {
+  text-align: left !important;
+  text-align-last: left !important;
+  word-spacing: normal !important;
+}
+@media(max-width:520px) {
+ body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek,
+ body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-run,
+ body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-sleep {width:min(191px,43vw) !important;max-width:43vw !important;height:229px !important;top:12px !important;}
+ body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {padding:18px 27px !important;}
+}
