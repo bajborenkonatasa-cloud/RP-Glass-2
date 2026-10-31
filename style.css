@@ -2077,3 +2077,64 @@ body.rp2-chat-forest #rp-glass-2-hanabi-input {
  body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-sleep {width:min(176px,39vw) !important;max-width:39vw !important;height:211px !important;}
  body.rp2-chat-forest #rp-glass-2-hanabi-input {width:min(335px,82vw) !important;max-height:119px !important;}
 }
+
+/* Enchanted Forest V10 — CSS-only living foliage, soft fairy halo and leaf reader. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar {
+  background-image: linear-gradient(90deg,rgba(119,215,116,.22),transparent 14%,transparent 86%,rgba(119,215,116,.22)) !important;
+  outline:1px solid rgba(226,250,160,.55) !important;
+  outline-offset:3px !important;
+  box-shadow: -4px 0 7px rgba(157,244,135,.8),4px 0 7px rgba(157,244,135,.8),0 -4px 12px rgba(214,251,148,.7),0 0 22px rgba(125,224,128,.4) !important;
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar::before {
+  content:'❧ ❦ ❧' !important;
+  left:-13px !important;top:-19px !important;
+  font-size:17px !important;
+  text-shadow:0 0 6px #d6ffc0,0 0 14px #72ef9e !important;
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek,
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-run,
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-sleep {
+  -webkit-mask-image:radial-gradient(ellipse 96% 88% at 69% 42%,#000 54%,rgba(0,0,0,.85) 70%,transparent 100%) !important;
+  mask-image:radial-gradient(ellipse 96% 88% at 69% 42%,#000 54%,rgba(0,0,0,.85) 70%,transparent 100%) !important;
+  filter:drop-shadow(0 0 12px rgba(255,222,151,.92)) drop-shadow(0 0 25px rgba(191,133,255,.73)) !important;
+}
+/* Tiny animated lights in the free space between avatar and fairy; never block clicks. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header::before {
+  content:'' !important; position:absolute !important; z-index:1 !important;
+  width:30% !important;height:190px !important;top:22px !important;right:26% !important;
+  pointer-events:none !important;
+  background:radial-gradient(circle at 12% 20%,#ffed9e 0 1px,transparent 3px),radial-gradient(circle at 78% 17%,#e8ffb7 0 1.5px,transparent 4px),radial-gradient(circle at 42% 55%,#f5c8ff 0 1px,transparent 4px),radial-gradient(circle at 89% 82%,#ffe6a0 0 1.5px,transparent 4px),radial-gradient(circle at 24% 88%,#eaffbe 0 1px,transparent 3px) !important;
+  filter:drop-shadow(0 0 5px #f5f2b0) !important;
+  animation:rp2ForestFireflies 4.8s ease-in-out infinite alternate !important;
+}
+@keyframes rp2ForestFireflies {from{opacity:.25;transform:translateY(4px)}to{opacity:.95;transform:translateY(-7px)}}
+body.rp2-chat-forest #chat .mes_text details.rpg-thoughts {
+  border:1px solid rgba(105,239,166,.84) !important;
+  box-shadow:0 0 11px rgba(68,226,144,.32),0 0 23px rgba(47,166,115,.17),inset 0 0 13px rgba(64,174,125,.12) !important;
+}
+/* A subtle veined leaf texture made from gradients, not an image asset. */
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader {
+  border-radius: 23px 30px 24px 32px !important;
+  border:1px solid rgba(213,184,94,.8) !important;
+  background:
+    repeating-linear-gradient(28deg,transparent 0 35px,rgba(164,187,90,.055) 36px,transparent 38px,transparent 70px),
+    repeating-linear-gradient(-28deg,transparent 0 35px,rgba(164,187,90,.045) 36px,transparent 38px,transparent 70px),
+    linear-gradient(94deg,transparent 0 49.7%,rgba(195,170,93,.14) 50%,transparent 50.3%),
+    radial-gradient(ellipse at 48% 40%,rgba(52,91,45,.55),rgba(14,42,31,.97) 78%) !important;
+  box-shadow:0 0 15px rgba(228,194,94,.24),inset 0 0 22px rgba(117,158,74,.17) !important;
+  padding-top:9px !important;
+}
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader > summary {
+  color:#f5d992 !important;
+  font-family:Georgia,'Palatino Linotype',serif !important;
+  font-style:italic !important;
+  letter-spacing:.25px !important;
+  text-shadow:0 0 7px rgba(255,209,103,.55) !important;
+  margin-bottom:0 !important;
+  padding-top:0 !important;
+  padding-bottom:0 !important;
+  min-height:25px !important;
+}
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader p:first-of-type {margin-top:0 !important;}
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader > summary + * {margin-top:2px !important;}
+@media(prefers-reduced-motion:reduce){body.rp2-chat-forest #chat .mes.rp2-has-scene-header::before{animation:none !important;}}
