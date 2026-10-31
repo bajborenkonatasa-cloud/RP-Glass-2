@@ -2433,3 +2433,65 @@ body.rp2-chat-forest #rp-glass-2-hanabi-input[data-rp2-input-chibi="sleep"] {
   max-height:138px !important;
  }
 }
+
+/* Forest V16 — quiet avatar and precisely placed, STATIC forest lights.
+   The two decorative layers are non-interactive; input fairy is unchanged. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar {
+  background-image:none !important;
+  border:1px solid rgba(137,209,158,.56) !important;
+  outline:1px solid rgba(116,194,145,.25) !important;
+  box-shadow:0 0 4px rgba(105,210,154,.28) !important;
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar::before {
+  content:none !important; display:none !important;
+  background:none !important;
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar::after {
+  content:'🦋' !important; display:block !important;
+  right:-12px !important; top:-17px !important;
+  font-size:19px !important;
+  filter:drop-shadow(0 0 4px rgba(192,153,255,.8)) !important;
+}
+/* Two butterflies at the lower left/right marks, not a repeated text grid. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header::before {
+  content:'🦋                                      🦋' !important;
+  position:absolute !important;
+  left:3% !important;right:3% !important;top:210px !important;
+  width:94% !important;height:48px !important;
+  display:flex !important;align-items:center !important;justify-content:space-between !important;
+  font-size:20px !important;letter-spacing:0 !important;
+  line-height:1 !important;white-space:pre !important;
+  overflow:hidden !important;
+  color:#e9d5ff !important;
+  text-align:justify !important;
+  opacity:1 !important;
+  background:none !important;
+  filter:drop-shadow(0 0 5px #b28dff) drop-shadow(0 0 8px rgba(218,174,255,.85)) !important;
+  animation:none !important;transform:none !important;
+  z-index:2 !important;pointer-events:none !important;
+}
+/* Upper pair, and separate firefly points scattered between the two portraits. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header::after {
+  content:'🦋                 🦋' !important;
+  position:absolute !important;
+  top:22px !important;left:39% !important;right:25% !important;
+  height:190px !important;
+  padding:0 !important;
+  font-size:19px !important;line-height:1 !important;
+  letter-spacing:0 !important;white-space:pre !important;
+  color:#e8d9ff !important;
+  text-align:justify !important;
+  overflow:visible !important;
+  background:
+    radial-gradient(circle at 8% 21%,#fff1b7 0 2px,rgba(255,224,139,.35) 3px,transparent 9px),
+    radial-gradient(circle at 46% 10%,#f9d3ff 0 2px,rgba(221,176,255,.36) 3px,transparent 9px),
+    radial-gradient(circle at 78% 28%,#e7ffc7 0 2px,rgba(177,249,166,.3) 3px,transparent 9px),
+    radial-gradient(circle at 25% 43%,#fff0b1 0 2px,rgba(255,224,139,.28) 3px,transparent 8px),
+    radial-gradient(circle at 63% 51%,#f9d3ff 0 2px,rgba(221,176,255,.3) 3px,transparent 9px),
+    radial-gradient(circle at 95% 68%,#fff1b7 0 2px,rgba(255,224,139,.32) 3px,transparent 9px),
+    radial-gradient(circle at 13% 83%,#e7ffc7 0 2px,rgba(177,249,166,.28) 3px,transparent 8px),
+    radial-gradient(circle at 52% 92%,#fff1b7 0 2px,rgba(255,224,139,.3) 3px,transparent 8px) !important;
+  filter:drop-shadow(0 0 5px rgba(198,166,255,.8)) !important;
+  animation:none !important;transform:none !important;
+  pointer-events:none !important;z-index:2 !important;
+}
