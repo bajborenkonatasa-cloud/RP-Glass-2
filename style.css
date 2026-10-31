@@ -1732,3 +1732,106 @@ body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chib
     width: min(105px, 24vw) !important; max-width: 24vw !important; height: 128px !important;
  }
 }
+
+/* Enchanted Forest v5 — restrained foliage, legible reading and balanced fairies.
+   Everything is theme-scoped; Opal, story content and composer fairy are unchanged. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek,
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-run,
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-sleep {
+    width: min(132px, 30vw) !important;
+    max-width: 30vw !important;
+    height: 159px !important;
+    top: 7px !important;
+    right: -3px !important;
+    object-fit: contain !important;
+    object-position: right top !important;
+}
+/* A line lower, subtly larger; keep the existing right float and text wrapping. */
+body.rp2-chat-forest #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {
+    width: clamp(250px, 62vw, 330px) !important;
+    max-width: 64% !important;
+    margin: -37px -18px 4px 15px !important;
+}
+/* Date plaque: fine luminous vines following the outline, butterfly-wing flourishes
+   at the two sides. No opaque art overlays the actual date or place text. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+    position: relative !important;
+    isolation: isolate !important;
+    border: 1px solid rgba(170,213,142,.82) !important;
+    border-radius: 24px !important;
+    padding: 20px 45px !important;
+    background-image:
+      radial-gradient(ellipse at 2% 48%, rgba(170,235,149,.16), transparent 25%),
+      radial-gradient(ellipse at 98% 48%, rgba(189,158,241,.15), transparent 25%),
+      linear-gradient(135deg, rgba(9,34,30,.87), rgba(20,23,42,.91)) !important;
+    background-size: 100% 100% !important;
+    background-position: center !important;
+    box-shadow: inset 0 0 0 2px rgba(178,227,156,.11), inset 0 0 16px rgba(92,178,122,.13), 0 0 14px rgba(157,204,140,.17) !important;
+    color: #f2f5e8 !important;
+    text-shadow: 0 1px 3px #030b0b, 0 0 4px #030b0b !important;
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::before,
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::after {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0;
+    pointer-events: none;
+    font-family: Georgia, serif;
+    font-size: 24px;
+    line-height: 1;
+    opacity: .82;
+    color: #c9efc0;
+    text-shadow: 0 0 7px rgba(161,245,170,.75), 0 0 11px rgba(181,148,252,.45);
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::before { content: '❧🦋'; left: 5px; }
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::after { content: '🦋❧'; right: 5px; }
+/* Reader: decorative corners and gentle light, never over the prose. */
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader {
+    border: 1px solid rgba(162,197,140,.72) !important;
+    border-left: 3px solid rgba(163,211,154,.85) !important;
+    background: linear-gradient(145deg, rgba(14,32,26,.96), rgba(9,22,22,.97)) !important;
+    box-shadow: inset 0 0 0 1px rgba(204,228,167,.08), 0 0 16px rgba(118,166,116,.10) !important;
+    color: #f2f2e9 !important;
+}
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader::before {
+    border-color: rgba(173,211,147,.22) !important;
+    box-shadow: inset 0 0 10px rgba(156,206,138,.05) !important;
+}
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader::after {
+    content: '❧' !important;
+    color: #d8e6a7 !important;
+    opacity: .7 !important;
+}
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader p,
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader div:not(.rp-dialogue) {
+    color: #f1f1e9 !important;
+    text-shadow: 0 1px 1px rgba(0,0,0,.7) !important;
+}
+/* A slim living-leaf halo on the existing character avatar; no image replacement. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar {
+    position: relative !important;
+    overflow: visible !important;
+    border: 2px solid rgba(166,209,132,.8) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 0 9px rgba(126,218,136,.35), inset 0 0 6px rgba(145,212,125,.2) !important;
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar::after {
+    content: '❧' !important;
+    position: absolute;
+    right: -8px;
+    top: -14px;
+    font-size: 25px;
+    line-height: 1;
+    color: #bce3a2;
+    text-shadow: 0 0 6px #9be59c, 0 0 11px rgba(146,224,141,.6);
+    pointer-events: none;
+    z-index: 2;
+}
+@media (max-width: 520px) {
+  body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek { width: min(132px, 30vw) !important; max-width: 30vw !important; height: 159px !important; }
+  body.rp2-chat-forest #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi { width: clamp(250px, 62vw, 315px) !important; max-width: 64% !important; margin: -37px -18px 4px 15px !important; }
+  body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header { padding: 18px 39px !important; }
+  body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::before,
+  body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::after { font-size: 19px; }
+}
