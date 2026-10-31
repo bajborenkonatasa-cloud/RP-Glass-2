@@ -2182,3 +2182,106 @@ body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader::after {widt
 @media(max-width:520px) {
  body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader > summary {padding-right:106px !important;}
 }
+
+
+/* Enchanted Forest V12 — restrained emerald avatar, roaming butterflies,
+   single-line reader heading and tight content spacing. CSS-only. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar {
+  outline: 1px solid rgba(141,222,157,.43) !important;
+  outline-offset: 1px !important;
+  border-top: 2px solid rgba(141,231,160,.68) !important;
+  border-left: 2px solid rgba(141,231,160,.68) !important;
+  border-right: 2px solid rgba(141,231,160,.68) !important;
+  box-shadow: 0 0 4px rgba(104,220,157,.42), 0 0 9px rgba(74,190,129,.20) !important;
+  background-image:none !important;
+}
+/* Small, individually shaped leaves on the upper and right branches. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar::before {
+  content:'' !important;
+  position:absolute !important; inset:-8px -8px -3px -8px !important;
+  z-index:4 !important; pointer-events:none !important;
+  background:
+    radial-gradient(ellipse 4px 8px at 10% 5%,#9ee2a2 10%,transparent 76%),
+    radial-gradient(ellipse 8px 4px at 26% 3%,#b4eab0 10%,transparent 76%),
+    radial-gradient(ellipse 5px 9px at 47% 3%,#79c99a 10%,transparent 76%),
+    radial-gradient(ellipse 8px 4px at 66% 3%,#a7e6a0 10%,transparent 76%),
+    radial-gradient(ellipse 4px 8px at 84% 4%,#89d7a0 10%,transparent 76%),
+    radial-gradient(ellipse 8px 4px at 98% 19%,#a5e6a4 10%,transparent 76%),
+    radial-gradient(ellipse 4px 9px at 98% 38%,#81cfa2 10%,transparent 76%),
+    radial-gradient(ellipse 8px 4px at 98% 57%,#b0e9ae 10%,transparent 76%),
+    radial-gradient(ellipse 4px 9px at 98% 77%,#8cd9a6 10%,transparent 76%),
+    linear-gradient(90deg,transparent 3%,rgba(122,203,141,.6) 12%,rgba(122,203,141,.6) 91%,transparent 98%) top 7px left 0 / 100% 1px no-repeat,
+    linear-gradient(180deg,transparent 2%,rgba(122,203,141,.6) 12%,rgba(122,203,141,.6) 87%,transparent 98%) right 7px top 0 / 1px 100% no-repeat !important;
+  filter:drop-shadow(0 0 2px rgba(166,255,184,.48)) !important;
+}
+/* Keep the butterfly in the corner, but remove the oversized halo. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar::after {
+  content:'🦋' !important;
+  filter:drop-shadow(0 0 3px rgba(185,166,255,.48)) !important;
+}
+/* Sparse moving butterflies in the otherwise empty profile space. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header::before {
+  content:'🦋     ✧        🦋' !important;
+  position:absolute !important;
+  top: 61px !important; right: 28% !important;
+  width: 30% !important; height: 135px !important;
+  font-size: 14px !important; letter-spacing: 7px !important;
+  line-height: 5 !important; text-align:center !important;
+  white-space:normal !important;
+  color:#e5d9ff !important;
+  background:
+    radial-gradient(circle at 19% 29%,#ffe6a0 0 1px,transparent 3px),
+    radial-gradient(circle at 73% 63%,#d9fbb7 0 1px,transparent 3px),
+    radial-gradient(circle at 38% 88%,#ffdb9e 0 1px,transparent 3px) !important;
+  filter:drop-shadow(0 0 3px rgba(255,230,153,.68)) !important;
+  animation:rp2ForestButterflyV12 6s ease-in-out infinite alternate !important;
+  pointer-events:none !important; z-index:1 !important;
+}
+@keyframes rp2ForestButterflyV12 {
+  0% {opacity:.36; transform:translate(-4px,4px)}
+  100% {opacity:.88; transform:translate(7px,-8px)}
+}
+/* The title must never wrap into two lines or steal space from the prose. */
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader {
+  padding: 7px 11px 11px !important;
+}
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader > summary {
+  display:block !important;
+  width:100% !important; box-sizing:border-box !important;
+  font-family: Georgia, 'Palatino Linotype', serif !important;
+  font-size: 15px !important;
+  font-weight:700 !important; font-style:italic !important;
+  line-height:1.25 !important;
+  letter-spacing:0 !important;
+  white-space:nowrap !important;
+  overflow:visible !important;
+  padding:0 108px 0 0 !important;
+  margin:0 0 1px !important;
+  min-height:0 !important;
+  height:auto !important;
+  text-align:left !important;
+}
+/* Preserve the book at upper-right, larger but not over the reader prose. */
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader::after {
+  width:124px !important; height:60px !important;
+  top:-2px !important; right:1px !important;
+  background-size:contain !important;
+}
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader > summary + *,
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader > p:first-of-type,
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader > div:first-of-type {
+  margin-top:0 !important; padding-top:0 !important;
+}
+body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader > p {margin-bottom:.25em !important;}
+@media(max-width:520px) {
+  body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader > summary {
+    font-size:clamp(12px,3.45vw,15px) !important;
+    padding-right:102px !important;
+  }
+  body.rp2-chat-forest #chat .mes_text details.rpg-independent-reader::after {
+    width:118px !important;height:57px !important;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  body.rp2-chat-forest #chat .mes.rp2-has-scene-header::before {animation:none !important;}
+}
