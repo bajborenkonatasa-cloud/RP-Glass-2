@@ -8,6 +8,8 @@ const RP2_SAFE_GAP = 14;
 // Independent chat-theme layer. Opal is the untouched default.
 const RP2_CHAT_THEME_KEY = 'rpGlass2ChatTheme';
 const RP2_FOREST_HANABI = './assets/enchanted-forest/hanabi-fairy-elf-input.png';
+const RP2_FOREST_INPUT_ASSETS = { input: './assets/enchanted-forest/hanabi-fairy-meadow-input.png', run: './assets/enchanted-forest/hanabi-fairy-elf-input.png', sleep: './assets/enchanted-forest/hanabi-fairy-meadow-input.png' };
+const rp2ForestInputAsset = kind => RP2_FOREST_INPUT_ASSETS[kind] || RP2_FOREST_INPUT_ASSETS.input;
 const RP2_FOREST_PORTRAIT = './assets/enchanted-forest/hanabi-fairy-side.png';
 const RP2_FOREST_EMOTION_ASSETS = { dreamy:'./assets/enchanted-forest/hanabi-emotion-dreamy.webp', angry:'./assets/enchanted-forest/hanabi-emotion-angry.webp', sad:'./assets/enchanted-forest/hanabi-emotion-sad.webp', happy:'./assets/enchanted-forest/hanabi-emotion-happy.webp', playful:'./assets/enchanted-forest/hanabi-emotion-happy.webp' };
 const rp2ForestEmotionAsset = emotion => RP2_FOREST_EMOTION_ASSETS[emotion] || RP2_FOREST_EMOTION_ASSETS.dreamy;
@@ -25,7 +27,7 @@ function rp2ApplyChatTheme() {
     });
     const mascot = document.getElementById(RP2_ID);
     if (mascot) {
-        const next = new URL(forest ? RP2_FOREST_HANABI : (RP2_INPUT_CHIBI_ASSETS[mascot.dataset.rp2InputChibi] || RP2_INPUT_CHIBI_ASSETS.input), import.meta.url).href;
+        const next = new URL(forest ? rp2ForestInputAsset(mascot.dataset.rp2InputChibi) : (RP2_INPUT_CHIBI_ASSETS[mascot.dataset.rp2InputChibi] || RP2_INPUT_CHIBI_ASSETS.input), import.meta.url).href;
         if (mascot.src !== next) mascot.src = next;
     }
     queuePlacement();
@@ -224,7 +226,7 @@ function applyInputChibi(kind) {
     if (!hanabi) return;
     const safeKind = RP2_INPUT_CHIBI_ASSETS[kind] ? kind : 'input';
     hanabi.dataset.rp2InputChibi = safeKind;
-    hanabi.src = new URL(rp2IsForest() ? RP2_FOREST_HANABI : RP2_INPUT_CHIBI_ASSETS[safeKind], import.meta.url).href;
+    hanabi.src = new URL(rp2IsForest() ? rp2ForestInputAsset(safeKind) : RP2_INPUT_CHIBI_ASSETS[safeKind], import.meta.url).href;
     replayHanabiEffect(hanabi, 'rp2-chibi-change');
     queuePlacement();
 }
@@ -536,7 +538,7 @@ function mountHanabi() {
     hanabi.id = RP2_ID;
     hanabi.alt = '';
     hanabi.draggable = false;
-    hanabi.src = new URL(rp2IsForest() ? RP2_FOREST_HANABI : './assets/hanabi-chibi-input.webp', import.meta.url).href;
+    hanabi.src = new URL(rp2IsForest() ? rp2ForestInputAsset('input') : './assets/hanabi-chibi-input.webp', import.meta.url).href;
     // Keep the mascot in BODY so fixed positioning is not clipped by the composer.
     // Visibility layering is handled by a deliberately low z-index in CSS: chat UI shows her,
     // SillyTavern drawers/settings/loading screens naturally cover her.

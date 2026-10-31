@@ -2039,3 +2039,41 @@ body:not(.rp2-chat-forest) #chat .mes_text details.rpg-independent-reader p {
  body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-sleep {width:min(191px,43vw) !important;max-width:43vw !important;height:229px !important;top:12px !important;}
  body.rp2-chat-forest #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {padding:18px 27px !important;}
 }
+
+/* Enchanted Forest V9 — subtle header fairy, leafy avatar and alternating meadow fairy. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek,
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-run,
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-sleep {
+  width: min(176px, 39vw) !important; max-width:39vw !important;
+  height:211px !important; top:12px !important; right:-3px !important;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%);
+  filter: drop-shadow(0 0 8px rgba(255,223,133,.85)) drop-shadow(0 0 17px rgba(193,131,255,.8)) !important;
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar {
+  border-top: 3px solid rgba(166,241,153,.92) !important;
+  border-left: 3px solid rgba(166,241,153,.92) !important;
+  border-right: 3px solid rgba(166,241,153,.92) !important;
+  border-bottom: 1px solid rgba(166,241,153,.38) !important;
+  box-shadow: 0 0 9px rgba(147,238,141,.65),0 0 17px rgba(154,239,188,.26) !important;
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar::before {
+  content:'❧ ❦ ❧' !important; position:absolute; left:-9px; top:-17px;
+  color:#b5e9a4; font-size:15px; letter-spacing:2px; white-space:nowrap;
+  text-shadow:0 0 5px #b8ffc0,0 0 11px #9cf2b4; pointer-events:none; z-index:3;
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar::after {
+  content:'🦋' !important; right:-12px !important; top:-18px !important; font-size:19px !important;
+  filter:drop-shadow(0 0 5px #b9a0ff) drop-shadow(0 0 8px #9bf8ce);
+}
+body.rp2-chat-forest #rp-glass-2-hanabi-input {
+  width:min(335px,82vw) !important; max-width:82vw !important;
+  max-height:119px !important; transform:translate(-50%,-91%) !important;
+  filter:drop-shadow(0 0 6px rgba(250,213,142,.28));
+}
+@media(max-width:520px) {
+ body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek,
+ body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-run,
+ body.rp2-chat-forest #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek.rp2-chibi-sleep {width:min(176px,39vw) !important;max-width:39vw !important;height:211px !important;}
+ body.rp2-chat-forest #rp-glass-2-hanabi-input {width:min(335px,82vw) !important;max-height:119px !important;}
+}
