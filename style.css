@@ -2377,3 +2377,59 @@ body.rp2-chat-forest #rp-glass-2-hanabi-input[data-rp2-input-chibi="sleep"] {
   width:min(320px,78vw) !important;max-width:78vw !important;max-height:110px !important;
  }
 }
+
+/* Forest V15: legible leafy right edge, brighter STATIC butterflies, restored woodland wings. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar::before {
+  content:'❧\A ❦\A ❧\A ❦' !important;
+  white-space:pre !important;
+  display:block !important;
+  inset:-7px -14px auto auto !important;
+  width:18px !important;
+  height:calc(100% + 13px) !important;
+  background:none !important;
+  font:normal 18px/1.9 Georgia,serif !important;
+  color:#b6f5ba !important;
+  text-align:center !important;
+  letter-spacing:0 !important;
+  text-shadow:0 0 3px #70d69d,0 0 7px rgba(91,216,144,.65) !important;
+  filter:none !important;
+  pointer-events:none !important;
+  z-index:6 !important;
+}
+/* Small top sprigs, keeping the butterfly in its existing corner. */
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header .avatar {
+  background-image:radial-gradient(ellipse 8px 4px at 14% 0%,#b2e8aa 30%,transparent 76%),radial-gradient(ellipse 8px 4px at 34% 0%,#b2e8aa 30%,transparent 76%),radial-gradient(ellipse 8px 4px at 56% 0%,#b2e8aa 30%,transparent 76%),radial-gradient(ellipse 8px 4px at 77% 0%,#b2e8aa 30%,transparent 76%) !important;
+}
+body.rp2-chat-forest #chat .mes.rp2-has-scene-header::before {
+  content:'🦋  ✦  🦋  ✧  🦋  ✦  🦋  ✧  🦋  ✦  🦋  ✧  🦋  ✦  🦋  ✧  🦋  ✦  🦋' !important;
+  top:32px !important;
+  left:20% !important;
+  right:auto !important;
+  width:56% !important;
+  height:295px !important;
+  font-size:17px !important;
+  line-height:4.4 !important;
+  letter-spacing:9px !important;
+  opacity:1 !important;
+  text-align:center !important;
+  filter:drop-shadow(0 0 3px #d5a2ff) drop-shadow(0 0 8px rgba(218,164,255,.95)) !important;
+  animation:none !important;
+  transform:none !important;
+  pointer-events:none !important;
+}
+/* The woodland PNG has a wide natural canvas: let it grow while keeping its left wing visible. */
+body.rp2-chat-forest #rp-glass-2-hanabi-input[data-rp2-input-chibi="sleep"] {
+  width:min(410px,95vw) !important;
+  max-width:95vw !important;
+  max-height:144px !important;
+  transform:translate(-50%,-96%) !important;
+  object-fit:contain !important;
+  object-position:left bottom !important;
+}
+@media(max-width:520px) {
+ body.rp2-chat-forest #rp-glass-2-hanabi-input[data-rp2-input-chibi="sleep"] {
+  width:min(390px,94vw) !important;
+  max-width:94vw !important;
+  max-height:138px !important;
+ }
+}
