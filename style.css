@@ -2688,3 +2688,82 @@ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header
  body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .name_text,
  body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .ch_name {font-size: 1.07em !important;}
 }
+
+/* WINTER GOTHIC · STAGE 2B — portrait clearance and metadata placement.
+   Scoped only to Gothic messages; all scene content remains in normal flow. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header {
+  --rp2-gothic-avatar-size: 142px;
+  padding-top: 196px !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper {
+  position: absolute !important;
+  top: 28px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 142px !important;
+  height: 142px !important;
+  z-index: 4 !important;
+  overflow: visible !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper .avatar {
+  width: 130px !important;
+  height: 130px !important;
+  min-width: 130px !important;
+  min-height: 130px !important;
+  margin: 6px auto !important;
+  overflow: hidden !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper::after {
+  inset: -27px !important;
+  background-size: contain !important;
+}
+/* Native header remains in document flow; name/date centered, counters left,
+   action controls right. Reserve lateral gutters so nothing collides. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 74px !important;
+  width: 100% !important;
+  padding: 4px 68px 10px !important;
+  margin: 0 0 10px !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+  gap: 5px !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .mesIDDisplay,
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .tokenCounterDisplay {
+  position: absolute !important;
+  left: 6px !important;
+  right: auto !important;
+  width: 54px !important;
+  margin: 0 !important;
+  transform: none !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  z-index: 2 !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .mesIDDisplay {top: 16px !important;}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .tokenCounterDisplay {top: 39px !important;}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .mes_buttons {
+  position: absolute !important;
+  top: 21px !important;
+  right: 5px !important;
+  left: auto !important;
+  transform: none !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: 10px 0 17px !important;
+}
+@media (max-width:520px) {
+  body.rp2-chat-gothic #chat .mes.rp2-has-scene-header {padding-top: 196px !important;}
+  body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header {
+    padding-left: 58px !important;
+    padding-right: 58px !important;
+  }
+}
