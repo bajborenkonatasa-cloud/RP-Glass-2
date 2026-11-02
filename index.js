@@ -283,49 +283,6 @@ function isSceneHeading(el) {
     return /📅|🕒|📍|🌫️/.test(text) && (text.includes('|') || text.length > 12);
 }
 
-function rp2RestoreGothicHeaders() {
-    document.querySelectorAll('#chat .mes > .rp2-gothic-layout').forEach(layout => {
-        const mes = layout.parentElement;
-        const portrait = layout.querySelector('.rp2-gothic-portrait .mesAvatarWrapper');
-        const header = layout.querySelector('.mes_header') || document.createElement('div');
-        header.classList.add('mes_header');
-        for (const selector of ['.name_text, .ch_name, .mes_name', '.timestamp, .mes_timer', '.mes_buttons', '.mesIDDisplay', '.tokenCounterDisplay']) {
-            const node = layout.querySelector(selector); if (node && node !== header) header.appendChild(node);
-        }
-        if (portrait) mes.insertBefore(portrait, layout);
-        mes.insertBefore(header, layout);
-        layout.remove();
-    });
-}
-function rp2BuildGothicHeader(messageEl) {
-    if (!rp2IsGothic() || !messageEl || messageEl.querySelector(':scope > .rp2-gothic-layout')) return;
-    const avatar = messageEl.querySelector(':scope > .mesAvatarWrapper') || messageEl.querySelector(':scope > .avatar')?.closest('.mesAvatarWrapper');
-    const header = messageEl.querySelector(':scope > .mes_header');
-    if (!avatar || !header) return;
-    const layout = document.createElement('div'); layout.className = 'rp2-gothic-layout';
-    const portrait = document.createElement('div'); portrait.className = 'rp2-gothic-portrait';
-    const meta = document.createElement('div'); meta.className = 'rp2-gothic-meta';
-    const left = document.createElement('div'); left.className = 'rp2-gothic-left';
-    const center = document.createElement('div'); center.className = 'rp2-gothic-center';
-    const right = document.createElement('div'); right.className = 'rp2-gothic-right';
-    // Move native elements, never clone: SillyTavern click handlers stay attached.
-    portrait.appendChild(avatar);
-    for (const selector of ['.mesIDDisplay', '.tokenCounterDisplay']) {
-        const el = messageEl.querySelector(selector); if (el) left.appendChild(el);
-    }
-    const name = header.querySelector('.name_text, .ch_name, .mes_name');
-    if (name) center.appendChild(name);
-    const stamp = header.querySelector('.timestamp, .mes_timer') || messageEl.querySelector('.timestamp, .mes_timer');
-    if (stamp) center.appendChild(stamp);
-    const buttons = header.querySelector('.mes_buttons');
-    if (buttons) right.appendChild(buttons);
-    // Keep any unknown header elements intact, to avoid breaking third-party controls.
-    if (header.children.length) center.appendChild(header);
-    else header.remove();
-    meta.append(left, center, right); layout.append(portrait, meta);
-    messageEl.insertBefore(layout, messageEl.firstChild);
-}
-
 function decorateSceneHeader(messageEl) {
     if (!messageEl) return;
     const text = messageEl.querySelector('.mes_text');
@@ -335,7 +292,6 @@ function decorateSceneHeader(messageEl) {
     if (!heading) return;
     heading.classList.add('rp2-scene-header');
     messageEl.classList.add('rp2-has-scene-header');
-    rp2BuildGothicHeader(messageEl);
 
     // v0.6.6 — one lightweight peeking Hanabi in the free header corner.
     // No observers/timers; this runs only through the same safe message decoration pass.
@@ -682,8 +638,6 @@ function rp2MountOpalSettings() {
     chatTheme.addEventListener('change', () => {
         localStorage.setItem(RP2_CHAT_THEME_KEY, chatTheme.value);
         rp2ApplyChatTheme();
-        if (rp2IsGothic()) document.querySelectorAll('#chat .mes.rp2-has-scene-header').forEach(rp2BuildGothicHeader);
-        else rp2RestoreGothicHeaders();
         opacityRow.hidden = !rp2IsForest();
     });
 
