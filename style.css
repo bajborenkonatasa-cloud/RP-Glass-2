@@ -2767,3 +2767,98 @@ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header
     padding-right: 58px !important;
   }
 }
+
+/* WINTER GOTHIC — HEADER ALIGNMENT PATCH (from working framed-avatar baseline)
+   Preserve the existing real portrait, alpha PNG frame, scene plaque and message flow.
+   Only adjust metadata placement. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header {
+  padding-top: 220px !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper {
+  top: 25px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 142px !important;
+  height: 142px !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper .avatar {
+  width: 130px !important;
+  height: 130px !important;
+  min-width: 130px !important;
+  min-height: 130px !important;
+  border-radius: 50% !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper::after {
+  inset: -27px !important;
+  background: url('./assets/winter-gothic-roses/avatar-frame.png') center / contain no-repeat !important;
+}
+/* Header is an independent row directly below the framed portrait. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  min-height: 82px !important;
+  padding: 6px 65px 10px !important;
+  margin: 0 0 12px !important;
+  gap: 5px !important;
+  box-sizing: border-box !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .name_text,
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .ch_name,
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .mes_name {
+  display: block !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+  line-height: 1.25 !important;
+  white-space: normal !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .mes_timer,
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .timestamp {
+  display: block !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+  white-space: normal !important;
+}
+/* Metadata can be a direct child of .mes in different SillyTavern versions. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesIDDisplay,
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .tokenCounterDisplay {
+  position: absolute !important;
+  left: 12px !important;
+  right: auto !important;
+  width: 50px !important;
+  margin: 0 !important;
+  text-align: left !important;
+  transform: none !important;
+  z-index: 6 !important;
+  white-space: nowrap !important;
+  font-size: .78em !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesIDDisplay { top: 236px !important; }
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .tokenCounterDisplay { top: 258px !important; }
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .mes_buttons,
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_buttons {
+  position: absolute !important;
+  right: 9px !important;
+  left: auto !important;
+  top: 240px !important;
+  transform: none !important;
+  z-index: 6 !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: 10px 0 17px !important;
+}
+@media (max-width:520px) {
+  body.rp2-chat-gothic #chat .mes.rp2-has-scene-header { padding-top: 220px !important; }
+  body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header {
+    padding-left: 56px !important;
+    padding-right: 56px !important;
+  }
+}
