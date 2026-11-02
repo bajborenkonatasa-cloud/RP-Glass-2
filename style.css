@@ -3103,3 +3103,35 @@ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header > .mes_buttons {
   transform: none !important;
   z-index: 8 !important;
 }
+
+/* GOTHIC FINAL: restore scene plaque normal flow; older top:145px !important
+   had remained active when position was changed to relative. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+  position:relative !important;
+  top:auto !important; bottom:auto !important;
+  left:auto !important; right:auto !important;
+  transform:none !important;
+  margin:10px 0 17px !important;
+}
+/* Action buttons are inside mes_block in SillyTavern. Position against
+   that block (the character name row), not the entire message. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .mes_buttons,
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .mes_header .mes_buttons {
+  position:absolute !important;
+  top:5px !important;
+  right:9px !important;
+  bottom:auto !important;
+  left:auto !important;
+  margin:0 !important;
+  transform:none !important;
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  z-index:20 !important;
+}
+/* If controls are a direct child of the message, anchor to message
+   coordinates; no generic descendant selector that overrides the above. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header > .mes_buttons {
+  top:222px !important;
+  right:9px !important;
+}
