@@ -2955,3 +2955,69 @@ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name .timest
   font-size: .72em !important;
   opacity: .8;
 }
+
+/* WINTER GOTHIC — HEADER DECORATION PATCH · 2026-11-02
+   Theme-scoped. Two original alpha PNGs, independent of the live avatar.
+   Keep the real character portrait dynamic. No changes to chat message flow. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header {
+  padding-top: 207px !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper {
+  top: 18px !important;
+  height: 156px !important;
+  overflow: visible !important;
+  isolation: isolate;
+}
+/* One full-width alpha overlay: top lanterns and mirrored Hanabi below.
+   Center remains transparent, allowing the existing live portrait to show. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper::before {
+  content: '' !important;
+  display: block !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: -16px !important;
+  width: 100% !important;
+  height: 204px !important;
+  background-image:
+    url('./assets/winter-gothic-roses/gothic-top-lanterns.png'),
+    url('./assets/winter-gothic-roses/hanabi-mirrored-mist.png') !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-position: center top, center bottom !important;
+  background-size: 100% auto, 100% auto !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+/* Portrait one step smaller, frame scales with it; both stay centered. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper .avatar {
+  position: relative !important;
+  z-index: 2 !important;
+  width: 112px !important;
+  height: 112px !important;
+  min-width: 112px !important;
+  min-height: 112px !important;
+  margin: 8px auto 0 !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper::after {
+  top: -18px !important;
+  left: 50% !important;
+  width: 168px !important;
+  height: 168px !important;
+  transform: translateX(-50%) !important;
+  z-index: 5 !important;
+}
+/* Subtle warm shimmer on any character name, no hard-coded names. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name .name_text,
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name .name_text * {
+  color: #ffe3c4 !important;
+  text-shadow: 0 0 4px rgba(255,199,128,.65), 0 0 12px rgba(255,119,35,.46), 0 0 22px rgba(255,100,30,.18) !important;
+}
+/* Counters stay on the left of the name, not inside the portrait. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper .mesIDDisplay {top: 174px !important;}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper .tokenCounterDisplay {top: 196px !important;}
+@media (max-width: 520px) {
+  body.rp2-chat-gothic #chat .mes.rp2-has-scene-header {padding-top: 207px !important;}
+  body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper::before {
+    top: -14px !important;
+    height: 194px !important;
+  }
+}
