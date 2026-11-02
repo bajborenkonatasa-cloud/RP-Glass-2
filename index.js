@@ -29,6 +29,9 @@ const rp2ThemeInputAsset = kind => rp2IsGothic() ? RP2_GOTHIC_INPUT : (rp2IsFore
 
 
 const RP2_FOREST_ALPHA_KEY = 'rpGlass2ForestPanelOpacity';
+const RP2_GLOBAL_ALPHA_KEY = 'rpGlass2GlobalPanelOpacity';
+function rp2GlobalAlpha() { const raw = localStorage.getItem(RP2_GLOBAL_ALPHA_KEY) ?? localStorage.getItem(RP2_FOREST_ALPHA_KEY); const n = raw === null ? 90 : Number(raw); return Number.isFinite(n) ? Math.max(10, Math.min(100, n)) : 90; }
+function rp2SetGlobalAlpha(value) { const n = Math.max(10, Math.min(100, Number(value) || 90)); localStorage.setItem(RP2_GLOBAL_ALPHA_KEY, String(n)); document.body.style.setProperty('--rp2-global-panel-alpha', (n / 100).toFixed(2)); document.body.style.setProperty('--rp2-forest-panel-alpha', (n / 100).toFixed(2)); }
 function rp2ForestAlpha() { const n = Number(localStorage.getItem(RP2_FOREST_ALPHA_KEY)); return Number.isFinite(n) && n >= 20 && n <= 100 ? n : 72; }
 function rp2IsForest() { return localStorage.getItem(RP2_CHAT_THEME_KEY) === 'forest'; }
 function rp2IsGothic() { return localStorage.getItem(RP2_CHAT_THEME_KEY) === 'gothic'; }
@@ -37,7 +40,8 @@ function rp2ApplyChatTheme() {
     const gothic = rp2IsGothic();
     document.body.classList.toggle('rp2-chat-forest', forest);
     document.body.classList.toggle('rp2-chat-gothic', gothic);
-    document.body.style.setProperty('--rp2-forest-panel-alpha', (rp2ForestAlpha() / 100).toFixed(2));
+    document.body.style.setProperty('--rp2-global-panel-alpha', (rp2GlobalAlpha() / 100).toFixed(2));
+    document.body.style.setProperty('--rp2-forest-panel-alpha', (rp2GlobalAlpha() / 100).toFixed(2));
     document.querySelectorAll('#chat .rp2-hanabi-peek, #chat .rpg-thought-hanabi').forEach(img => {
         const opal = img.classList.contains('rp2-hanabi-peek') ? './assets/hanabi-chibi-peek.webp' : (RP2_EMOTION_ASSETS[img.closest('.mes')?.dataset.rp2Emotion] || RP2_EMOTION_ASSETS.dreamy);
         const next = new URL(img.classList.contains('rp2-hanabi-peek') ? (forest ? RP2_FOREST_PORTRAIT : './assets/hanabi-chibi-peek.webp') : rp2ThemeEmotionAsset(img.closest('.mes')?.dataset.rp2Emotion), import.meta.url).href;
@@ -630,7 +634,7 @@ function rp2MountOpalSettings() {
         <div class="rp2-opal-note">Настройки Opal UI выше по-прежнему управляют только оболочкой Tavern.</div>
         <label class="rp2-opal-select-row"><span>Тема ролевого чата</span><select id="rp2-chat-theme"><option value="opal">💜 Opal Hanabi — оригинал</option><option value="forest">🌿 Enchanted Forest</option><option value="gothic">🥀 Winter Gothic Roses — основа</option></select></label>
         <div class="rp2-opal-note">Темы меняют только декор чата. Winter Gothic Roses пока содержит первый этап: круглый центральный аватар и зимнюю палитру. Opal и Forest сохранены.</div>
-        <label id="rp2-forest-opacity-row" class="rp2-forest-opacity-row"><span>🌿 Прозрачность лесных панелей: <output id="rp2-forest-opacity-value">72%</output></span><input id="rp2-forest-opacity" type="range" min="20" max="100" step="5" value="72"></label>
+        <label id="rp2-forest-opacity-row" class="rp2-forest-opacity-row"><span>✨ Плотность панелей всех тем: <output id="rp2-forest-opacity-value">72%</output></span><input id="rp2-forest-opacity" type="range" min="10" max="100" step="5" value="72"></label>
       </div>`;
     host.appendChild(panel);
     const title = panel.querySelector('.rp2-opal-title');
@@ -642,18 +646,18 @@ function rp2MountOpalSettings() {
     const opacityRow = panel.querySelector('#rp2-forest-opacity-row');
     const opacitySlider = panel.querySelector('#rp2-forest-opacity');
     const opacityValue = panel.querySelector('#rp2-forest-opacity-value');
-    opacitySlider.value = String(rp2ForestAlpha());
+    opacitySlider.value = String(rp2GlobalAlpha());
     opacityValue.textContent = opacitySlider.value + '%';
-    opacityRow.hidden = !rp2IsForest();
+    opacityRow.hidden = false;
     opacitySlider.addEventListener('input', () => {
-        localStorage.setItem(RP2_FOREST_ALPHA_KEY, opacitySlider.value);
+        rp2SetGlobalAlpha(opacitySlider.value);
         opacityValue.textContent = opacitySlider.value + '%';
-        document.body.style.setProperty('--rp2-forest-panel-alpha', (Number(opacitySlider.value) / 100).toFixed(2));
+        // Shared opacity is applied immediately to all three themes.
     });
     chatTheme.addEventListener('change', () => {
         localStorage.setItem(RP2_CHAT_THEME_KEY, chatTheme.value);
         rp2ApplyChatTheme();
-        opacityRow.hidden = !rp2IsForest();
+        opacityRow.hidden = false;
     });
 
     const setOpen = (open) => {

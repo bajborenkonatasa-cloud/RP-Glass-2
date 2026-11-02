@@ -3335,3 +3335,28 @@ body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader {
   body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {margin-right:-40px !important;}
   body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader::after {top:-17px !important;}
 }
+
+
+/* RP Glass 2 v6 — one global density slider for all chat themes.
+   Only panel background layers change; text, art, borders and shell remain opaque. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header {
+  background:linear-gradient(155deg,rgba(17,15,20,var(--rp2-global-panel-alpha,.9)),rgba(31,17,19,var(--rp2-global-panel-alpha,.9))) !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+  background:linear-gradient(110deg,rgba(20,17,22,var(--rp2-global-panel-alpha,.9)),rgba(45,24,23,var(--rp2-global-panel-alpha,.9))) !important;
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts {
+  background:radial-gradient(ellipse at 90% 5%,rgba(116,69,120,.15),transparent 56%),linear-gradient(135deg,rgba(8,8,13,var(--rp2-global-panel-alpha,.9)),rgba(28,14,23,var(--rp2-global-panel-alpha,.9))) !important;
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader {
+  background:radial-gradient(ellipse at 80% 5%,rgba(120,64,31,.18),transparent 48%),linear-gradient(135deg,rgba(29,19,17,var(--rp2-global-panel-alpha,.9)),rgba(15,11,15,var(--rp2-global-panel-alpha,.9))) !important;
+}
+/* Original Opal chat panels, without affecting the main Tavern interface. */
+body:not(.rp2-chat-forest):not(.rp2-chat-gothic) #chat .mes {
+  background-color:rgba(13,12,25,var(--rp2-global-panel-alpha,.9)) !important;
+}
+body:not(.rp2-chat-forest):not(.rp2-chat-gothic) #chat .mes_text details.rpg-thoughts,
+body:not(.rp2-chat-forest):not(.rp2-chat-gothic) #chat .mes_text details.rpg-independent-reader {
+  background:linear-gradient(135deg,rgba(22,16,38,var(--rp2-global-panel-alpha,.9)),rgba(13,12,27,var(--rp2-global-panel-alpha,.9))) !important;
+}
+body .rp2-forest-opacity-row input {accent-color:#d68a52;}
