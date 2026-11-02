@@ -13,6 +13,21 @@ const rp2ForestInputAsset = kind => RP2_FOREST_INPUT_ASSETS[kind] || RP2_FOREST_
 const RP2_FOREST_PORTRAIT = './assets/enchanted-forest/hanabi-fairy-side.png';
 const RP2_FOREST_EMOTION_ASSETS = { dreamy:'./assets/enchanted-forest/hanabi-emotion-dreamy.webp', angry:'./assets/enchanted-forest/hanabi-emotion-angry.webp', sad:'./assets/enchanted-forest/hanabi-emotion-sad.webp', happy:'./assets/enchanted-forest/hanabi-emotion-happy.webp', playful:'./assets/enchanted-forest/hanabi-emotion-happy.webp' };
 const rp2ForestEmotionAsset = emotion => RP2_FOREST_EMOTION_ASSETS[emotion] || RP2_FOREST_EMOTION_ASSETS.dreamy;
+
+// Winter Gothic Roses assets are isolated from Opal and Enchanted Forest.
+const RP2_GOTHIC_EMOTIONS = {
+    dreamy: './assets/winter-gothic-roses/hanabi-emotion-dreamy.webp',
+    sad: './assets/winter-gothic-roses/hanabi-emotion-sad.webp',
+    happy: './assets/winter-gothic-roses/hanabi-emotion-happy.webp',
+    playful: './assets/winter-gothic-roses/hanabi-emotion-happy.webp',
+    angry: './assets/winter-gothic-roses/hanabi-emotion-angry.webp',
+};
+const rp2GothicEmotionAsset = emotion => RP2_GOTHIC_EMOTIONS[emotion] || RP2_GOTHIC_EMOTIONS.dreamy;
+const RP2_GOTHIC_INPUT = './assets/winter-gothic-roses/hanabi-snow-leopard-input.webp';
+const rp2ThemeEmotionAsset = emotion => rp2IsGothic() ? rp2GothicEmotionAsset(emotion) : (rp2IsForest() ? rp2ForestEmotionAsset(emotion) : (RP2_EMOTION_ASSETS[emotion] || RP2_EMOTION_ASSETS.dreamy));
+const rp2ThemeInputAsset = kind => rp2IsGothic() ? RP2_GOTHIC_INPUT : (rp2IsForest() ? rp2ForestInputAsset(kind) : (RP2_INPUT_CHIBI_ASSETS[kind] || RP2_INPUT_CHIBI_ASSETS.input));
+
+
 const RP2_FOREST_ALPHA_KEY = 'rpGlass2ForestPanelOpacity';
 function rp2ForestAlpha() { const n = Number(localStorage.getItem(RP2_FOREST_ALPHA_KEY)); return Number.isFinite(n) && n >= 20 && n <= 100 ? n : 72; }
 function rp2IsForest() { return localStorage.getItem(RP2_CHAT_THEME_KEY) === 'forest'; }
@@ -25,12 +40,12 @@ function rp2ApplyChatTheme() {
     document.body.style.setProperty('--rp2-forest-panel-alpha', (rp2ForestAlpha() / 100).toFixed(2));
     document.querySelectorAll('#chat .rp2-hanabi-peek, #chat .rpg-thought-hanabi').forEach(img => {
         const opal = img.classList.contains('rp2-hanabi-peek') ? './assets/hanabi-chibi-peek.webp' : (RP2_EMOTION_ASSETS[img.closest('.mes')?.dataset.rp2Emotion] || RP2_EMOTION_ASSETS.dreamy);
-        const next = new URL(forest ? (img.classList.contains('rp2-hanabi-peek') ? RP2_FOREST_PORTRAIT : rp2ForestEmotionAsset(img.closest('.mes')?.dataset.rp2Emotion)) : opal, import.meta.url).href;
+        const next = new URL(img.classList.contains('rp2-hanabi-peek') ? (forest ? RP2_FOREST_PORTRAIT : './assets/hanabi-chibi-peek.webp') : rp2ThemeEmotionAsset(img.closest('.mes')?.dataset.rp2Emotion), import.meta.url).href;
         if (img.src !== next) img.src = next;
     });
     const mascot = document.getElementById(RP2_ID);
     if (mascot) {
-        const next = new URL(forest ? rp2ForestInputAsset(mascot.dataset.rp2InputChibi) : (RP2_INPUT_CHIBI_ASSETS[mascot.dataset.rp2InputChibi] || RP2_INPUT_CHIBI_ASSETS.input), import.meta.url).href;
+        const next = new URL(rp2ThemeInputAsset(mascot.dataset.rp2InputChibi), import.meta.url).href;
         if (mascot.src !== next) mascot.src = next;
     }
     queuePlacement();
@@ -56,7 +71,7 @@ function placeHanabi() {
     }
 
     const rect = composer.getBoundingClientRect();
-    hanabi.style.left = `${Math.round(rect.left + rect.width * (rp2IsForest() ? (hanabi.dataset.rp2InputChibi === 'sleep' ? 0.49 : 0.43) : 0.60))}px`;
+    hanabi.style.left = `${Math.round(rect.left + rect.width * (rp2IsGothic() ? 0.48 : (rp2IsGothic() ? 0.48 : (rp2IsForest() ? (hanabi.dataset.rp2InputChibi === 'sleep' ? 0.49 : 0.43) : 0.60))))}px`;
     hanabi.style.top = `${Math.round(rect.top)}px`;
     hanabi.style.bottom = 'auto';
 }
@@ -229,7 +244,7 @@ function applyInputChibi(kind) {
     if (!hanabi) return;
     const safeKind = RP2_INPUT_CHIBI_ASSETS[kind] ? kind : 'input';
     hanabi.dataset.rp2InputChibi = safeKind;
-    hanabi.src = new URL(rp2IsForest() ? rp2ForestInputAsset(safeKind) : RP2_INPUT_CHIBI_ASSETS[safeKind], import.meta.url).href;
+    hanabi.src = new URL(rp2ThemeInputAsset(safeKind), import.meta.url).href;
     replayHanabiEffect(hanabi, 'rp2-chibi-change');
     queuePlacement();
 }
@@ -260,7 +275,7 @@ function applyHanabiState(messageEl, state) {
 
     // ONLY the portrait inside “Распаковать мысли…” changes emotion.
     const portrait = messageEl.querySelector('.rpg-thought-hanabi');
-    const emotionAsset = rp2IsForest() ? rp2ForestEmotionAsset(state.emotion) : (RP2_EMOTION_ASSETS[state.emotion] || RP2_EMOTION_ASSETS.dreamy);
+    const emotionAsset = rp2ThemeEmotionAsset(state.emotion);
     if (portrait) {
         const nextSrc = new URL(emotionAsset, import.meta.url).href;
         if (portrait.src !== nextSrc) {
@@ -331,7 +346,7 @@ function decorateThoughts(messageEl) {
         portrait.alt = '';
         portrait.draggable = false;
         portrait.setAttribute('aria-hidden', 'true');
-        portrait.src = new URL(rp2IsForest() ? rp2ForestEmotionAsset(messageEl.dataset.rp2Emotion) : './assets/hanabi-thoughts-dreamy.webp', import.meta.url).href;
+        portrait.src = new URL(rp2ThemeEmotionAsset(messageEl.dataset.rp2Emotion), import.meta.url).href;
 
         const summary = details.querySelector(':scope > summary');
         if (summary) summary.insertAdjacentElement('afterend', portrait);
@@ -541,7 +556,7 @@ function mountHanabi() {
     hanabi.id = RP2_ID;
     hanabi.alt = '';
     hanabi.draggable = false;
-    hanabi.src = new URL(rp2IsForest() ? rp2ForestInputAsset('input') : './assets/hanabi-chibi-input.webp', import.meta.url).href;
+    hanabi.src = new URL(rp2ThemeInputAsset('input'), import.meta.url).href;
     // Keep the mascot in BODY so fixed positioning is not clipped by the composer.
     // Visibility layering is handled by a deliberately low z-index in CSS: chat UI shows her,
     // SillyTavern drawers/settings/loading screens naturally cover her.

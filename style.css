@@ -3135,3 +3135,58 @@ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header > .mes_buttons {
   top:222px !important;
   right:9px !important;
 }
+
+
+/* WINTER GOTHIC ROSES · lower panels · isolated to Gothic only.
+   No header positioning or message flow changes. */
+body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts {
+  position:relative !important; isolation:isolate; overflow:hidden !important;
+  border:1px solid rgba(192,122,91,.66) !important; border-left:4px solid #b77755 !important;
+  border-radius:21px !important; padding:14px 15px 16px !important;
+  background:radial-gradient(ellipse at 90% 5%,rgba(116,69,120,.24),transparent 56%),linear-gradient(135deg,rgba(8,8,13,.97),rgba(28,14,23,.96)) !important;
+  box-shadow:inset 0 0 20px rgba(173,102,165,.13),0 0 12px rgba(156,82,182,.19),0 5px 19px rgba(0,0,0,.45) !important;
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts > summary {
+  color:#e5c4ee !important; text-shadow:0 0 9px rgba(185,112,236,.55) !important;
+  position:relative !important; z-index:2 !important;
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {
+  display:block !important; float:right !important; position:relative !important;
+  width:clamp(125px,37%,215px) !important; max-width:44% !important;
+  height:auto !important; max-height:230px !important; object-fit:contain !important;
+  margin:-5px -10px 6px 9px !important; z-index:1 !important;
+  filter:drop-shadow(0 0 10px rgba(177,105,202,.30)) !important;
+  -webkit-mask-image:radial-gradient(ellipse 77% 74% at 50% 49%,#000 62%,transparent 100%);
+  mask-image:radial-gradient(ellipse 77% 74% at 50% 49%,#000 62%,transparent 100%);
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts p {
+  text-align:left !important; text-align-last:left !important;
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader {
+  position:relative !important; isolation:isolate; overflow:visible !important;
+  border:1px solid rgba(200,112,58,.66) !important; border-radius:22px !important;
+  background:radial-gradient(ellipse at 14% 5%,rgba(107,55,28,.30),transparent 48%),linear-gradient(125deg,rgba(21,14,17,.97),rgba(39,23,20,.96)) !important;
+  box-shadow:inset 0 0 19px rgba(255,129,48,.10),0 0 15px rgba(193,87,34,.17),0 7px 22px rgba(0,0,0,.45) !important;
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader::after {
+  content:'' !important; position:absolute !important; top:-26px !important; left:-13px !important; right:auto !important;
+  width:clamp(106px,29vw,165px) !important; height:clamp(70px,18vw,105px) !important;
+  background:url('./assets/winter-gothic-roses/reader-book-dagger.webp') left top / contain no-repeat !important;
+  pointer-events:none !important; z-index:2 !important; opacity:1 !important; animation:none !important;
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader > summary {
+  padding-left:clamp(94px,25vw,145px) !important; min-height:44px !important;
+  color:#ffd4a7 !important; font-family:Georgia,serif !important;
+  text-shadow:0 0 10px rgba(238,121,51,.50) !important;
+}
+body.rp2-chat-gothic #rp-glass-2-hanabi-input {
+  width:min(460px,96vw) !important; max-width:96vw !important; max-height:170px !important;
+  height:auto !important; object-fit:contain !important;
+  transform:translate(-50%,-79%) !important; pointer-events:none !important;
+  filter:drop-shadow(0 0 9px rgba(220,105,56,.30)) !important;
+}
+@media(max-width:520px){
+ body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader > summary {padding-left:104px !important; font-size:1em !important;}
+ body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader::after {width:122px !important;height:80px !important;}
+ body.rp2-chat-gothic #rp-glass-2-hanabi-input {width:min(385px,95vw) !important;max-height:135px !important;}
+}
