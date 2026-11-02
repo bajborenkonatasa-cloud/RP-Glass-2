@@ -2955,17 +2955,3 @@ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name .timest
   font-size: .72em !important;
   opacity: .8;
 }
-
-
-/* ===== WINTER GOTHIC — ПОДЪЁМ ИМЕНИ И ДАТЫ К АВАТАРУ =====
-   Всё сдвигается вверх на одну и ту же величину, плашка сцены остаётся на месте
-   (между именем и плашкой появляется свободное место под будущую рамку).
-   Хочешь выше/ниже — меняй -30px здесь и три значения top ниже (на столько же). */
-body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name div:has(> .name_text) {
-  position: relative !important;
-  top: -30px !important;
-}
-body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper .mesIDDisplay { top: 154px !important; }
-body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper .tokenCounterDisplay { top: 176px !important; }
-body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .mes_buttons,
-body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_buttons { top: 210px !important; }
