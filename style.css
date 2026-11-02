@@ -3190,3 +3190,36 @@ body.rp2-chat-gothic #rp-glass-2-hanabi-input {
  body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader::after {width:122px !important;height:80px !important;}
  body.rp2-chat-gothic #rp-glass-2-hanabi-input {width:min(385px,95vw) !important;max-height:135px !important;}
 }
+
+/* Winter Gothic lower panels v2: mobile usability, Forest-sized portraits. */
+body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts {overflow:visible !important;}
+body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {
+ width:clamp(235px,57vw,315px) !important;max-width:62% !important;
+ max-height:none !important;margin:-55px -15px 5px 13px !important;
+ border:0 !important;border-radius:0 !important;background:transparent !important;box-shadow:none !important;
+ -webkit-mask-image:none !important;mask-image:none !important;object-fit:contain !important;
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader {
+ background:radial-gradient(ellipse at 80% 5%,rgba(120,64,31,.24),transparent 48%),
+ linear-gradient(135deg,rgba(29,19,17,.96),rgba(15,11,15,.98)) !important;
+ border:1px solid rgba(185,109,65,.75) !important;
+ box-shadow:inset 0 0 0 3px rgba(47,25,20,.6),inset 0 0 22px rgba(242,125,45,.13),0 0 13px rgba(207,92,37,.18) !important;
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader::after {
+ left:auto !important;right:-7px !important;top:-23px !important;
+ background-position:right top !important;
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader > summary {
+ padding-left:10px !important;padding-right:clamp(108px,27vw,165px) !important;
+ text-align:left !important;min-height:44px !important;
+}
+body.rp2-chat-gothic #rp-glass-2-hanabi-input {
+ width:min(275px,65vw) !important;max-width:65vw !important;max-height:100px !important;
+ transform:translate(-50%,-105%) !important;pointer-events:none !important;
+}
+@media(max-width:520px){
+ body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {width:clamp(225px,59vw,290px) !important;max-width:62% !important;margin:-48px -13px 4px 12px !important;}
+ body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader::after {width:122px !important;height:80px !important;right:-6px !important;}
+ body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader > summary {padding-left:8px !important;padding-right:110px !important;}
+ body.rp2-chat-gothic #rp-glass-2-hanabi-input {width:min(260px,64vw) !important;max-height:92px !important;transform:translate(-50%,-108%) !important;}
+}
