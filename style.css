@@ -2608,3 +2608,83 @@ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header {
         padding-top: 155px !important;
     }
 }
+
+
+/* WINTER GOTHIC ROSES · STAGE 2 — real transparent PNG frame + safe header layout.
+   Gothic theme only. Scene plaque stays IN FLOW; no absolute date positioning. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header {
+  --rp2-gothic-avatar-size: 116px;
+  padding-top: 148px !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper {
+  width: var(--rp2-gothic-avatar-size) !important;
+  height: var(--rp2-gothic-avatar-size) !important;
+  top: 17px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper .avatar {
+  width: 102px !important; height: 102px !important;
+  min-width: 102px !important; min-height: 102px !important;
+  border: 0 !important; outline: 0 !important;
+  border-radius: 50% !important; overflow: hidden !important;
+  box-shadow: none !important;
+  margin: 7px auto !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper .avatar img {
+  border-radius: 50% !important; width: 100% !important; height: 100% !important;
+  object-fit: cover !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper::after {
+  content: '' !important; display: block !important;
+  position: absolute !important; inset: -14px !important;
+  background: url('./assets/winter-gothic-roses/avatar-frame.png') center / contain no-repeat !important;
+  pointer-events: none !important; z-index: 5 !important;
+  filter: drop-shadow(0 0 4px rgba(230,111,27,.3));
+}
+/* Keep header and action buttons in their own reserved row, not over the avatar. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header {
+  position: relative !important;
+  min-height: 76px !important;
+  padding: 2px 46px 7px 74px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 3px !important;
+  text-align: center !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .name_text,
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .ch_name {
+  font-family: 'UnifrakturMaguntia','Old English Text MT',Georgia,serif !important;
+  color: #f6d4b5 !important; font-size: 1.23em !important;
+  text-shadow: 0 0 7px rgba(232,108,29,.35) !important;
+}
+/* Small counters remain on the LEFT of the name/date, controls stay RIGHT. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .mesIDDisplay,
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .tokenCounterDisplay {
+  position: absolute !important; left: 8px !important;
+  width: 60px !important; text-align: left !important;
+  font-size: .75em !important; white-space: nowrap !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .mesIDDisplay {top: 15px !important;}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .tokenCounterDisplay {top: 37px !important;}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .mes_buttons {
+  position: absolute !important; right: 7px !important; top: 22px !important;
+  margin: 0 !important; z-index: 2 !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+  position: static !important; inset: auto !important; transform: none !important;
+  display: block !important; width: 100% !important; max-width: 100% !important;
+  clear: both !important; float: none !important; margin: 9px 0 16px !important;
+  box-sizing: border-box !important;
+}
+@media(max-width:520px) {
+ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header {padding-top: 148px !important;}
+ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header {padding-left: 60px !important; padding-right: 42px !important;}
+ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .name_text,
+ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .ch_name {font-size: 1.07em !important;}
+}
