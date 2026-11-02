@@ -2495,3 +2495,79 @@ body.rp2-chat-forest #chat .mes.rp2-has-scene-header::after {
   animation:none !important;transform:none !important;
   pointer-events:none !important;z-index:2 !important;
 }
+
+/* ==============================================================
+   WINTER GOTHIC ROSES · STAGE 1
+   Scoped to the third RP chat theme only. Existing Opal / Forest
+   and the SillyTavern shell remain untouched.
+   ============================================================= */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header {
+  --rp2-gothic-amber: #e78b39;
+  --rp2-gothic-ice: #b8c6d2;
+  background: linear-gradient(155deg,rgba(17,15,20,.95),rgba(31,17,19,.94)) !important;
+  border: 1px solid rgba(192,121,66,.44) !important;
+  box-shadow: inset 0 0 22px rgba(0,0,0,.35),0 0 16px rgba(228,104,33,.09) !important;
+  border-radius: 19px !important;
+  padding-top: 220px !important;
+  position: relative !important;
+  isolation: isolate;
+}
+/* Put the real avatar in the center, not an image baked into the background. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper {
+  position: absolute !important;
+  top: 18px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 116px !important;
+  height: 116px !important;
+  margin: 0 !important;
+  z-index: 4 !important;
+  overflow: visible !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .avatar {
+  width: 110px !important; height: 110px !important;
+  min-width: 110px !important; min-height: 110px !important;
+  margin: 0 auto !important;
+  border-radius: 50% !important;
+  overflow: visible !important;
+  border: 3px solid #c67835 !important;
+  outline: 2px solid rgba(197,210,224,.64) !important;
+  outline-offset: 4px !important;
+  background: #130e13 !important;
+  box-shadow: 0 0 0 8px rgba(10,9,12,.7), 0 0 18px rgba(235,104,27,.36) !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .avatar img {
+  width:100% !important; height:100% !important;
+  border-radius:50% !important; object-fit:cover !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .avatar::before,
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .avatar::after {content:none !important;display:none !important;}
+/* Scene/date plaque lives below the portrait and spans the card. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+  top: 145px !important; left: 12px !important; right: 12px !important;
+  width: auto !important; min-height: 58px !important;
+  padding: 9px 13px !important;
+  border: 1px solid rgba(214,139,70,.63) !important;
+  border-left: 1px solid rgba(214,139,70,.63) !important;
+  border-radius: 12px !important;
+  background: linear-gradient(110deg,rgba(20,17,22,.97),rgba(45,24,23,.96)) !important;
+  color: #f3e5dc !important;
+  text-align: center !important;
+  box-shadow: inset 0 0 13px rgba(232,108,35,.08) !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header > .rp2-hanabi-peek {display:none !important;}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header::before,
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header::after {content:none !important;display:none !important;}
+body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts,
+body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader {
+  border-color:rgba(208,121,63,.5) !important;
+  background:linear-gradient(135deg,rgba(22,18,23,.96),rgba(35,20,22,.92)) !important;
+}
+@media (max-width:520px) {
+  body.rp2-chat-gothic #chat .mes.rp2-has-scene-header {padding-top:225px !important;}
+  body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper {top:16px !important;}
+  body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+    top:143px !important;left:9px !important;right:9px !important;
+    font-size:.82em !important;
+  }
+}

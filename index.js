@@ -16,9 +16,12 @@ const rp2ForestEmotionAsset = emotion => RP2_FOREST_EMOTION_ASSETS[emotion] || R
 const RP2_FOREST_ALPHA_KEY = 'rpGlass2ForestPanelOpacity';
 function rp2ForestAlpha() { const n = Number(localStorage.getItem(RP2_FOREST_ALPHA_KEY)); return Number.isFinite(n) && n >= 20 && n <= 100 ? n : 72; }
 function rp2IsForest() { return localStorage.getItem(RP2_CHAT_THEME_KEY) === 'forest'; }
+function rp2IsGothic() { return localStorage.getItem(RP2_CHAT_THEME_KEY) === 'gothic'; }
 function rp2ApplyChatTheme() {
     const forest = rp2IsForest();
+    const gothic = rp2IsGothic();
     document.body.classList.toggle('rp2-chat-forest', forest);
+    document.body.classList.toggle('rp2-chat-gothic', gothic);
     document.body.style.setProperty('--rp2-forest-panel-alpha', (rp2ForestAlpha() / 100).toFixed(2));
     document.querySelectorAll('#chat .rp2-hanabi-peek, #chat .rpg-thought-hanabi').forEach(img => {
         const opal = img.classList.contains('rp2-hanabi-peek') ? './assets/hanabi-chibi-peek.webp' : (RP2_EMOTION_ASSETS[img.closest('.mes')?.dataset.rp2Emotion] || RP2_EMOTION_ASSETS.dreamy);
@@ -610,8 +613,8 @@ function rp2MountOpalSettings() {
         <label><input id="rp2-opal-motion" type="checkbox"> Живые переливы опала</label>
         <label class="rp2-opal-select-row"><span>Оттенок опала</span><select id="rp2-opal-palette"><option value="ocean">Ocean Opal</option><option value="fire">Fire Opal 🔥</option><option value="moss">Moss Opal</option></select></label>
         <div class="rp2-opal-note">Настройки Opal UI выше по-прежнему управляют только оболочкой Tavern.</div>
-        <label class="rp2-opal-select-row"><span>Тема ролевого чата</span><select id="rp2-chat-theme"><option value="opal">💜 Opal Hanabi — оригинал</option><option value="forest">🌿 Enchanted Forest</option></select></label>
-        <div class="rp2-opal-note">Лесная тема меняет только декор чата. Фон можно выбрать в SillyTavern. Оригинальная Opal Hanabi сохранена.</div>
+        <label class="rp2-opal-select-row"><span>Тема ролевого чата</span><select id="rp2-chat-theme"><option value="opal">💜 Opal Hanabi — оригинал</option><option value="forest">🌿 Enchanted Forest</option><option value="gothic">🥀 Winter Gothic Roses — основа</option></select></label>
+        <div class="rp2-opal-note">Темы меняют только декор чата. Winter Gothic Roses пока содержит первый этап: круглый центральный аватар и зимнюю палитру. Opal и Forest сохранены.</div>
         <label id="rp2-forest-opacity-row" class="rp2-forest-opacity-row"><span>🌿 Прозрачность лесных панелей: <output id="rp2-forest-opacity-value">72%</output></span><input id="rp2-forest-opacity" type="range" min="20" max="100" step="5" value="72"></label>
       </div>`;
     host.appendChild(panel);
@@ -620,7 +623,7 @@ function rp2MountOpalSettings() {
     const motion = panel.querySelector('#rp2-opal-motion');
     const palette = panel.querySelector('#rp2-opal-palette');
     const chatTheme = panel.querySelector('#rp2-chat-theme');
-    chatTheme.value = rp2IsForest() ? 'forest' : 'opal';
+    chatTheme.value = rp2IsGothic() ? 'gothic' : (rp2IsForest() ? 'forest' : 'opal');
     const opacityRow = panel.querySelector('#rp2-forest-opacity-row');
     const opacitySlider = panel.querySelector('#rp2-forest-opacity');
     const opacityValue = panel.querySelector('#rp2-forest-opacity-value');
