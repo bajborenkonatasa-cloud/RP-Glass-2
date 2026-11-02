@@ -2956,61 +2956,126 @@ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name .timest
   opacity: .8;
 }
 
-
-/* WINTER GOTHIC · DATE ORNAMENTS + SOFT PURPLE-MIST SNOW · 2026-11-02
-   Scoped to Gothic bot messages only. No change to layout or content flow. */
-body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
-  position: relative !important;
+/* WINTER GOTHIC — HEADER DECORATION PATCH · 2026-11-02
+   Theme-scoped. Two original alpha PNGs, independent of the live avatar.
+   Keep the real character portrait dynamic. No changes to chat message flow. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header {
+  padding-top: 207px !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper {
+  top: 18px !important;
+  height: 156px !important;
   overflow: visible !important;
   isolation: isolate;
-  padding: 14px 23px !important;
-  border-color: rgba(192,113,61,.7) !important;
-  background: linear-gradient(110deg,rgba(23,18,25,.97),rgba(49,25,26,.95)) !important;
+}
+/* One full-width alpha overlay: top lanterns and mirrored Hanabi below.
+   Center remains transparent, allowing the existing live portrait to show. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper::before {
+  content: '' !important;
+  display: block !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: -16px !important;
+  width: 100% !important;
+  height: 204px !important;
+  background-image:
+    url('./assets/winter-gothic-roses/gothic-top-lanterns.png'),
+    url('./assets/winter-gothic-roses/hanabi-mirrored-mist.png') !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-position: center top, center bottom !important;
+  background-size: 100% auto, 100% auto !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+/* Portrait one step smaller, frame scales with it; both stay centered. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper .avatar {
+  position: relative !important;
+  z-index: 2 !important;
+  width: 112px !important;
+  height: 112px !important;
+  min-width: 112px !important;
+  min-height: 112px !important;
+  margin: 8px auto 0 !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper::after {
+  top: -18px !important;
+  left: 50% !important;
+  width: 168px !important;
+  height: 168px !important;
+  transform: translateX(-50%) !important;
+  z-index: 5 !important;
+}
+/* Subtle warm shimmer on any character name, no hard-coded names. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name .name_text,
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name .name_text * {
+  color: #ffe3c4 !important;
+  text-shadow: 0 0 4px rgba(255,199,128,.65), 0 0 12px rgba(255,119,35,.46), 0 0 22px rgba(255,100,30,.18) !important;
+}
+/* Counters stay on the left of the name, not inside the portrait. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper .mesIDDisplay {top: 174px !important;}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper .tokenCounterDisplay {top: 196px !important;}
+@media (max-width: 520px) {
+  body.rp2-chat-gothic #chat .mes.rp2-has-scene-header {padding-top: 207px !important;}
+  body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper::before {
+    top: -14px !important;
+    height: 194px !important;
+  }
+}
+
+/* GOTHIC RESTORATION: decorations on the full message surface, not avatar wrapper.
+   The wrapper's stacking context previously obscured its own decoration. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header::before {
+ content: '' !important; display:block !important; position:absolute !important;
+ top:0 !important; left:0 !important; right:0 !important;
+ width:100% !important; height:205px !important;
+ background-image:url('./assets/winter-gothic-roses/gothic-top-lanterns.png'),url('./assets/winter-gothic-roses/hanabi-mirrored-mist.png') !important;
+ background-size:100% auto,100% auto !important;
+ background-position:center top,center bottom !important;
+ background-repeat:no-repeat !important;
+ pointer-events:none !important; z-index:1 !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper::before {
+ content:none !important;display:none !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mesAvatarWrapper {z-index:4 !important;}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block {position:relative !important;z-index:2 !important;}
+/* Date corners: close to the plaque's edge, without covering its text. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {
+ position:relative !important; overflow:visible !important; isolation:isolate;
+ padding:14px 22px !important;
 }
 body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::before,
 body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::after {
-  content: '' !important; display: block !important; position: absolute !important;
-  pointer-events: none !important; z-index: 2 !important;
-  width: clamp(76px, 20vw, 158px) !important; height: clamp(53px, 13vw, 94px) !important;
-  background-repeat: no-repeat !important; background-size: contain !important;
-  opacity: 1 !important; filter: drop-shadow(0 1px 3px rgba(238,117,36,.18)) !important;
+ content:'' !important;display:block !important;position:absolute !important;
+ width:clamp(70px,18vw,140px) !important;height:clamp(49px,12vw,90px) !important;
+ background-size:contain !important;background-repeat:no-repeat !important;
+ pointer-events:none !important;z-index:2 !important;
 }
 body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::before {
-  top: -17px !important; left: -17px !important; right: auto !important; bottom: auto !important;
-  transform: none !important;
-  background-image: url('./assets/winter-gothic-roses/date-corner-top-left.png') !important;
-  background-position: top left !important;
+ top:-12px !important;left:-10px !important;right:auto !important;bottom:auto !important;
+ background-image:url('./assets/winter-gothic-roses/date-corner-top-left.png') !important;
+ background-position:left top !important;
 }
 body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header::after {
-  right: -15px !important; bottom: -16px !important; left: auto !important; top: auto !important;
-  transform: none !important;
-  background-image: url('./assets/winter-gothic-roses/date-corner-bottom-right.png') !important;
-  background-position: bottom right !important;
+ bottom:-11px !important;right:-9px !important;left:auto !important;top:auto !important;
+ background-image:url('./assets/winter-gothic-roses/date-corner-bottom-right.png') !important;
+ background-position:right bottom !important;
 }
-/* Snowfall gently descends from the violet mist under the portraits. */
+/* Light snow over the card; no interference with clicks or text. */
 body.rp2-chat-gothic #chat .mes.rp2-has-scene-header::after {
-  content: '' !important; display: block !important;
-  position: absolute !important; inset: 0 !important;
-  height: 100% !important; width: 100% !important;
-  pointer-events: none !important; z-index: 3 !important;
-  opacity: .43 !important;
-  background-image:
-    radial-gradient(circle,rgba(255,255,255,.94) 0 1.15px,transparent 1.9px),
-    radial-gradient(circle,rgba(229,204,255,.78) 0 1.5px,transparent 2.3px),
-    radial-gradient(circle,rgba(255,244,237,.82) 0 .8px,transparent 1.6px) !important;
-  background-size: 147px 211px, 211px 279px, 97px 163px !important;
-  background-position: 14px 0, 80px 34px, 40px 90px !important;
-  animation: rp2GothicSoftSnow 19s linear infinite !important;
-  -webkit-mask-image: linear-gradient(to bottom,transparent 0,black 19%,black 72%,transparent 100%) !important;
-  mask-image: linear-gradient(to bottom,transparent 0,black 19%,black 72%,transparent 100%) !important;
+ content:'' !important;display:block !important;position:absolute !important;
+ inset:0 !important;width:100% !important;height:100% !important;
+ pointer-events:none !important;z-index:3 !important;opacity:.46 !important;
+ background-image:radial-gradient(circle,rgba(255,255,255,.95) 0 1px,transparent 1.7px),radial-gradient(circle,rgba(213,176,247,.82) 0 1.3px,transparent 2px),radial-gradient(circle,rgba(255,244,230,.78) 0 .7px,transparent 1.4px) !important;
+ background-size:83px 149px,127px 211px,61px 113px !important;
+ animation:rp2GothicSnowRestored 22s linear infinite !important;
+ -webkit-mask-image:linear-gradient(to bottom,transparent 0,black 10%,black 68%,transparent 100%) !important;
+ mask-image:linear-gradient(to bottom,transparent 0,black 10%,black 68%,transparent 100%) !important;
 }
-@keyframes rp2GothicSoftSnow {
-  from {background-position: 14px -211px,80px -279px,40px -163px;}
-  to {background-position: 14px 0,80px 0,40px 0;}
+@keyframes rp2GothicSnowRestored {
+ from {background-position:11px -149px,53px -211px,22px -113px;}
+ to {background-position:11px 0,53px 0,22px 0;}
 }
-@media (max-width:520px) {
- body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_text .rp2-scene-header {padding: 13px 18px !important;}
-}
-@media (prefers-reduced-motion: reduce) {
- body.rp2-chat-gothic #chat .mes.rp2-has-scene-header::after {animation: none !important;}
+@media (prefers-reduced-motion:reduce){
+ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header::after{animation:none !important;}
 }
