@@ -3313,3 +3313,25 @@ body.rp2-chat-gothic #rp-glass-2-hanabi-input {
     width:min(355px,87vw) !important;max-height:123px !important;
   }
 }
+
+/* Winter Gothic Roses v5 — micro-alignment and subtle cracked-ember texture. */
+body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {
+  margin-right:-40px !important; /* 13px further right, including beyond border */
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader::after {
+  top:-18px !important; /* move book up slightly */
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader {
+  background:
+    repeating-linear-gradient(133deg,transparent 0 77px,rgba(237,102,29,.09) 78px,transparent 79px,transparent 137px),
+    repeating-linear-gradient(47deg,transparent 0 111px,rgba(244,102,28,.07) 112px,transparent 113px,transparent 183px),
+    radial-gradient(ellipse at 83% 12%,rgba(168,60,21,.20),transparent 47%),
+    linear-gradient(135deg,rgba(29,19,17,.97),rgba(12,9,14,.98)) !important;
+  box-shadow:inset 0 0 0 2px #030205,inset 0 0 0 5px #100c14,
+    inset 0 0 18px rgba(7,3,12,.95),0 0 0 1px rgba(5,3,10,.9),
+    0 0 8px rgba(126,64,181,.22) !important;
+}
+@media(max-width:520px){
+  body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {margin-right:-40px !important;}
+  body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader::after {top:-17px !important;}
+}
