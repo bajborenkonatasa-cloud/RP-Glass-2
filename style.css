@@ -3079,3 +3079,27 @@ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header::after {
 @media (prefers-reduced-motion:reduce){
  body.rp2-chat-gothic #chat .mes.rp2-has-scene-header::after{animation:none !important;}
 }
+
+/* GOTHIC · message action controls only · 2026-11-02
+   Keep ellipsis/edit aligned with the name/timestamp row.
+   The previous shared top:240px positioned header-relative controls over the story. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_header .mes_buttons {
+  position: absolute !important;
+  top: 53px !important;
+  right: 8px !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  z-index: 8 !important;
+}
+/* Fallback for SillyTavern builds that place actions outside .mes_header. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header > .mes_buttons {
+  position: absolute !important;
+  top: 294px !important;
+  right: 8px !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+  z-index: 8 !important;
+}
