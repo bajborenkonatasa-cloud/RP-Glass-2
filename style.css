@@ -3223,3 +3223,42 @@ body.rp2-chat-gothic #rp-glass-2-hanabi-input {
  body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader > summary {padding-left:8px !important;padding-right:110px !important;}
  body.rp2-chat-gothic #rp-glass-2-hanabi-input {width:min(260px,64vw) !important;max-height:92px !important;transform:translate(-50%,-108%) !important;}
 }
+
+/* Winter Gothic Roses v3 — mobile alignment refinement; scoped to Gothic only. */
+body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts {
+  border:1px solid rgba(231,123,48,.82) !important;
+  border-left:4px solid #d88042 !important;
+  box-shadow:inset 0 0 0 2px rgba(4,3,9,.95),inset 0 0 0 5px rgba(25,13,29,.95),inset 0 0 18px rgba(143,75,196,.22),0 0 10px rgba(92,40,131,.20) !important;
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader {
+  border:1px solid rgba(217,119,58,.78) !important;
+  box-shadow:inset 0 0 0 2px #08070b,inset 0 0 0 5px rgba(29,16,29,.94),inset 0 0 15px rgba(143,74,191,.19),0 0 10px rgba(106,52,143,.18) !important;
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {
+  width:clamp(280px,70vw,390px) !important;
+  max-width:76% !important;
+  margin:-68px -17px 3px 10px !important;
+  -webkit-mask-image:none !important;mask-image:none !important;
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader::after {
+  left:auto !important;right:-11px !important;top:-38px !important;
+  width:clamp(160px,38vw,205px) !important;height:clamp(106px,25vw,140px) !important;
+  transform:scaleX(-1) !important;transform-origin:center !important;
+  background-position:right top !important;
+}
+body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader > summary {
+  padding-left:10px !important;padding-right:15px !important;
+  min-height:44px !important;position:relative !important;z-index:3 !important;
+}
+body.rp2-chat-gothic #rp-glass-2-hanabi-input {
+  width:min(420px,94vw) !important;max-width:94vw !important;
+  max-height:145px !important;
+  transform:translate(-50%,-96%) !important;
+  object-position:left bottom !important;pointer-events:none !important;
+}
+@media(max-width:520px){
+ body.rp2-chat-gothic #chat .mes_text details.rpg-thoughts[open] > .rpg-thought-hanabi {width:clamp(265px,72vw,365px) !important;max-width:76% !important;margin:-58px -16px 4px 9px !important;}
+ body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader::after {width:clamp(154px,39vw,195px) !important;height:112px !important;top:-34px !important;right:-10px !important;}
+ body.rp2-chat-gothic #chat .mes_text details.rpg-independent-reader > summary {padding-right:14px !important;}
+ body.rp2-chat-gothic #rp-glass-2-hanabi-input {width:min(390px,94vw) !important;max-height:138px !important;transform:translate(-50%,-96%) !important;}
+}
