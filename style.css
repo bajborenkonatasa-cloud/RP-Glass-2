@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=UnifrakturMaguntia&family=Cormorant+SC:wght@600&display=swap");
 /* RP Glass 2 — v0.3.2 Visual Novel Foundation
    Mobile-first decorative layer only. Core SillyTavern message layout is NOT rewritten. */
 
@@ -2918,4 +2919,39 @@ body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name > div {
 body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name {
   padding: 0 64px !important;
   box-sizing: border-box !important;
+}
+
+
+/* ===== WINTER GOTHIC — ИМЯ ПЕРСОНАЖА (готический шрифт, под аватаром) =====
+   Шрифт подключается строкой @import в самом верху файла.
+   Поменять размер имени: font-size ниже. Поменять шрифт: замени UnifrakturCook
+   на UnifrakturMaguntia (тоньше) — оба уже подключены. */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name .name_text,
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name .name_text * {
+  font-family: 'UnifrakturCook','UnifrakturMaguntia','Cormorant SC','Old English Text MT',Georgia,serif !important;
+  font-weight: 700 !important;
+  font-size: 1.55em !important;
+  line-height: 1.15 !important;
+  letter-spacing: .03em !important;
+  color: #f6d4b5 !important;
+  text-shadow: 0 0 8px rgba(232,108,29,.45), 0 1px 2px rgba(0,0,0,.8) !important;
+}
+/* имя — отдельной строкой по центру, дата/время ниже мелким шрифтом как было */
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name div:has(> .name_text) {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: baseline !important;
+  row-gap: 2px !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name .name_text {
+  display: block !important;
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  text-align: center !important;
+  margin: 0 !important;
+}
+body.rp2-chat-gothic #chat .mes.rp2-has-scene-header .mes_block .ch_name .timestamp {
+  font-size: .72em !important;
+  opacity: .8;
 }
